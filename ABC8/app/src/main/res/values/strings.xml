@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">ABC8</string>
+
+    <string name="txt_nombre">Nombre</string>
+    <string name="txt_comenzar">Jugar</string>
+    <string name="txt_vacío"></string>
+
+    <string name="jugador">BAUTISTA</string>
+    <string name="Boton_borrar">Borrar</string>
+    <string name="Boton_evaluar">Evaluar</string>
+    <string name="silaba_inicial">ABCD</string>
+    <string name="puntaje_inicial">0</string>
+    <string name="respuesta_inicial">ABUELA</string>
+    <string name="title_activity_opciones">Opciones</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+    <string name="txt_Opciones">Opciones</string>
+    <string name="txt_Salir">Salir</string>
+    <string name="txt_musica">Música</string>
+    <string name="txt_sonidos">Sonidos</string>
+    <string name="txt_si">Sonido activado</string>
+    <string name="txt_no">Sonido desactivado</string>
+    <string name="txt_music_on">Musica encendida</string>
+    <string name="txt_music_off">Musica apagada</string>
+    <string name="txt_color">Color</string>
+    <string name="txt_azul">Fondo Azul</string>
+    <string name="txt_rojo">Fondo Rojo</string>
+    <string name="txt_editar_tarjetas">Editar tarjetas</string>
+
+    <string name="txt_proximamente">Proximamente</string>
+    <string name="txt_salir">Salir</string>
+</resources>

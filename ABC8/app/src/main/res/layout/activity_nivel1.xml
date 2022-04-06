@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Nivel1">
+
+    <ImageView
+        android:id="@+id/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/txt_vacío"
+        app:srcCompat="@drawable/fondo" />
+
+    <Button
+        android:id="@+id/idbt_silaba1"
+        android:layout_width="150dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/boton_silaba"
+        android:onClick="buttonPress"
+        android:text="@string/silaba_inicial"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toBottomOf="@+id/borde_pantalla" />
+
+    <Button
+        android:id="@+id/idbt_silaba2"
+        android:layout_width="148dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/boton_silaba"
+        android:onClick="buttonPress"
+        android:text="@string/silaba_inicial"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toBottomOf="@+id/borde_pantalla" />
+
+    <Button
+        android:id="@+id/idbt_silaba3"
+        android:layout_width="148dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/boton_silaba"
+        android:onClick="buttonPress"
+        android:text="@string/silaba_inicial"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toBottomOf="@+id/idbt_silaba1" />
+
+    <Button
+        android:id="@+id/idbt_silaba4"
+        android:layout_width="147dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:background="@drawable/boton_silaba"
+        android:onClick="buttonPress"
+        android:text="@string/silaba_inicial"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toBottomOf="@+id/idbt_silaba2" />
+
+    <Button
+        android:id="@+id/idbt_borrar"
+        android:layout_width="162dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/boton_naranja"
+        android:onClick="Borrar"
+        android:text="@string/txt_vacío"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toBottomOf="@+id/idbt_silaba3"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <Button
+        android:id="@+id/idbt_evaluar"
+        android:layout_width="160dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/boton_verde"
+        android:onClick="Evaluar"
+        android:text="@string/txt_vacío"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toBottomOf="@+id/idbt_silaba4"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="362dp"
+        android:layout_height="282dp"
+        android:layout_marginTop="100dp"
+        android:contentDescription="@string/txt_vacío"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/screen_background_light" />
+
+    <ImageView
+        android:id="@+id/imgPrincipal"
+        android:layout_width="315dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="72dp"
+        android:contentDescription="@string/txt_vacío"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/borde_pantalla"
+        app:srcCompat="@drawable/abuela" />
+
+    <ImageView
+        android:id="@+id/borde_pantalla"
+        android:layout_width="398dp"
+        android:layout_height="405dp"
+        android:layout_marginTop="56dp"
+        android:contentDescription="@string/txt_vacío"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/borde_pantalla" />
+
+    <ImageView
+        android:id="@+id/idiv_estrellas"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toTopOf="@+id/borde_pantalla"
+        app:srcCompat="@drawable/tres_estrellas" />
+
+    <TextView
+        android:id="@+id/idtv_jugador"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="15dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/jugador"
+        android:textColor="@color/color_jugador"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toTopOf="@+id/borde_pantalla" />
+
+    <TextView
+        android:id="@+id/idtv_score"
+        android:layout_width="67dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:text="@string/puntaje_inicial"
+        android:textColor="@color/color_texto_puntaje"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/borde_pantalla"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="@+id/borde_pantalla"
+        app:layout_constraintTop_toTopOf="@+id/borde_pantalla" />
+
+    <TextView
+        android:id="@+id/idtv_respuesta"
+        android:layout_width="217dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/txt_vacío"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/borde_pantalla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgPrincipal"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <Button
+        android:id="@+id/id_switch_musica"
+        android:layout_width="42dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/ic_lock_silent_mode_off"
+        android:onClick="Musica"
+        app:layout_constraintEnd_toStartOf="@+id/idiv_estrellas"
+        app:layout_constraintTop_toTopOf="@+id/borde_pantalla" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

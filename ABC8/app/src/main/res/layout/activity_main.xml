@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/id_fondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="201dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/silaba_presionada"
+        android:onClick="Jugar"
+        android:text="@string/txt_comenzar"
+        android:textColor="@color/background_light"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idet_nombre" />
+
+    <EditText
+        android:id="@+id/idet_nombre"
+        android:layout_width="273dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="180dp"
+        android:background="@color/background_light"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/txt_nombre"
+        android:importantForAutofill="no"
+        android:inputType="textCapCharacters"
+        android:maxLength="9"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/idtv_bestScore"
+        android:layout_width="215dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="332dp"
+        android:gravity="center"
+        android:text="@string/jugador"
+        android:textColor="@color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="196dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="68dp"
+        android:onClick="Opciones"
+        android:text="@string/title_activity_opciones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idtv_bestScore" />
+
+    <Button
+        android:id="@+id/id_editor_de_tarjetas"
+        android:layout_width="193dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="40dp"
+        android:onClick="EditarTarjetas"
+        android:text="@string/txt_editar_tarjetas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

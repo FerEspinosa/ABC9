@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Opciones">
+
+
+    <TextView
+        android:id="@+id/txt_Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_Opciones"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ToggleButton
+        android:id="@+id/idtb_musica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:checked="true"
+        android:onClick="OnDefaultToggleClick"
+        android:textOff="@string/txt_music_off"
+        android:textOn="@string/txt_music_on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Titulo" />
+
+
+    <ToggleButton
+        android:id="@+id/id_botonSonido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:checked="true"
+        android:onClick="SonidosOnOff"
+        android:textOff="@string/txt_no"
+        android:textOn="@string/txt_si"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idtb_musica" />
+
+    <Button
+        android:id="@+id/id_fondo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:onClick="imagenDeFondo"
+        android:text="@string/txt_rojo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_botonSonido" />
+
+    <Button
+        android:id="@+id/boton_simbolo_musica"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/ic_music_note_black_24dp"
+        android:onClick="OnCustomToggleClick"
+        android:text="@string/txt_vacío"
+        app:layout_constraintStart_toEndOf="@+id/idtb_musica"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Titulo" />
+    <!-- android:background="@drawable/toggle_selection" -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
