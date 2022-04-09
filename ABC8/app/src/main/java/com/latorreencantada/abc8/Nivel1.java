@@ -126,7 +126,6 @@ public class Nivel1 extends AppCompatActivity {
         tv_respuesta = findViewById(R.id.idtv_respuesta);
         tv_respuesta.setTypeface(supersonic);
 
-        // Vincular la parte gráfica con la parte lógica:
         iv = findViewById(R.id.imgPrincipal);
         iv_estrellas = findViewById(R.id.idiv_estrellas);
         tv_respuesta = findViewById(R.id.idtv_respuesta);
@@ -499,13 +498,14 @@ public class Nivel1 extends AppCompatActivity {
 
     public void Musica(View view) {
 
+        /*
         Intent intent = new Intent (this, Opciones.class);
         posicion = mp.getCurrentPosition();
         intent.putExtra("posicion", posicion);
         posicion = 0;
         startActivity(intent);
 
-       /*
+
        if (Global.musica){
            Global.musica= false;
            mp.pause();
