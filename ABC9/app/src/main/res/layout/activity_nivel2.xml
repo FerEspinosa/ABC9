@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/main_layout_level"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Nivel2"
+    android:background="@drawable/fondo"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/monitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/layout_info_de_juego"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/mainImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_nombre"
+                android:layout_width="139dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Nombre"
+                android:textColor="@color/white"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_puntaje"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:text="123"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/id_switch_musica"
+                android:layout_width="42dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:drawable/ic_lock_silent_mode_off"
+                app:layout_constraintEnd_toStartOf="@+id/idiv_estrellas"
+                app:layout_constraintTop_toTopOf="@+id/borde_pantalla" />
+
+
+            <ImageView
+                android:id="@+id/iv_estrellas"
+                android:layout_width="87dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/tres_estrellas" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_marco_monitor"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_margin="8dp"
+            android:translationZ="0dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/borde_pantalla" />
+
+        <ImageView
+            android:id="@+id/mainImage"
+            android:layout_width="270dp"
+            android:layout_height="211dp"
+            android:layout_marginTop="64dp"
+            android:translationZ="-1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/abuela" />
+
+        <TextView
+            android:id="@+id/tv_respuesta_2"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="284dp"
+            android:text="RESPUESTA"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_marco_monitor"
+            app:layout_constraintStart_toStartOf="@+id/iv_marco_monitor"
+            app:layout_constraintTop_toTopOf="@+id/iv_marco_monitor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/botonera_acciones2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:columnCount="2">
+
+            <Button
+                android:id="@+id/bt1"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/boton_silaba"
+
+                android:onClick="buttonPress"
+                android:text="ABCD"
+                android:textSize="35sp" />
+
+            <Button
+                android:id="@+id/bt2"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/boton_silaba"
+
+                android:onClick="buttonPress"
+                android:text="ABCD"
+                android:textSize="35sp" />
+
+            <Button
+                android:id="@+id/bt3"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/boton_silaba"
+
+                android:onClick="buttonPress"
+                android:text="ABCD"
+                android:textSize="35sp" />
+
+            <Button
+                android:id="@+id/bt4"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/boton_silaba"
+
+                android:onClick="buttonPress"
+                android:text="ABCD"
+                android:textSize="35sp" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/botonera_acciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_borrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="25dp"
+            android:text="@string/erase"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bt_enviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="25dp"
+            android:text="@string/send"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
