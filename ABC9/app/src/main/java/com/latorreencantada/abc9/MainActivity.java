@@ -2,7 +2,6 @@ package com.latorreencantada.abc9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MainActivity.this, Nivel2.class);
+                Intent intent = new Intent(MainActivity.this, Nivel.class);
                 intent.putExtra("nombre", et_nombre.getText().toString());
                 posicion = mp.getCurrentPosition();
                 mp.stop();

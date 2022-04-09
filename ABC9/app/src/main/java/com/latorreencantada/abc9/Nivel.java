@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Nivel2 extends AppCompatActivity {
+public class Nivel extends AppCompatActivity {
 
     private MediaPlayer wonderful;
     private MediaPlayer wrong;
