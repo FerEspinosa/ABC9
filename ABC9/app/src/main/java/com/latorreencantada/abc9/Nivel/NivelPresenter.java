@@ -1,20 +1,32 @@
-package com.latorreencantada.abc9;
+package com.latorreencantada.abc9.Nivel;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.os.Build;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Nivel extends AppCompatActivity {
+import androidx.annotation.Nullable;
+
+import com.latorreencantada.abc9.Global;
+import com.latorreencantada.abc9.R;
+
+public class NivelPresenter implements NivelMVP.Presenter{
+
+    @Nullable
+    private NivelMVP.View view;
+
+    private NivelMVP.Model model;
+
+    public NivelPresenter (NivelMVP.Model model){
+        this.model = model;
+    }
+
+    @Override
+    public void setView(@Nullable NivelMVP.View view) {
+        this.view = view;
+    }
+
 
     private MediaPlayer wonderful;
     private MediaPlayer wrong;
@@ -67,137 +79,11 @@ public class Nivel extends AppCompatActivity {
 
     String[] silabas = {"PA","MA","CA","SA","PO","TO","CO","A","LO","BUE","LA","DE","DI","DO","DU","PI","ZA","TIO","TIS", "NO"};
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nivel2);
 
-        configView();
-       NuevaCarta();
-
-    }
-
-    private void configView() {
-
-        //fuente supersonic
-        String fuente1 = "fuentes/supersonic.ttf";
-        Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
-
-        // musica y sonidos
-        wonderful = MediaPlayer.create(this, R.raw.wonderful);
-        wrong = MediaPlayer.create(this, R.raw.bad);
-        mp = MediaPlayer.create(this, R.raw.goats);
-        if (Global.musica){
-            mp.start();
-            mp.setLooping(true);
-        }
-
-        // elementos gráficos
-        iv_estrellas = findViewById(R.id.iv_estrellas);
-        iv = findViewById(R.id.mainImage);
-        tv_score = findViewById(R.id.tv_puntaje);
-        tv_nombre = findViewById(R.id.tv_nombre);
-        tv_respuesta = findViewById(R.id.tv_respuesta_2);
-        bt_musica = findViewById(R.id.id_switch_musica);
-        bt_borrar = findViewById(R.id.bt_borrar);
-        bt_enviar = findViewById(R.id.bt_enviar);
-
-        // Declarar Array de TextViews:
-        for (int i=0; i<textViewCount; i++){
-            textView[i]= new TextView(this);
-        }
-
-        textView[0] = findViewById(R.id.bt1);
-        textView[1] = findViewById(R.id.bt2);
-        textView[2] = findViewById(R.id.bt3);
-        textView[3] = findViewById(R.id.bt4);
-
-        jugador = getIntent().getStringExtra("nombre");
-
-        tv_nombre.setText(jugador);
-        tv_score.setText("0");
-        tv_respuesta.setText("");
-
-
-        // botones con click listeners:
-
-        bt_musica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bt_music_clicked(view);
-            }
-        });
-
-        bt_enviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bt_enviar_clicked();
-            }
-        });
-
-        bt_borrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bt_borrar_clicked();
-            }
-        });
-
-    }
-
-    public void buttonPress(View v) {
-
-        sylablePressed (v);
-    }
 
     @Override
-    protected void onPause() { super.onPause();
-        posicion = mp.getCurrentPosition();
-        if (Global.musica){
-            mp.pause();
-        }
-    }
+    public void NuevaCarta() {
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    protected void onResume() {
-        super.onResume();
-/*
-        if (Global.musica){
-            mp.seekTo(posicion);
-            mp.start();
-            mp.setLooping(true);
-        }
-
-        if (Global.BackgroundImage=="rojo"){
-            fondo.setImageResource(R.drawable.fondo);
-        } else {
-            fondo.setImageResource(R.drawable.fondo_azul);
-        }
-*/
-
-        View decorView = getWindow().getDecorView();
-        int uiOptions = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        }
-
-        decorView.setSystemUiVisibility(uiOptions);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-    }
-
-
-    //Mudar los siguientes métodos al presenter
-
-    private void NuevaCarta(){
         //borrar textView
         tv_respuesta.setText("");
 
@@ -207,15 +93,15 @@ public class Nivel extends AppCompatActivity {
 
 
         /*  SELECCIONAR UNA CARTA ALEATORIA:
-        *
-        *   En este caso estoy tomando la cantidad de palabras contenidas en el array "palabras",
-        *   declarado junto a las variables globales.
-        *   Próximamente, esta info se obtendrá de base de datos. Por lo que aquí comenzaría
-        *   la interacción de la vista, primero con el "presenter", y luego con el "model",
-        *   encargado de manejar los datos.
-        *   Esto facilitará futuras migraciones de base de datos y testing.
-        *
-        *///                             V V V V
+         *
+         *   En este caso estoy tomando la cantidad de palabras contenidas en el array "palabras",
+         *   declarado junto a las variables globales.
+         *   Próximamente, esta info se obtendrá de base de datos. Por lo que aquí comenzaría
+         *   la interacción de la vista, primero con el "presenter", y luego con el "model",
+         *   encargado de manejar los datos.
+         *   Esto facilitará futuras migraciones de base de datos y testing.
+         *
+         *///                             V V V V
         cartaActual= (int)(Math.random()*palabras.length);
         //                                A A A
 
@@ -227,8 +113,9 @@ public class Nivel extends AppCompatActivity {
             if (nombreDeImagen.equals("MONTAÑA")) {
                 nombreDeImagen = "montana";
             }
-            int id = getResources().getIdentifier(nombreDeImagen.toLowerCase(), "drawable", getPackageName());
-            iv.setImageResource(id);
+
+            //int id = getResources().getIdentifier(nombreDeImagen.toLowerCase(), "drawable", getPackageName()); ///////////////////////////////////////////////////////////////////
+            //iv.setImageResource(id);
 
             ultimaCarta = cartaActual;
         }
@@ -322,11 +209,12 @@ public class Nivel extends AppCompatActivity {
                 }
             }
         }
+
+
     }
 
-    // llevar este método al presenter
-    private void sylablePressed(View v) {
-
+    @Override
+    public void sylablePressed(View v) {
         String silaba_presionada;
         String nueva_resp;
         String resp_temp = tv_respuesta.getText().toString();
@@ -377,9 +265,8 @@ public class Nivel extends AppCompatActivity {
         }
     }
 
-    // llevar este método al presenter
-    private void bt_borrar_clicked() {
-
+    @Override
+    public void bt_borrar_clicked() {
         if (tipoDeCarta==1){
             tv_respuesta.setText("");
         } else {
@@ -393,9 +280,8 @@ public class Nivel extends AppCompatActivity {
         }
     }
 
-    // llevar este método al presenter
-    private void bt_music_clicked(View view) {
-
+    @Override
+    public void bt_music_clicked(View view) {
         if (Global.musica){
             Global.musica= false;
             mp.pause();
@@ -409,9 +295,8 @@ public class Nivel extends AppCompatActivity {
         }
     }
 
-    // llevar este método al presenter
-    private void bt_enviar_clicked() {
-
+    @Override
+    public void bt_enviar_clicked() {
         // resetear botones de silabas
         for (int p=0; p<textViewCount; p++) {
             textViewPresionado[p] = false;
@@ -481,17 +366,18 @@ public class Nivel extends AppCompatActivity {
 
                     mp.stop();
 
+                    /*  pasar las siguientes lineas a un método manejado por la View y llamarlo desde aquí:
+
                     Intent intent = new Intent (getApplicationContext(), Pantalla_Game_Over.class);
                     intent.putExtra("jugador", jugador);
                     stringScore = Integer.toString(score);
                     intent.putExtra("score", stringScore);
                     startActivity(intent);
 
+                    */
+
                     break;
             }
-
-
         }
     }
-
 }

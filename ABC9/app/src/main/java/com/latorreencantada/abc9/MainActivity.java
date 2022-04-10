@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.latorreencantada.abc9.Nivel.Nivel;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText et_nombre;

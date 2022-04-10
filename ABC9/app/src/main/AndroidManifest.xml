@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".Nivel"
+            android:name=".Nivel.Nivel"
             android:exported="false" />
         <activity
             android:name=".Pantalla_Game_Over"
