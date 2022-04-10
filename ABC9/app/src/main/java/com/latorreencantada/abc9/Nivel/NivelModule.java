@@ -17,7 +17,7 @@ public class NivelModule {
     }
 
     @Provides
-    public NivelRepository provideLoginRepository(){
+    public NivelRepository provideNivelRepository(){
         return new MemoryRepository();
         // cambiar aqui si queremos que el repo sea en memoria, en una BdD, un cloud...
     }

@@ -90,13 +90,13 @@
 
         <TextView
             android:id="@+id/tv_respuesta_2"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
             android:layout_marginTop="284dp"
             android:text="RESPUESTA"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_marco_monitor"
             app:layout_constraintStart_toStartOf="@+id/iv_marco_monitor"
             app:layout_constraintTop_toTopOf="@+id/iv_marco_monitor" />
@@ -123,7 +123,6 @@
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/boton_silaba"
-
                 android:onClick="buttonPress"
                 android:text="ABCD"
                 android:textSize="35sp" />
@@ -169,26 +168,27 @@
         android:id="@+id/botonera_acciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/bt_borrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+            android:layout_margin="15dp"
             android:padding="25dp"
-            android:text="@string/erase"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:background="@drawable/boton_naranja"/>
 
         <Button
             android:id="@+id/bt_enviar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+            android:layout_margin="15dp"
             android:padding="25dp"
-            android:text="@string/send"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:background="@drawable/boton_verde"/>
 
     </LinearLayout>
 

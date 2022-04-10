@@ -1,51 +1,45 @@
 package com.latorreencantada.abc9.Nivel;
 
+import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.R;
 
+import java.util.Locale;
+
 public class NivelPresenter implements NivelMVP.Presenter{
 
+
     @Nullable
+    //variable que hace referencia a la vista
     private NivelMVP.View view;
 
-    private NivelMVP.Model model;
-
-    public NivelPresenter (NivelMVP.Model model){
-        this.model = model;
-    }
-
+    // constructor que configura la dependencia con la vista
     @Override
     public void setView(@Nullable NivelMVP.View view) {
         this.view = view;
     }
 
 
-    private MediaPlayer wonderful;
-    private MediaPlayer wrong;
-    private MediaPlayer mp;
+    //variable que hace referencia al modelo
+    private final NivelMVP.Model model;
 
-    private TextView tv_score;
-    private TextView tv_respuesta;
-    private TextView tv_nombre;
+    // constructor que configura la dependencia con el modelo
+    public NivelPresenter (NivelMVP.Model model){
+        this.model = model;
+    }
 
-    private TextView[] textView = new TextView[4];
 
-    private Button bt_borrar, bt_enviar, bt_musica;
 
-    private ImageView iv_estrellas;
-    private ImageView iv;
-
-    //private ImageView fondo;
-
-    String jugador;
     String stringScore;
     String palabraActual;
 
@@ -84,12 +78,13 @@ public class NivelPresenter implements NivelMVP.Presenter{
     @Override
     public void NuevaCarta() {
 
-        //borrar textView
-        tv_respuesta.setText("");
+        if (view!=null){
+            //borrar textView
+            view.setAnswer("");
+        }
 
         //generar tipo de carta aleatoria (0 o 1)
-        //tipoDeCarta = (int)(Math.random()*2);
-        tipoDeCarta = 1;
+        tipoDeCarta = (int)(Math.random()*2);
 
 
         /*  SELECCIONAR UNA CARTA ALEATORIA:
@@ -108,14 +103,17 @@ public class NivelPresenter implements NivelMVP.Presenter{
         // CHEQUEAR QUE LA CARTA ALEATORIA NO SEA IGUAL A LA ANTERIOR
         if (cartaActual!=ultimaCarta) {
 
-            //colocar imagen
+
             String nombreDeImagen = palabras[cartaActual];
             if (nombreDeImagen.equals("MONTAÑA")) {
                 nombreDeImagen = "montana";
             }
 
-            //int id = getResources().getIdentifier(nombreDeImagen.toLowerCase(), "drawable", getPackageName()); ///////////////////////////////////////////////////////////////////
-            //iv.setImageResource(id);
+            //colocar imagen
+            if (view != null){
+                nombreDeImagen = nombreDeImagen.toLowerCase();
+                view.setMainImage(nombreDeImagen);
+            }
 
             ultimaCarta = cartaActual;
         }
@@ -134,11 +132,10 @@ public class NivelPresenter implements NivelMVP.Presenter{
                 tv_Aleatorio = (int)(Math.random()*textViewCount);
 
                 //si ese textview aleatorio se encuentra vacío:
-                if (textView[tv_Aleatorio].getText().toString().equals("ABCD")
-                        ||textView[tv_Aleatorio].getText().toString().equals("")){
+                if (view.getSyllableButtonText(tv_Aleatorio).equals("ABCD")
+                        ||view.getSyllableButtonText(tv_Aleatorio).equals("")){
 
-                    //colocar la silaba correcta
-                    textView[tv_Aleatorio].setText(silabasCorrectas[cartaActual][silaba_i]);
+                    view.setSyllableButtonText(silabasCorrectas[cartaActual][silaba_i],tv_Aleatorio);
                 }
                 else {
                     //volver a hacer lo mismo con la misma silaba correcta
@@ -147,14 +144,14 @@ public class NivelPresenter implements NivelMVP.Presenter{
             }
 
             /////////////////////////////////////////////////////////////////////
-            //Colocar silabas aleatorias en textViews vacíos:
+            //      Colocar silabas aleatorias en textViews vacíos:
             /////////////////////////////////////////////////////////////////////
 
             // Para cada textView...
             for (int t=0 ; t<textViewCount; t++){
 
                 // que esté vacío
-                if (textView[t].getText().toString().equals("ABCD")||textView[t].getText().toString().equals("")){
+                if (view.getSyllableButtonText(t).equals("ABCD")||view.getSyllableButtonText(t).equals("")){
 
                     // calcular una sílaba aleatoria
                     int silabaAleatoria = (int)(Math.random() * silabas.length);
@@ -171,7 +168,7 @@ public class NivelPresenter implements NivelMVP.Presenter{
                     }
 
                     if (!sonIguales){
-                        textView[t].setText(silabas[silabaAleatoria]);
+                        view.setSyllableButtonText(silabas[silabaAleatoria],t);
                     } else {
                         t--;
                         sonIguales=false;
@@ -179,7 +176,6 @@ public class NivelPresenter implements NivelMVP.Presenter{
                 }
                 // si el textView no se encuentra vacío, continuar con el próximo
             }
-
 
 
         } else { // TIPO DE CARTA 0: Completar la letra que falta.
@@ -191,11 +187,11 @@ public class NivelPresenter implements NivelMVP.Presenter{
 
             palabraActual = palabraActual.replaceFirst(unChar, "_");
 
-            tv_respuesta.setText(palabraActual);
+            view.setAnswer(palabraActual);
 
             //asignar letra unChar a un textview aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
-            textView[tv_aleatorio].setText(unChar);
+            view.setSyllableButtonText(unChar,tv_aleatorio);
 
             //asignar un char aleatorio a los demas texviews
             for (int i = 0; i < textViewCount; i++){
@@ -205,19 +201,17 @@ public class NivelPresenter implements NivelMVP.Presenter{
                     char letter = abc.charAt((int)(Math.random()*26));
                     String string_letter = Character.toString(letter);
                     //por el momento completo así nomas:
-                    textView[i].setText(string_letter);
+                    view.setSyllableButtonText(string_letter,i);
                 }
             }
         }
-
-
     }
 
     @Override
     public void sylablePressed(View v) {
         String silaba_presionada;
         String nueva_resp;
-        String resp_temp = tv_respuesta.getText().toString();
+        String resp_temp = view.getAnswerText();
 
         int p=0;
 
@@ -244,23 +238,24 @@ public class NivelPresenter implements NivelMVP.Presenter{
         if (!textViewPresionado[p]){
 
             //cambiar background del boton (mas oscuro, que parezca desabilitado)
-            textView[p].setBackgroundResource(R.drawable.silaba_presionada);
-            silaba_presionada = textView[p].getText().toString();
+            view.changeTvBgImagePressed(p);
+
+            silaba_presionada = view.getSyllableButtonText(p);
 
             if (tipoDeCarta==1){
                 textViewPresionado[p]=true;
                 nueva_resp = resp_temp+silaba_presionada;
-                tv_respuesta.setText(nueva_resp);
+                view.setAnswer(nueva_resp);
 
             } else { // si tipo de carta == 0
 
                 // reestablecer el fondo a los botones que habian quedado "presionados" (fondo oscuro)
                 for (int z=0; z<textViewCount;z++) {
                     if (p!=z){
-                        textView[z].setBackgroundResource(R.drawable.boton_silaba);
+                        view.changeTvBgImageUnpressed(z);
                     }
                 }
-                tv_respuesta.setText(palabraActual.replaceFirst("_", silaba_presionada));
+                view.setAnswer(palabraActual.replaceFirst("_", silaba_presionada));
             }
         }
     }
@@ -268,27 +263,31 @@ public class NivelPresenter implements NivelMVP.Presenter{
     @Override
     public void bt_borrar_clicked() {
         if (tipoDeCarta==1){
-            tv_respuesta.setText("");
+            view.setAnswer("");
         } else {
-            tv_respuesta.setText(palabraActual);
+            view.setAnswer(palabraActual);
         }
 
         for (int p=0; p<textViewCount; p++) {
             textViewPresionado[p] = false;
             // cambiar background del boton (al estado inicial)
-            textView[p].setBackgroundResource(R.drawable.boton_silaba);
+
+            view.changeTvBgImageUnpressed(p);
         }
     }
 
+
     @Override
-    public void bt_music_clicked(View view) {
+    public void bt_music_clicked(MediaPlayer mp, View view) {
         if (Global.musica){
             Global.musica= false;
+            posicion = mp.getCurrentPosition();
             mp.pause();
             view.setBackgroundResource(android.R.drawable.ic_lock_silent_mode);
 
         } else {
             Global.musica=true;
+            mp.seekTo(posicion);
             mp.start();
             mp.setLooping(true);
             view.setBackgroundResource(android.R.drawable.ic_lock_silent_mode_off);
@@ -301,83 +300,108 @@ public class NivelPresenter implements NivelMVP.Presenter{
         for (int p=0; p<textViewCount; p++) {
             textViewPresionado[p] = false;
             // cambiar background del boton (al estado inicial)
-            textView[p].setBackgroundResource(R.drawable.boton_silaba);
+
+            view.changeTvBgImageUnpressed(p);
         }
         /////////////////////////////////////////////
 
-        for (int p=0; p<textViewCount; p++) {
-            // cambiar background del boton (al estado inicial)
-            textView[p].setBackgroundResource(R.drawable.boton_silaba);
-            textViewPresionado[p] = false;
-        }
-
 
         if ///////////////////// RESPUESTA CORRECTA /////////////////////////////
-        (tv_respuesta.getText().toString().equals(palabras[cartaActual])) {
-            if (Global.sonidos) {
-                wonderful.start();
-            }
+        (view.getAnswerText().equals(palabras[cartaActual])) {
+
+            playCorrectAnswerSound();
+
             score ++;
             //BaseDeDatos();
 
-            tv_respuesta.setText("");
+
+            view.setAnswer("");
 
             //vaciar todos los textviews
             for (int i=0;i<4;i++) {
-                textView[i].setText("");
+                view.setSyllableButtonText("",i);
             }
 
             NuevaCarta();
 
             //convertir el INT score en un STRING
             stringScore = Integer.toString(score);
-            tv_score.setText(stringScore);
+            view.setScore(stringScore);
 
         }
 
         else{ ////////////////// RESPUESTA INCORRECTA ///////////////////////////
 
             if (tipoDeCarta==1){
-                tv_respuesta.setText("");
+                view.setAnswer("");
             } else {
-                tv_respuesta.setText(palabraActual);
+                view.setAnswer(palabraActual);
             }
 
-            if (Global.sonidos){
-                wrong.start();
-            }
+            playWrongAnswerSound();
 
             vidas--;
 
             switch (vidas){
                 case 3:
-                    iv_estrellas.setImageResource(R.drawable.tres_estrellas);
+                    view.setThreeStars();
                     break;
 
                 case 2:
-                    iv_estrellas.setImageResource(R.drawable.dos_estrellas);
+                    view.setTwoStars();
                     break;
 
                 case 1:
-                    iv_estrellas.setImageResource(R.drawable.una_estrella);
+                    view.setOneStar();
                     break;
 
                 case 0:
 
-                    mp.stop();
+                    view.stopMusic();
 
-                    /*  pasar las siguientes lineas a un método manejado por la View y llamarlo desde aquí:
-
-                    Intent intent = new Intent (getApplicationContext(), Pantalla_Game_Over.class);
-                    intent.putExtra("jugador", jugador);
-                    stringScore = Integer.toString(score);
-                    intent.putExtra("score", stringScore);
-                    startActivity(intent);
-
-                    */
+                    view.goToGameOverScreen();
 
                     break;
             }
         }
     }
+
+    @Override
+    public void startMusic(MediaPlayer mp) {
+        if (Global.musica){
+            if (!mp.isPlaying()){
+                if (posicion!=0){
+                    mp.seekTo(posicion);
+                    mp.start();
+                    mp.setLooping(true);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void pauseMusic(MediaPlayer mp) {
+
+        if (Global.musica){
+            if (mp.isPlaying()){
+                posicion = mp.getCurrentPosition();
+                mp.pause();
+            }
+        }
+    }
+
+
+    public void playCorrectAnswerSound () {
+        if (Global.sonidos){
+            view.playCorrectAnswerSound();
+        }
+    }
+
+    public void playWrongAnswerSound () {
+        if (Global.sonidos){
+            view.playWrongAnswerSound();
+        }
+    }
+
+
 }
