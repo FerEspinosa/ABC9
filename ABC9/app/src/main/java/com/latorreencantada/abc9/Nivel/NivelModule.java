@@ -7,13 +7,13 @@ import dagger.Provides;
 public class NivelModule {
 
     @Provides
-    public NivelMVP.Presenter provideNivelPresenter (NivelMVP.Model model){
-        return new NivelPresenter(model);
+    public NivelActivityMVP.Presenter provideNivelPresenter (NivelActivityMVP.Model model){
+        return new NivelActivityPresenter(model);
     }
 
     @Provides
-    public NivelMVP.Model provideNivelModel (NivelRepository repository) {
-        return new NivelModel(repository);
+    public NivelActivityMVP.Model provideNivelModel (NivelRepository repository) {
+        return new NivelActivityModel(repository);
     }
 
     @Provides

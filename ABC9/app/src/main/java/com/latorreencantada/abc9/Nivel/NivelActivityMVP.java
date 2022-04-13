@@ -2,7 +2,7 @@ package com.latorreencantada.abc9.Nivel;
 
 import android.media.MediaPlayer;
 
-public interface NivelMVP {
+public interface NivelActivityMVP {
 
 interface View {
     void setPlayerName (String name);
@@ -29,7 +29,7 @@ interface View {
 interface Presenter {
 
     //el primero es para indicar al presenter qué vista gobierna
-    void setView (NivelMVP.View view);
+    void setView (NivelActivityMVP.View view);
 
     void NuevaCarta();
     void sylablePressed(android.view.View v);
@@ -43,7 +43,7 @@ interface Presenter {
 }
 
 interface Model {
-
+    String[][] getLevelWords(int level);
 }
 
 }

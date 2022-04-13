@@ -20,10 +20,10 @@ import com.latorreencantada.abc9.root.App;
 
 import javax.inject.Inject;
 
-public class Nivel extends AppCompatActivity implements NivelMVP.View{
+public class NivelActivity extends AppCompatActivity implements NivelActivityMVP.View{
 
     @Inject
-    NivelMVP.Presenter presenter;
+    NivelActivityMVP.Presenter presenter;
 
     private MediaPlayer wonderful;
     private MediaPlayer wrong;
