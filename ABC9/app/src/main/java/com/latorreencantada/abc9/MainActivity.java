@@ -1,5 +1,6 @@
 package com.latorreencantada.abc9;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +18,17 @@ import android.widget.TextView;
 
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText et_nombre;
     private MediaPlayer mp;
     private ImageView fondo;
 
-    Button bt_jugar;
+    Button bt_jugar, bt_opciones, bt_probar;
 
     int posicion=0;
 
@@ -64,11 +70,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mp = MediaPlayer.create(this, R.raw.alphabet_song);
-        mp.start();
+        //mp.start();
     }
 
     private void configView() {
         et_nombre = findViewById(R.id.idet_nombre);
+
         bt_jugar = findViewById(R.id.bt_jugar);
         bt_jugar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +90,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bt_opciones = findViewById(R.id.bt_opciones);
+        bt_opciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,OpcionesActivity.class));
+            }
+        });
+
+        bt_probar = findViewById(R.id.id_bt_prueba);
+        bt_probar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+
+                // define initial array
+                String numArray[]
+                        = { "one", "two", "three", "four", "five", "six" };
+
+                // print the original array
+                System.out.println("Initial Array:\n"
+                        + Arrays.toString(numArray));
+
+                // new element to be added
+                String newElement = "seven";
+
+                // convert the array to arrayList
+                List<String>numList
+                        = new ArrayList<String>(
+                        Arrays.asList(numArray));
+
+                // Add the new element to the arrayList
+                numList.add(newElement);
+
+                // Convert the Arraylist back to array
+                numArray = numList.toArray(numArray);
+
+                // print the changed array
+                System.out.println("\nArray with value " + newElement
+                        + " added:\n"
+                        + Arrays.toString(numArray));
+
+            }
+        });
     }
 
     @Override

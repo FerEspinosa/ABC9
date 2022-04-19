@@ -2,6 +2,7 @@ package com.latorreencantada.abc9.Nivel;
 
 import static com.latorreencantada.abc9.Global.silabas;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.view.View;
 
@@ -9,6 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.R;
+
+import java.util.Locale;
 
 public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
@@ -64,10 +67,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         tipoDeCarta = (int)(Math.random()*2);
 
         // Obtener nivel del jugador /////////////////////////////////////////////////////////////  intervencion del model
-        // playerLevel = player.getLevel();
+        // Player = new player();
+        // playerLevel = Player.getUserLevel();
+
 
         // Obtener palabras del nivel "playerLevel"
-        palabrasDelNivel = model.getLevelWords(playerLevel-1);
+       palabrasDelNivel = model.getLevelWords(playerLevel-1);
 
 
         /*  SELECCIONAR UNA CARTA ALEATORIA:
@@ -101,8 +106,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             ultimaCarta = cartaActual;
         } // else, si la palabra nueva es igual a la anterior, la imagen no se cambia
 
-        if (tipoDeCarta ==1){ //                    TIPO DE CARTA 1: Escribir la palabra con sílabas
-
+        if (tipoDeCarta ==1){ //                                                    TIPO DE CARTA 1: Escribir la palabra con sílabas
 
             ///////////////////////////////
             // Colocar Silabas correctas //
@@ -118,7 +122,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 if (view.getSyllableButtonText(tv_Aleatorio).equals("ABCD")
                         ||view.getSyllableButtonText(tv_Aleatorio).equals("")){
 
-                    view.setSyllableButtonText(palabrasDelNivel[cartaActual][silaba_i],tv_Aleatorio);
+                    view.setSyllableButtonText(palabrasDelNivel[cartaActual][silaba_i].toLowerCase(Locale.ROOT),tv_Aleatorio);
                 }
                 else {
                     //volver a hacer lo mismo con la misma silaba correcta
@@ -151,7 +155,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
 
                     if (!sonIguales){
-                        view.setSyllableButtonText(silabas[silabaAleatoria],t);
+                        view.setSyllableButtonText(silabas[silabaAleatoria].toLowerCase(Locale.ROOT),t);
                     } else {
                         t--;
                         sonIguales=false;
@@ -160,31 +164,55 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 // si el textView no se encuentra vacío, continuar con el próximo
             }
 
+        } else { //                                                                 TIPO DE CARTA 0: Completar la letra que falta.
 
-        } else { // TIPO DE CARTA 0: Completar la letra que falta.
 
             //generar numero aleatorio menor que longitud de palabra actual
-            int num_aleat = (int) (Math.random()*palabrasDelNivel[cartaActual][0].length());
             palabraActual = palabrasDelNivel[cartaActual][0];
+            int num_aleat = (int) (Math.random()*palabraActual.length());
+
+            // extraer de la palabra  la letra que está en la posicion del num_aleat
             String unChar = String.valueOf(palabraActual.charAt(num_aleat));
 
+            // construir la palabra con esa letra por un guión
             palabraActual = palabraActual.replaceFirst(unChar, "_");
 
-            view.setAnswer(palabraActual);
+            view.setAnswer(palabraActual.toLowerCase(Locale.ROOT));
 
-            //asignar letra unChar a un textview aleatorio
+            // colocar la letra correcta en un text view aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
-            view.setSyllableButtonText(unChar,tv_aleatorio);
+            view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
+
 
             //asignar un char aleatorio a los demas texviews
             for (int i = 0; i < textViewCount; i++){
-                if (i!=tv_aleatorio){
-                    //generar letra aleatoria
-                    String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    char letter = abc.charAt((int)(Math.random()*26));
-                    String string_letter = Character.toString(letter);
-                    //por el momento completo así nomas:
-                    view.setSyllableButtonText(string_letter,i);
+
+                //generar letra aleatoria
+                String abc = "abcdefghijklmnopqrstuvwxyz";
+                char letter = abc.charAt((int)(Math.random()*26));
+                String string_letter = Character.toString(letter);
+
+                sonIguales = false;
+
+                //para cada textView
+                for (int x= 0; x<textViewCount; x++){
+                    // verificar si string_letter es igual al contenido de textview(x)
+                    if (string_letter.equals(view.getSyllableButtonText(x))){
+                        sonIguales=true;
+                    }
+                }
+
+                // si luego de haber comparado el string_letter con todos los demas textviews,
+                // no son iguales en ningun caso
+                if (!sonIguales){
+                    if (i!=tv_aleatorio){
+                        //entonces colocar esa letra en el textView
+                        view.setSyllableButtonText(string_letter,i);
+                    }
+                } else {
+                    // si la letra aleatoria es igual a cualquiera de los demas textviews,
+                    // generar otra letra aleatoria para colocar en el mismo textview
+                    i--;
                 }
             }
         }
@@ -194,7 +222,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public void sylablePressed(View v) {
         String silaba_presionada;
         String nueva_resp;
-        String resp_temp = view.getAnswerText();
+        String resp_temp = view.getAnswerText().toLowerCase(Locale.ROOT);
 
         int p=0;
 
@@ -228,7 +256,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             if (tipoDeCarta==1){
                 textViewPresionado[p]=true;
                 nueva_resp = resp_temp+silaba_presionada;
-                view.setAnswer(nueva_resp);
+                view.setAnswer(nueva_resp.toLowerCase(Locale.ROOT));
 
             } else { // si tipo de carta == 0
 
@@ -238,7 +266,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                         view.changeTvBgImageUnpressed(z);
                     }
                 }
-                view.setAnswer(palabraActual.replaceFirst("_", silaba_presionada));
+                view.setAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
             }
         }
     }
@@ -290,7 +318,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
 
         if ///////////////////// RESPUESTA CORRECTA /////////////////////////////
-        (view.getAnswerText().equals(palabrasDelNivel[cartaActual][0])) {
+        (view.getAnswerText().toLowerCase(Locale.ROOT).equals(palabrasDelNivel[cartaActual][0].toLowerCase(Locale.ROOT))) {
 
             playCorrectAnswerSound();
 
@@ -301,14 +329,17 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 view.setSyllableButtonText("",i);
             }
 
-            if (score==20){
-                score=0;
+            score++;
+            if (score%8==0){
                 playerLevel++;
-            } else {
-                score ++;
             }
 
-            NuevaCarta();
+            if (playerLevel==5){
+                view.goToGameOverScreen();
+            } else {
+                NuevaCarta();
+            }
+
 
             //convertir el INT score en un STRING
             stringScore = Integer.toString(score);

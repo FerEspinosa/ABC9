@@ -1,18 +1,37 @@
 package com.latorreencantada.abc9.Nivel;
 
-import com.latorreencantada.abc9.Global;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
+import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
 
 public class NivelActivityModel implements NivelActivityMVP.Model{
-    private NivelRepository repository;
 
-    public NivelActivityModel(NivelRepository repository) {
+    private final MemoryInterface memory;
 
-        this.repository = repository;
+
+    public NivelActivityModel(MemoryInterface memory) {
+        this.memory = memory;
     }
 
-
     @Override
-    public String[][] getLevelWords(int playerLevel) {
-        return Global.niveles[playerLevel];
+    public String[][] getLevelWords (int playerLevel) {
+
+        //Crear objeto administrador de base de datos
+
+        /*
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "administracion", null, 1);
+
+
+        SQLiteDatabase bd= admin.getWritableDatabase();
+        Cursor fila = bd.rawQuery
+                ("SELECT * FROM cards WHERE level ="+ playerLevel, null);
+
+        int numOfwords = fila.getCount();
+        System.out.println(numOfwords);
+        */
+        return null;
     }
 }

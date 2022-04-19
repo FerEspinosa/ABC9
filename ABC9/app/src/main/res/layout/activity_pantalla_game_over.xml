@@ -4,15 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".Pantalla_Game_Over">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="312dp"
-        android:text="GAME OVER"
+        android:id="@+id/txt_congrats"
+        android:layout_width="351dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="76dp"
+        android:text="MUY BIEN BAUTISTA"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score_gameover"
+        android:layout_width="299dp"
+        android:layout_height="255dp"
+        android:layout_marginTop="4dp"
+        android:text="24"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="180sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_congrats" />
+
+    <TextView
+        android:id="@+id/txt_play_again"
+        android:layout_width="155dp"
+        android:layout_height="176dp"
+        android:layout_marginTop="40dp"
+        android:text="JUGAR OTRA VEZ"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score_gameover" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

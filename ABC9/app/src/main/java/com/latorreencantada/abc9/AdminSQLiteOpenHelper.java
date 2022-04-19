@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 
         @Override
         public void onCreate(SQLiteDatabase BD) {
-            BD.execSQL("create table puntaje (nombre text, score int)");
+            BD.execSQL("create table players (nombre text, level int, bestScore int)");
+            BD.execSQL("create table cards (word text, syl1 text, syl2 text, syl3 text, syl4 text, level int)");
         }
 
         @Override

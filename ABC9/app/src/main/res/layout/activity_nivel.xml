@@ -136,6 +136,7 @@
                 android:background="@drawable/boton_silaba"
                 android:onClick="buttonPress"
                 android:text="ABCD"
+                android:textAllCaps="false"
                 android:textSize="35sp" />
 
             <Button
@@ -144,7 +145,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/boton_silaba"
-
+                android:textAllCaps="false"
                 android:onClick="buttonPress"
                 android:text="ABCD"
                 android:textSize="35sp" />
@@ -155,7 +156,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/boton_silaba"
-
+                android:textAllCaps="false"
                 android:onClick="buttonPress"
                 android:text="ABCD"
                 android:textSize="35sp" />
@@ -166,7 +167,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/boton_silaba"
-
+                android:textAllCaps="false"
                 android:onClick="buttonPress"
                 android:text="ABCD"
                 android:textSize="35sp" />

@@ -231,9 +231,8 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     @Override
     public void goToGameOverScreen() {
         Intent intent = new Intent (getApplicationContext(), Pantalla_Game_Over.class);
-        //intent.putExtra("jugador", jugador);
-        //stringScore = Integer.toString(score);
-        //intent.putExtra("score", stringScore);
+        intent.putExtra("jugador", jugador);
+        intent.putExtra("score", tv_score.getText().toString());
         startActivity(intent);
     }
 

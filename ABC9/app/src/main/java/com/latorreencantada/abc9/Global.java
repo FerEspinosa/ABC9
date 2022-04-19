@@ -4,10 +4,10 @@ public class Global {
     public static Boolean musica = true;
     public static Boolean sonidos = true;
     public static String BackgroundImage = "rojo";
-    public static String[] silabas = {"PA","MA","CA","SA","PO","TO","CO","A","LO","BUE","LA","DE","DI","DO","DU","PI","ZA","TIO","TIS", "NO"};;
+    public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};;
 
 
-    public static String [][][] niveles = {
+    public static String [][][] niveles = { //[nivel][palabra][silaba]
 
             {//NIVEL 1
                         {"DINOSAURIO", "DI", "NO", "SAU", "RIO"},
@@ -53,7 +53,16 @@ public class Global {
                         {"AGUA", "A", "GU", "A"},
                         {"GENIO", "GE", "NI", "O"},
                         {"MAGIA", "MA", "G", "I", "A"},
-                        {"GELATINA", "GE", "LA", "TI", "NA"}}
+                        {"GELATINA", "GE", "LA", "TI", "NA"}},
+
+            { // NIVEL 4
+                    {"MARIO", "MA", "RIO"},
+                    {"GLOBO","GLO","BO"},
+                    {"TIBURON", "TI", "BU", "RON"},
+                    {"HORMIGA", "HOR", "MI", "GA"},
+                    {"GODZILLA", "GOD", "ZI", "LLA"}
+
+            }
     };
 
 

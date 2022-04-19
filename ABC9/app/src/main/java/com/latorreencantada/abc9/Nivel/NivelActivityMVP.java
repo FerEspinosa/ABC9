@@ -1,5 +1,6 @@
 package com.latorreencantada.abc9.Nivel;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 
 public interface NivelActivityMVP {

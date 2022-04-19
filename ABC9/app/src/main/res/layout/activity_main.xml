@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/bt_opciones"
         android:layout_width="196dp"
         android:layout_height="78dp"
         android:layout_marginTop="68dp"
@@ -70,12 +70,12 @@
         app:layout_constraintTop_toBottomOf="@+id/idtv_bestScore" />
 
     <Button
-        android:id="@+id/id_editor_de_tarjetas"
+        android:id="@+id/id_bt_prueba"
         android:layout_width="193dp"
         android:layout_height="82dp"
         android:layout_marginTop="40dp"
-        android:text="@string/txt_editar_tarjetas"
+        android:text="prueba"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_opciones" />
 </androidx.constraintlayout.widget.ConstraintLayout>
