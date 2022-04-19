@@ -21,4 +21,9 @@ import androidx.annotation.Nullable;
         public void onUpgrade(SQLiteDatabase BD, int oldVersion, int newVersion) {
 
         }
+
+        public Integer deleteAllData () {
+            SQLiteDatabase db = this.getWritableDatabase();
+            return db.delete("cards", null, null);
+        }
     }

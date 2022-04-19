@@ -32,7 +32,7 @@ public class Player {
         return userLevel;
     }
 
-    public void setUserLevel(int userLevel) {
+    public void setPlayerLevel(int userLevel) {
         this.userLevel = userLevel;
     }
 }

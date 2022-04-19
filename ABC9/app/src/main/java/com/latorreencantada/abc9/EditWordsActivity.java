@@ -83,6 +83,21 @@ public class EditWordsActivity extends AppCompatActivity {
 
     }
 
+    private void getFirstSyl (String word){
+
+        String firstSyl = "";
+
+        //Crear objeto administrador de base de datos
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+
+        //Se utiliza el objeto "admin" para obtener la base de datos (en modo lectura y escritura)
+        SQLiteDatabase BD = admin.getWritableDatabase();
+
+        // agregar una card al array de cards del nivel actual
+
+        Toast.makeText(this, firstSyl, Toast.LENGTH_SHORT).show();
+    }
+
     // el siguiente método iría en el presenter
     private void getInputs() {
         word = viewGetWord();
@@ -96,7 +111,6 @@ public class EditWordsActivity extends AppCompatActivity {
     private String viewGetWord() {
         return et_word.getText().toString();
     }
-
     private String viewGetSyl1() {
         return et_syl1.getText().toString();
     }
@@ -114,11 +128,12 @@ public class EditWordsActivity extends AppCompatActivity {
         return et_level.getText().toString();
     }
 
-
+/*
     private String[][] getLevelsWords(int userLevel) {
 
         levelWordsArray = Global.niveles[userLevel];
 
         return levelWordsArray;
     }
+    */
 }

@@ -3,7 +3,9 @@ package com.latorreencantada.abc9.Nivel;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Pantalla_Game_Over;
@@ -41,8 +44,15 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     private ImageView iv;
 
     String jugador;
+    private int playerLevel = 1;
 
     int textViewCount = 4 ;
+
+    // prueba de shared preference
+    public static final String SHARED_PREFS = "SharedPrefs";
+    public static final String FIRST_RUN = "firstRun";
+    public static final String SWITCH1 = "switch1";
+    private boolean firstRun;
 
 
     @Override
@@ -54,7 +64,10 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
         configView();
         presenter.setView(this);
-        presenter.NuevaCarta();
+
+        // por ahora mando el player level manualmente
+        // más adelante (cuando desarrolle la clase "player") lo obtendré de manera programática
+        presenter.NuevaCarta(playerLevel);
     }
 
     private void configView() {
@@ -234,6 +247,26 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         intent.putExtra("jugador", jugador);
         intent.putExtra("score", tv_score.getText().toString());
         startActivity(intent);
+    }
+
+    @Override
+    public void checkFirstRun() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if (sharedPreferences.getBoolean(FIRST_RUN, true)){
+            editor.putBoolean(FIRST_RUN, false);
+            Toast.makeText(this, "first run!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "not first run", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
     }
 
     @Override

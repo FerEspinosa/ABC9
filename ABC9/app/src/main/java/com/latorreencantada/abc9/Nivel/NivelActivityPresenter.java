@@ -8,9 +8,11 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.latorreencantada.abc9.Card;
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.R;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
@@ -35,64 +37,50 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         this.model = model;
     }
 
-
-
     String stringScore;
     String palabraActual;
     int playerLevel=1;
 
     int textViewCount = 4 ;
     int tv_Aleatorio;
-    int cartaActual;
+    int cartaActualInt;
     int score;
     int vidas = 3 ;
     int tipoDeCarta;
     int ultimaCarta=99999;
     int posicion = 0;
 
+    Card cartaActual;
+
     boolean sonIguales = false;
     boolean[] textViewPresionado = {false, false, false,false};
 
-    String [][] palabrasDelNivel;
+    ArrayList<Card> levelCardList;
 
     @Override
-    public void NuevaCarta() {
+    public void NuevaCarta(int playerLevel) {
 
         if (view!=null){
-            //borrar textView
+            //vaciar textView principal
             view.setAnswer("");
         }
 
         //generar tipo de carta aleatoria (0 o 1)
         tipoDeCarta = (int)(Math.random()*2);
 
-        // Obtener nivel del jugador /////////////////////////////////////////////////////////////  intervencion del model
-        // Player = new player();
-        // playerLevel = Player.getUserLevel();
-
-
         // Obtener palabras del nivel "playerLevel"
-       palabrasDelNivel = model.getLevelWords(playerLevel-1);
+        levelCardList = model.getLevelWords(playerLevel, view.getContext());
 
-
-        /*  SELECCIONAR UNA CARTA ALEATORIA:
-         *
-         *   En este caso estoy tomando la cantidad de palabras contenidas en el array "palabras",
-         *   declarado junto a las variables globales.
-         *   Próximamente, esta info se obtendrá de base de datos. Por lo que aquí comenzaría
-         *   la interacción de la vista, primero con el "presenter", y luego con el "model",
-         *   encargado de manejar los datos.
-         *   Esto facilitará futuras migraciones de base de datos y testing.
-         *
-         *///                             V V V V
-        cartaActual= (int)(Math.random()*palabrasDelNivel.length);
-        //                                A A A
-
+        //SELECCIONAR UNA CARTA ALEATORIA:
+        cartaActualInt = (int)(Math.random()*levelCardList.size());
 
         // CHEQUEAR QUE LA CARTA ALEATORIA NO SEA IGUAL A LA ANTERIOR
-        if (cartaActual!=ultimaCarta) {
+        if (cartaActualInt !=ultimaCarta) {
 
-            String nombreDeImagen = palabrasDelNivel[cartaActual][0];
+            cartaActual = levelCardList.get(cartaActualInt);
+
+            String nombreDeImagen = cartaActual.getWord();
+
             if (nombreDeImagen.equals("MONTAÑA")) {
                 nombreDeImagen = "montana";
             }
@@ -103,7 +91,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 view.setMainImage(nombreDeImagen);
             }
 
-            ultimaCarta = cartaActual;
+            ultimaCarta = cartaActualInt;
         } // else, si la palabra nueva es igual a la anterior, la imagen no se cambia
 
         if (tipoDeCarta ==1){ //                                                    TIPO DE CARTA 1: Escribir la palabra con sílabas
@@ -113,7 +101,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             ///////////////////////////////
 
             //para cada silaba correcta
-            for (int silaba_i=1; silaba_i < palabrasDelNivel[cartaActual].length; silaba_i++){
+            for (int silabaCorrecta_i = 1; silabaCorrecta_i < 5; silabaCorrecta_i++){
 
                 //escoger un text view aleatorio
                 tv_Aleatorio = (int)(Math.random()*textViewCount);
@@ -122,11 +110,15 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 if (view.getSyllableButtonText(tv_Aleatorio).equals("ABCD")
                         ||view.getSyllableButtonText(tv_Aleatorio).equals("")){
 
-                    view.setSyllableButtonText(palabrasDelNivel[cartaActual][silaba_i].toLowerCase(Locale.ROOT),tv_Aleatorio);
+                    // asignar al textview vacío el texto de la silaba i
+                    view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i),tv_Aleatorio);
+
                 }
                 else {
-                    //volver a hacer lo mismo con la misma silaba correcta
-                    silaba_i--;
+                    //si el textview aleatorio no está vacío,
+                    // volver a generar un textView aleatorio
+                    // para colocar la misma silaba correcta:
+                    silabaCorrecta_i--;
                 }
             }
 
@@ -141,21 +133,23 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 if (view.getSyllableButtonText(t).equals("ABCD")||view.getSyllableButtonText(t).equals("")){
 
                     // calcular una sílaba aleatoria
-                    int silabaAleatoria = (int)(Math.random() * silabas.length);
+                    int intSilabaaleatoria = (int)(Math.random() * silabas.length);
+                    String silabaAleatoria = silabas[intSilabaaleatoria];
 
                     sonIguales  = false;
                     //para cada respuesta correcta:
-                    for (int z=1; z<palabrasDelNivel[cartaActual].length; z++){
+                    for (int correct_syl_i = 1; correct_syl_i<5; correct_syl_i++){
 
-                        //comparar con silaba aleatoria
-                        if (palabrasDelNivel[cartaActual][z].equals(silabas[silabaAleatoria])){
+                        //comparar cada respuesta correcta con silaba aleatoria
+
+                        if (cartaActual.getSyl(correct_syl_i).equals(silabaAleatoria)){
                             sonIguales=true;
-                            break;
                         }
+
                     }
 
                     if (!sonIguales){
-                        view.setSyllableButtonText(silabas[silabaAleatoria].toLowerCase(Locale.ROOT),t);
+                        view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),t);
                     } else {
                         t--;
                         sonIguales=false;
@@ -168,7 +162,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
 
             //generar numero aleatorio menor que longitud de palabra actual
-            palabraActual = palabrasDelNivel[cartaActual][0];
+            palabraActual = cartaActual.getWord();
             int num_aleat = (int) (Math.random()*palabraActual.length());
 
             // extraer de la palabra  la letra que está en la posicion del num_aleat
@@ -182,7 +176,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             // colocar la letra correcta en un text view aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
             view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
-
 
             //asignar un char aleatorio a los demas texviews
             for (int i = 0; i < textViewCount; i++){
@@ -318,7 +311,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
 
         if ///////////////////// RESPUESTA CORRECTA /////////////////////////////
-        (view.getAnswerText().toLowerCase(Locale.ROOT).equals(palabrasDelNivel[cartaActual][0].toLowerCase(Locale.ROOT))) {
+        (view.getAnswerText().toLowerCase(Locale.ROOT).equals(cartaActual.getWord().toLowerCase(Locale.ROOT))) {
 
             playCorrectAnswerSound();
 
@@ -330,16 +323,16 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             }
 
             score++;
-            if (score%8==0){
+            if (score%4==0){
                 playerLevel++;
+
             }
 
             if (playerLevel==5){
                 view.goToGameOverScreen();
             } else {
-                NuevaCarta();
+                NuevaCarta(playerLevel);
             }
-
 
             //convertir el INT score en un STRING
             stringScore = Integer.toString(score);
@@ -407,7 +400,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
     }
 
-
     public void playCorrectAnswerSound () {
         if (Global.sonidos){
             view.playCorrectAnswerSound();
@@ -420,142 +412,10 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
     }
 
-    //@Override
-    public void NuevaCartaBis () {
-
+    @Override
+    public Context getContext() {
         assert view != null;
-
-        // vaciar campo answer
-        view.setAnswer("");
-
-        // obtener nivel del jugador
-        int nivelJugador = 0;
-
-        //generar tipo de carta aleatoria (0 o 1)
-        tipoDeCarta = (int)(Math.random()*2);
-        tipoDeCarta =1;
-
-        // obtener array de palabras dentro del nivel del jugador
-        String [][] palabrasDelNivel = {
-                {"DINOSAURIO", "DI","NO","SAU","RIO"},  //0
-                {"BALLENA","BA","LLE", "NA"},           //1
-                {"CONEJO","CO","NE","JO"},              //2
-                {"ELEFANTE","E","LE","FAN","TE"}        //3
-        };
-
-        // contar cantidad de palabras en ese array
-        int cantPalabras = palabrasDelNivel.length;
-
-        // generar numero aleatorio < cantPalabras
-        int palAleat = (int)(Math.random()*cantPalabras);
-
-
-        if (palAleat==ultimaCarta){
-
-            // se repitió la palabra
-            // seleccionar otro numero aleatorio y volver a comparar
-            // cómo hago esto???
-
-        } else {
-
-            // no se repitió la palabra. Colocar la imagen:
-
-            String nombreDeImagen = palabrasDelNivel[palAleat][0];
-            if (nombreDeImagen.equals("MONTAÑA")) {
-                nombreDeImagen = "montana";
-            }
-
-            //colocar imagen
-            if (view != null) {
-                nombreDeImagen = nombreDeImagen.toLowerCase();
-                view.setMainImage(nombreDeImagen);
-            }
-
-            ultimaCarta = palAleat;
-
-            // fin colocar imagen
-
-            if (tipoDeCarta==1){
-
-
-            // colocar silabas correctas en botones aleatorios
-
-            //para cada silaba correcta
-            for (int silaba_i=0; silaba_i < palabrasDelNivel[palAleat].length; silaba_i++){
-
-                //escoger un text view aleatorio
-                tv_Aleatorio = (int)(Math.random()*textViewCount);
-
-                //si ese textview aleatorio se encuentra vacío:
-                assert view != null;
-                if (view.getSyllableButtonText(tv_Aleatorio).equals("ABCD")
-                        ||view.getSyllableButtonText(tv_Aleatorio).equals("")){
-
-                    view.setSyllableButtonText(palabrasDelNivel[palAleat][silaba_i],tv_Aleatorio);
-                }
-                else {
-                    //volver a hacer lo mismo con la misma silaba correcta
-                    silaba_i--;
-                }
-            }
-
-            // rellenar botones vacíos con silabas incorrectas
-
-                /////////////////////////////////////////////////////////////////////
-                //      Colocar silabas aleatorias en textViews vacíos:
-                /////////////////////////////////////////////////////////////////////
-
-                // Para cada textView...
-                for (int t=0 ; t<textViewCount; t++){
-
-                    // que esté vacío
-                    if (view.getSyllableButtonText(t).equals("ABCD")||view.getSyllableButtonText(t).equals("")){
-
-                        // calcular una sílaba aleatoria
-                        int silabaAleatoria = (int)(Math.random() * silabas.length);
-
-                        sonIguales  = false;
-
-                        //para cada sílaba correcta:
-                        for (int z=1; z<palabrasDelNivel[palAleat].length; z++){
-
-                            //comparar con silaba aleatoria
-                            if (palabrasDelNivel[palAleat][z].equals(silabas[silabaAleatoria])){
-                                sonIguales=true;
-                                break;
-                            }
-                        }
-
-                        if (!sonIguales){
-                            view.setSyllableButtonText(silabas[silabaAleatoria],t);
-                        } else {
-                            t--;
-                            sonIguales=false;
-                        }
-                    }
-                    // si el textView no se encuentra vacío, continuar con el próximo
-                }
-
-
-            } else if (tipoDeCarta==0){
-
-                // contra letras que tiene la palabra
-                int q = palabrasDelNivel[palAleat][0].length();
-
-                // generar numAleat < q
-                int PosicLetraAleat = (int) (Math.random() * q);
-
-                // guardar letra aleatoria en variable
-
-                //reemplazar letra aleatoria por "_"
-
-            }
-        }
-
-
-
-
+        return view.getContext();
     }
-
 
 }

@@ -3,6 +3,10 @@ package com.latorreencantada.abc9.Nivel;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+import com.latorreencantada.abc9.Card;
+
+import java.util.ArrayList;
+
 public interface NivelActivityMVP {
 
 interface View {
@@ -25,6 +29,9 @@ interface View {
     void stopMusic();
 
     void goToGameOverScreen();
+    void checkFirstRun();
+
+    Context getContext();
 }
 
 interface Presenter {
@@ -32,7 +39,7 @@ interface Presenter {
     //el primero es para indicar al presenter qué vista gobierna
     void setView (NivelActivityMVP.View view);
 
-    void NuevaCarta();
+    void NuevaCarta(int playerLevel);
     void sylablePressed(android.view.View v);
     void bt_borrar_clicked();
     void bt_music_clicked(MediaPlayer mp, android.view.View v);
@@ -41,10 +48,11 @@ interface Presenter {
     void pauseMusic(MediaPlayer mp);
     void playCorrectAnswerSound ();
     void playWrongAnswerSound ();
+    Context getContext();
 }
 
 interface Model {
-    String[][] getLevelWords(int level);
+    ArrayList<Card> getLevelWords(int level, Context context);
 }
 
 }

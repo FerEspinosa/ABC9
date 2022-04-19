@@ -6,6 +6,6 @@ public class MemoryRepository implements MemoryInterface {
 
     @Override
     public String[][] getLevelWords(int playerLevel) {
-        return Global.niveles[playerLevel];
+        return Global.defaultLevels[playerLevel];
     }
 }
