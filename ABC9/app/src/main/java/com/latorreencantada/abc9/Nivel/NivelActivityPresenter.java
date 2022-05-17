@@ -50,6 +50,11 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     int ultimaCarta=99999;
     int posicion = 0;
 
+    // el siguiente booleano debe estar en true por default
+    // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
+    // el switch para que el usuario seleccione la opcion que quiera.
+    boolean capslock = Global.capsLock;
+
     Card cartaActual;
 
     boolean sonIguales = false;
@@ -64,6 +69,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             //vaciar textView principal
             view.setAnswer("");
         }
+
+        clearAllSylButtons();
 
         //generar tipo de carta aleatoria (0 o 1)
         tipoDeCarta = (int)(Math.random()*2);
@@ -123,7 +130,13 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                         ||view.getSyllableButtonText(tv_Aleatorio).equals("")){
 
                     // asignar al textview vacío el texto de la silaba i
-                    view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i),tv_Aleatorio);
+
+                    if (capslock){
+                        view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toUpperCase(),tv_Aleatorio);
+                    } else {
+                        view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toLowerCase(Locale.ROOT),tv_Aleatorio);
+                    }
+
 
                 }
                 else {
@@ -161,7 +174,11 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
 
                     if (!sonIguales){
-                        view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),t);
+                        if(capslock){
+                            view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),t);
+                        } else {
+                            view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),t);
+                        }
                     } else {
                         t--;
                         sonIguales=false;
@@ -183,11 +200,20 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             // construir la palabra con esa letra por un guión
             palabraActual = palabraActual.replaceFirst(unChar, "_");
 
-            view.setAnswer(palabraActual.toLowerCase(Locale.ROOT));
+            if (capslock){
+                view.setAnswer(palabraActual.toUpperCase(Locale.ROOT));
+            } else {
+                view.setAnswer(palabraActual.toLowerCase(Locale.ROOT));
+            }
 
             // colocar la letra correcta en un text view aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
-            view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
+
+            if (capslock){
+                view.setSyllableButtonText(unChar.toUpperCase(Locale.ROOT),tv_aleatorio);
+            } else {
+                view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
+            }
 
             //asignar un char aleatorio a los demas texviews
             for (int i = 0; i < textViewCount; i++){
@@ -212,7 +238,13 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 if (!sonIguales){
                     if (i!=tv_aleatorio){
                         //entonces colocar esa letra en el textView
-                        view.setSyllableButtonText(string_letter,i);
+
+                        if (capslock){
+                            view.setSyllableButtonText(string_letter.toUpperCase(),i);
+                        } else {
+                            view.setSyllableButtonText(string_letter.toLowerCase(),i);
+                        }
+
                     }
                 } else {
                     // si la letra aleatoria es igual a cualquiera de los demas textviews,
@@ -227,7 +259,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public void sylablePressed(View v) {
         String silaba_presionada;
         String nueva_resp;
-        String resp_temp = view.getAnswerText().toLowerCase(Locale.ROOT);
+        String resp_temp = view.getAnswerText();
 
         int p=0;
 
@@ -261,7 +293,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             if (tipoDeCarta==1){
                 textViewPresionado[p]=true;
                 nueva_resp = resp_temp+silaba_presionada;
-                view.setAnswer(nueva_resp.toLowerCase(Locale.ROOT));
+
+                if (capslock){
+                    view.setAnswer(nueva_resp.toUpperCase(Locale.ROOT));
+                } else {
+                    view.setAnswer(nueva_resp.toLowerCase(Locale.ROOT));
+                }
 
             } else { // si tipo de carta == 0
 
@@ -271,7 +308,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                         view.changeTvBgImageUnpressed(z);
                     }
                 }
-                view.setAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
+
+                if (capslock){
+                    view.setAnswer(palabraActual.toUpperCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
+                } else {
+                    view.setAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
+                }
             }
         }
     }
@@ -329,19 +371,19 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
             view.setAnswer("");
 
-            //vaciar todos los textviews
-            for (int i=0;i<4;i++) {
-                view.setSyllableButtonText("",i);
-            }
-
             score++;
-            if (score%8==0){
+            if (score%4==0){
                 playerLevel++;
-
             }
 
-            if (playerLevel==5){
-                view.goToGameOverScreen();
+            if (playerLevel==(Global.defaultLevels.length)+1){
+                if (capslock){
+                    capslock= false;
+                    playerLevel=1;
+                    NuevaCarta(playerLevel);
+                } else {
+                    view.goToGameOverScreen();
+                }
             } else {
                 NuevaCarta(playerLevel);
             }
@@ -354,12 +396,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         else{ ////////////////// RESPUESTA INCORRECTA ///////////////////////////
 
-            if (tipoDeCarta==1){
-                view.setAnswer("");
-            } else {
-                view.setAnswer(palabraActual);
-            }
-
             playWrongAnswerSound();
 
             vidas--;
@@ -371,20 +407,27 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
                 case 2:
                     view.setTwoStars();
+                    NuevaCarta(playerLevel);
                     break;
 
                 case 1:
                     view.setOneStar();
+                    NuevaCarta(playerLevel);
                     break;
 
                 case 0:
-
                     view.stopMusic();
-
                     view.goToGameOverScreen();
-
                     break;
             }
+
+        }
+    }
+
+    private void clearAllSylButtons() {
+        //vaciar todos los textviews
+        for (int i=0;i<4;i++) {
+            view.setSyllableButtonText("",i);
         }
     }
 

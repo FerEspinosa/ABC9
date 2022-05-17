@@ -81,6 +81,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         wrong = MediaPlayer.create(this, R.raw.bad);
         mp = MediaPlayer.create(this, R.raw.goats);
 
+        boolean capslock = Global.capsLock;
 
         if (Global.musica){
             mp.start();

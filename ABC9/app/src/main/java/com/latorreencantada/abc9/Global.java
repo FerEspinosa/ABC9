@@ -3,6 +3,7 @@ package com.latorreencantada.abc9;
 public class Global {
     public static Boolean musica = false;
     public static Boolean sonidos = true;
+    public static Boolean capsLock = false;
     public static String BackgroundImage = "rojo";
     public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};;
 
@@ -69,7 +70,7 @@ public class Global {
                     {"BAÑO","BA","ÑO","","","9"},                //------------------------------
                     {"CABAÑA","CA","BA","ÑA","","9"},                //---------------------
                     {"CAÑA","CA","ÑA","","","9"},                //---------------------
-                    {"MONTAÑA", "MON", "TA", "ÑA", "", "3"}
+                    {"MONTAÑA", "MON", "TA", "ÑA", "", "9"}
             },
 
             {// NIVEL 10: U
@@ -102,8 +103,8 @@ public class Global {
                     {"SILLON","SI","LLON","","","13"},                //---------------------
                     {"JABALI","JA","BA","LI","","13"},                //---------------------
                     {"JABON","JA","BON","","","13"},                //---------------------
-                    {"CONEJO", "CO", "NE", "JO", "", "1"},
-                    {"JIRAFA", "JI", "RA", "FA", "", "1"},
+                    {"CONEJO", "CO", "NE", "JO", "", "13"},
+                    {"JIRAFA", "JI", "RA", "FA", "", "13"},
                     {"ABEJA","A","BE","JA","","13"}                //-------------------------
             },
 
@@ -126,7 +127,7 @@ public class Global {
                     {"CARTA","CAR","TA","","","16"},                //---------------------
                     {"TORO","TO","RO","","","16"},
                     {"CARPA","CAR","PA","","","16"},                //---------------------
-                    {"PIRATA","PI","RA","TA","16"},                //---------------------60
+                    {"PIRATA","PI","RA","TA","","16"},                //---------------------60
                     {"CARACOL","CA","RA","COL","","16"},                //---------------------
                     {"MARIPOSA","MA","RI","PO","SA","16"}                //---------------------
             },
@@ -153,7 +154,7 @@ public class Global {
                     {"GENIO","GE","NI","O","","19"},
                     {"GIGANTE","GI","GAN","TE","","19"},                //---------------------
                     {"GELATINA","GE","LA","TI","NA","19"},
-                    {"MAGIA","MA","GI","A"}
+                    {"MAGIA","MA","GI","A", "","19"}
             },
 
             {// NIVEL 20: Gue Gui
@@ -196,47 +197,47 @@ public class Global {
                     {"YERBA","YER","BA","","","24"}                //---------------------
             },
 
-            { // NIVEL 27: Z
-                    {"ZANAHORIA","ZA","NA","HO","RIA","27"},                //---------------------
-                    {"ZAPATO","ZA","PA","TO","","27"},
-                    {"ZORRO","ZO","RRO","","","27"},                //---------------------
-                    {"PLAZA","PLA","ZA","","","27"},                //---------------------
-                    {"ABRAZO","A","BRA","ZO","","27"},                //---------------------
-                    {"CABEZA","CA","BE","ZA","","27"},                //---------------------
-                    {"CALABAZA","CA","LA","BA","ZA","27"},                //---------------------
-                    {"CORAZON","CO","RA","ZON","","27"},
-                    {"MANZANA","MAN","ZA","NA","","27"},
-                    {"DURAZNO","DU","RAZ","NO","","27"},                //---------------------
-                    {"NARIZ","NA","RIZ","RIS","","27"}                //--------------------- 109
+            { // NIVEL 25: Z
+                    {"ZANAHORIA","ZA","NA","HO","RIA","25"},                //---------------------
+                    {"ZAPATO","ZA","PA","TO","","25"},
+                    {"ZORRO","ZO","RRO","","","25"},                //---------------------
+                    {"PLAZA","PLA","ZA","","","25"},                //---------------------
+                    {"ABRAZO","A","BRA","ZO","","25"},                //---------------------
+                    {"CABEZA","CA","BE","ZA","","25"},                //---------------------
+                    {"CALABAZA","CA","LA","BA","ZA","25"},                //---------------------
+                    {"CORAZON","CO","RA","ZON","","25"},
+                    {"MANZANA","MAN","ZA","NA","","25"},
+                    {"DURAZNO","DU","RAZ","NO","","25"},                //---------------------
+                    {"NARIZ","NA","RIZ","RIS","","25"}                //--------------------- 109
+            },
+
+            { // NIVEL 26
+                {"FRUTILLA", "FRU", "TI", "LLA", "l", "26"},
+                {"FUEGO", "FUE", "GO", "", "", "26"},
+                {"JUGO", "JU", "GO", "", "", "26"},
+                {"LECHE", "LE", "CHE", "", "", "26"},
+                {"NARANJA", "NA", "RAN", "JA", "", "26"},
+                {"NEMO", "NE", "MO", "", "", "26"},
+                {"PERA", "P", "E", "R", "A", "26"},
+                {"PEZ", "P", "E", "Z", "S", "26"}},
+
+            { // NIVEL 27
+                {"SANDIA", "SAN", "DIA", "", "", "27"},
+                {"TREN", "T", "R", "E", "N", "27"},
+                {"MONTAÑA", "MON", "TA", "ÑA", "", "27"},
+                {"NUBE", "NU", "BE", "", "", "27"},
+                {"RASCACIELO", "RAS", "CA", "CIE", "LO", "27"},
+                {"SEMAFORO", "SE", "MA", "FO", "RO", "27"},
+                {"CAMION", "CA", "MI", "ON", "", "27"},
+                {"MAGIA", "MA", "G", "I", "A", "27"},
             },
 
             { // NIVEL 28
-                {"FRUTILLA", "FRU", "TI", "LLA", "l", "28"},
-                {"FUEGO", "FUE", "GO", "", "", "28"},
-                {"JUGO", "JU", "GO", "", "", "28"},
-                {"LECHE", "LE", "CHE", "", "", "28"},
-                {"NARANJA", "NA", "RAN", "JA", "", "28"},
-                {"NEMO", "NE", "MO", "", "", "28"},
-                {"PERA", "P", "E", "R", "A", "28"},
-                {"PEZ", "P", "E", "Z", "S", "28"}},
-
-            { // NIVEL 29
-                {"SANDIA", "SAN", "DIA", "", "", "29"},
-                {"TREN", "T", "R", "E", "N", "29"},
-                {"MONTAÑA", "MON", "TA", "ÑA", "", "29"},
-                {"NUBE", "NU", "BE", "", "", "29"},
-                {"RASCACIELO", "RAS", "CA", "CIE", "LO", "29"},
-                {"SEMAFORO", "SE", "MA", "FO", "RO", "29"},
-                {"CAMION", "CA", "MI", "ON", "", "29"},
-                {"MAGIA", "MA", "G", "I", "A", "29"},
-            },
-
-            { // NIVEL 30
-                {"MARIO", "MA", "RIO", "", "", "30"},
-                {"GLOBO","GLO","BO", "", "", "30"},
-                {"TIBURON", "TI", "BU", "RON", "", "30"},
-                {"GODZILLA", "GOD", "ZI", "LLA", "", "30"},
-                {"DINOSAURIO", "DI", "NO", "SAU", "RIO", "1"}
+                {"MARIO", "MA", "RIO", "", "", "28"},
+                {"GLOBO","GLO","BO", "", "", "28"},
+                {"TIBURON", "TI", "BU", "RON", "", "28"},
+                {"GODZILLA", "GOD", "ZI", "LLA", "", "28"},
+                {"DINOSAURIO", "DI", "NO", "SAU", "RIO", "28"}
             }
 
             /*

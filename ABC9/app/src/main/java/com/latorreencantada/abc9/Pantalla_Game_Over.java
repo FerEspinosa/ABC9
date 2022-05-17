@@ -3,6 +3,7 @@ package com.latorreencantada.abc9;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.latorreencantada.abc9.Nivel.NivelActivity;
 public class Pantalla_Game_Over extends AppCompatActivity {
 
     TextView tv_congrats, tv_score, playAgain;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +21,19 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_game_over);
 
         configView();
+        mp.start();
     }
 
     private void configView() {
+
+        mp = MediaPlayer.create(this, R.raw.end);
         tv_congrats = findViewById(R.id.txt_congrats);
         String congrats = "MUY BIEN "+getIntent().getStringExtra("jugador");
         tv_congrats.setText(congrats);
 
         tv_score = findViewById(R.id.score_gameover);
         tv_score.setText(getIntent().getStringExtra("score"));
+
 
 
         //botón jugar de nuevo
