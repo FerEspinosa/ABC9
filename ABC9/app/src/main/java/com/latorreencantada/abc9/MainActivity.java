@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 posicion = mp.getCurrentPosition();
                 mp.stop();
                 startActivity(intent);
-
             }
         });
 

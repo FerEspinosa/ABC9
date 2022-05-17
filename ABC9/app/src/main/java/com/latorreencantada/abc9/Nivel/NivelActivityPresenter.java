@@ -82,7 +82,19 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             String nombreDeImagen = cartaActual.getWord();
 
             if (nombreDeImagen.equals("MONTAÑA")) {
-                nombreDeImagen = "montana";
+                nombreDeImagen = "montania";
+            }
+            if (nombreDeImagen.equals("MOÑO")) {
+                nombreDeImagen = "monio";
+            }
+            if (nombreDeImagen.equals("BAÑO")) {
+                nombreDeImagen = "banio";
+            }
+            if (nombreDeImagen.equals("CABAÑA")) {
+                nombreDeImagen = "cabania";
+            }
+            if (nombreDeImagen.equals("CAÑA")) {
+                nombreDeImagen = "cania";
             }
 
             //colocar imagen
@@ -323,7 +335,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             }
 
             score++;
-            if (score%4==0){
+            if (score%8==0){
                 playerLevel++;
 
             }
