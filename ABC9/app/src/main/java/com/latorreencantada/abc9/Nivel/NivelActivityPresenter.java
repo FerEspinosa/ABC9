@@ -158,15 +158,15 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 if (view.getSyllableButtonText(t).equals("ABCD")||view.getSyllableButtonText(t).equals("")){
 
                     // calcular una sílaba aleatoria
-                    int intSilabaaleatoria = (int)(Math.random() * silabas.length);
-                    String silabaAleatoria = silabas[intSilabaaleatoria];
+                    int intSilabaAleatoria = (int)(Math.random() * silabas.length);
+                    String silabaAleatoria = silabas[intSilabaAleatoria];
 
                     sonIguales  = false;
+
                     //para cada respuesta correcta:
                     for (int correct_syl_i = 1; correct_syl_i<5; correct_syl_i++){
 
                         //comparar cada respuesta correcta con silaba aleatoria
-
                         if (cartaActual.getSyl(correct_syl_i).equals(silabaAleatoria)){
                             sonIguales=true;
                         }
