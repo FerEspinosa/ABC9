@@ -18,7 +18,7 @@ Here is a description of the app features, expressed as user stories that are me
   
 - Every word correspond to a level (it is posible for a word to be present in more than one level). When the player accumulate 5 correct answers, he/she levels up. 
 
-- If the user makes a mistake, he/she loses one of three stars (attemps), and the game draws another card (set of image, and correct and incorrect syllables). 
+- If the user makes a mistake, he/she loses one of three stars (attempts), and the game draws another card (set of image, and correct and incorrect syllables). 
 
 - In the end, when the player makes 3 mistakes, the score is shown. And he/she can restart the game.
 
