@@ -12,7 +12,7 @@ Here is a description of the app features, expressed as user stories that are me
   Once all the correct syllables are put on random answer buttons, the program should fill then all the buttons left with random incorrect syllables.
   These must not repeat themselves nor the correct syllables.
 
-- In the second game mode, the answer is shown lacking a letter. The user must choose the correct letter from the 4 given ones to complete the word.
+- In the second display mode, the answer is shown lacking a letter. The user must choose the correct letter from the 4 given ones to complete the word.
   Once the correct letter is put on a random answer button, the program should fill all the buttons left with random letters. 
   These must not repeat themselves nor the correct letter.
   
@@ -39,7 +39,7 @@ Roadmap (future features expressed as user stories)
 - Every user will be a "tutor account" and every "tutor account" will be able to manage several "student accounts"
 - The data base should be stored in Firestore and also persist on the local SQLite database (using Room)
 - User should be able to create win prices 
-(Image, description of the price, and condition. e.g: achieving 200 points, or playing 10 days in a row, etc)
+(setting image, description of the price, and condition. e.g: achieving 200 points, or playing 10 days in a row, etc)
 
 
 Contact: la.torre.encantada@gmail.com
