@@ -1,8 +1,10 @@
 package com.latorreencantada.abc9.Nivel;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.latorreencantada.abc9.Global.silabas;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.view.View;
 
@@ -50,10 +52,13 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     int ultimaCarta=99999;
     int posicion = 0;
 
+    boolean capslock = Global.capsLock;
+
     // el siguiente booleano debe estar en true por default
     // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
     // el switch para que el usuario seleccione la opcion que quiera.
-    boolean capslock = Global.capsLock;
+
+
 
     Card cartaActual;
 
@@ -131,7 +136,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
                     // asignar al textview vacío el texto de la silaba i
 
-                    if (capslock){
+                    if (Capslock()&& capslock){
                         view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toUpperCase(),tv_Aleatorio);
                     } else {
                         view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toLowerCase(Locale.ROOT),tv_Aleatorio);
@@ -152,10 +157,10 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             /////////////////////////////////////////////////////////////////////
 
             // Para cada textView...
-            for (int t=0 ; t<textViewCount; t++){
+            for (int textView_t=0 ; textView_t<textViewCount; textView_t++){
 
                 // que esté vacío
-                if (view.getSyllableButtonText(t).equals("ABCD")||view.getSyllableButtonText(t).equals("")){
+                if (view.getSyllableButtonText(textView_t).equals("ABCD")||view.getSyllableButtonText(textView_t).equals("")){
 
                     // calcular una sílaba aleatoria
                     int intSilabaAleatoria = (int)(Math.random() * silabas.length);
@@ -163,24 +168,23 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
                     sonIguales  = false;
 
-                    //para cada respuesta correcta:
-                    for (int correct_syl_i = 1; correct_syl_i<5; correct_syl_i++){
 
-                        //comparar cada respuesta correcta con silaba aleatoria
-                        if (cartaActual.getSyl(correct_syl_i).equals(silabaAleatoria)){
+                    // (de nuevo) para cada textView n
+                    for (int tv_n = 0; tv_n<textViewCount; tv_n++){
+                        // comparar: silabaAleatoria.toLowerCase(Locale.ROOT) con: view.textView n
+                        if (silabaAleatoria.toLowerCase(Locale.ROOT).equals(view.getSyllableButtonText(tv_n))){
                             sonIguales=true;
                         }
-
                     }
 
                     if (!sonIguales){
-                        if(capslock){
-                            view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),t);
+                        if(Capslock()&& capslock){
+                            view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),textView_t);
                         } else {
-                            view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),t);
+                            view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),textView_t);
                         }
                     } else {
-                        t--;
+                        textView_t--;
                         sonIguales=false;
                     }
                 }
@@ -200,7 +204,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             // construir la palabra con esa letra por un guión
             palabraActual = palabraActual.replaceFirst(unChar, "_");
 
-            if (capslock){
+            if (Capslock() && capslock){
                 view.setAnswer(palabraActual.toUpperCase(Locale.ROOT));
             } else {
                 view.setAnswer(palabraActual.toLowerCase(Locale.ROOT));
@@ -209,7 +213,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             // colocar la letra correcta en un text view aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
 
-            if (capslock){
+            if (Capslock()&& capslock){
                 view.setSyllableButtonText(unChar.toUpperCase(Locale.ROOT),tv_aleatorio);
             } else {
                 view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
@@ -228,7 +232,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 //para cada textView
                 for (int x= 0; x<textViewCount; x++){
                     // verificar si string_letter es igual al contenido de textview(x)
-                    if (string_letter.equals(view.getSyllableButtonText(x))){
+                    if (string_letter.toLowerCase(Locale.ROOT).equals(view.getSyllableButtonText(x).toLowerCase(Locale.ROOT))){
                         sonIguales=true;
                     }
                 }
@@ -239,7 +243,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     if (i!=tv_aleatorio){
                         //entonces colocar esa letra en el textView
 
-                        if (capslock){
+                        if (Capslock()&& capslock){
                             view.setSyllableButtonText(string_letter.toUpperCase(),i);
                         } else {
                             view.setSyllableButtonText(string_letter.toLowerCase(),i);
@@ -294,7 +298,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 textViewPresionado[p]=true;
                 nueva_resp = resp_temp+silaba_presionada;
 
-                if (capslock){
+                if (Capslock()&& capslock){
                     view.setAnswer(nueva_resp.toUpperCase(Locale.ROOT));
                 } else {
                     view.setAnswer(nueva_resp.toLowerCase(Locale.ROOT));
@@ -309,7 +313,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
                 }
 
-                if (capslock){
+                if (Capslock()&& capslock){
                     view.setAnswer(palabraActual.toUpperCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
                 } else {
                     view.setAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
@@ -367,18 +371,21 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         if ///////////////////// RESPUESTA CORRECTA /////////////////////////////
         (view.getAnswerText().toLowerCase(Locale.ROOT).equals(cartaActual.getWord().toLowerCase(Locale.ROOT))) {
 
-            playCorrectAnswerSound();
+
 
             view.setAnswer("");
 
             score++;
             if (score%4==0){
                 playerLevel++;
+                view.playNewLevelSound();
+            } else {
+                playCorrectAnswerSound();
             }
 
             if (playerLevel==(Global.defaultLevels.length)+1){
-                if (capslock){
-                    capslock= false;
+                if (Capslock()&&capslock){
+                    Global.capsLock= false;
                     playerLevel=1;
                     NuevaCarta(playerLevel);
                 } else {
@@ -423,6 +430,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         }
     }
+
+
 
     private void clearAllSylButtons() {
         //vaciar todos los textviews
@@ -471,6 +480,26 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public Context getContext() {
         assert view != null;
         return view.getContext();
+    }
+
+    private void CapslockOff() {
+        String SHARED_PREFS = "SharedPrefs";
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(SHARED_PREFS, false);
+        editor.apply();
+    }
+
+
+    public boolean Capslock(){
+        String SHARED_PREFS = "SharedPrefs";
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean("capslock", true)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

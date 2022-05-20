@@ -29,6 +29,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     NivelActivityMVP.Presenter presenter;
 
     private MediaPlayer wonderful;
+    private MediaPlayer correctAnswer;
     private MediaPlayer wrong;
     private MediaPlayer mp;
 
@@ -80,6 +81,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         wonderful = MediaPlayer.create(this, R.raw.wonderful);
         wrong = MediaPlayer.create(this, R.raw.bad);
         mp = MediaPlayer.create(this, R.raw.goats);
+        correctAnswer = MediaPlayer.create(this,R.raw.correct);
 
         boolean capslock = Global.capsLock;
 
@@ -234,6 +236,11 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public void playCorrectAnswerSound() {
+        correctAnswer.start();
+    }
+
+    @Override
+    public void playNewLevelSound() {
         wonderful.start();
     }
 

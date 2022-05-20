@@ -3,7 +3,7 @@ package com.latorreencantada.abc9;
 public class Global {
     public static Boolean musica = false;
     public static Boolean sonidos = true;
-    public static Boolean capsLock = false;
+    public static Boolean capsLock = true;
     public static String BackgroundImage = "rojo";
     public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};;
 

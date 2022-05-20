@@ -73,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             BD.close();
         }
+
+        if (itsTheFirstRun()){
+            Toast.makeText(this, "First Run", Toast.LENGTH_SHORT).show();
+            // default db creating should happen here:
+
+
+        } else {
+            Toast.makeText(this, "Not first run", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void configView() {
@@ -185,12 +194,12 @@ public class MainActivity extends AppCompatActivity {
         if (sharedPreferences.getBoolean(FIRST_RUN, true)){
             editor.putBoolean(FIRST_RUN, false);
             editor.apply();
-            Toast.makeText(this, "first run!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "first run!", Toast.LENGTH_SHORT).show();
             return true;
 
 
         } else {
-            Toast.makeText(this, "not first run", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "not first run", Toast.LENGTH_SHORT).show();
             return false;
         }
     }

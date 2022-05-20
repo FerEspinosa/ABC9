@@ -25,7 +25,7 @@ interface View {
     String getAnswerText();
     void playWrongAnswerSound();
     void playCorrectAnswerSound();
-
+    void playNewLevelSound();
     void stopMusic();
 
     void goToGameOverScreen();
