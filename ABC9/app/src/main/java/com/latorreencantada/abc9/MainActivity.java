@@ -50,11 +50,8 @@ public class MainActivity extends AppCompatActivity {
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
 
-        tv_bestScore = findViewById(R.id.idtv_bestScore);
-        tv_bestScore.setTypeface(supersonic);
 
-        et_nombre = findViewById(R.id.idet_nombre);
-
+        /*
         // gestionar BdD
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();
@@ -75,18 +72,11 @@ public class MainActivity extends AppCompatActivity {
             BD.close();
         }
 
-        if (itsTheFirstRun()){
-            Toast.makeText(this, "First Run", Toast.LENGTH_SHORT).show();
-            // default db creating should happen here:
+         */
 
-
-        } else {
-            Toast.makeText(this, "Not first run", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void configView() {
-        et_nombre = findViewById(R.id.idet_nombre);
 
         bt_jugar = findViewById(R.id.bt_jugar);
         bt_jugar.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 posicion = mp.getCurrentPosition();
                 mp.stop();
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -110,40 +101,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bt_probar = findViewById(R.id.id_bt_prueba);
-        bt_probar.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View view) {
 
-                if (itsTheFirstRun()){
-                    Toast.makeText(MainActivity.this, "first run", Toast.LENGTH_SHORT).show();
-                    fillDbWithDefaultValues();
-                } else {
-                    Toast.makeText(MainActivity.this, "not first run", Toast.LENGTH_SHORT).show();
-                    eraseDB();
-                    fillDbWithDefaultValues();
-
-                }
-
-
-            }
-        });
+        if (itsTheFirstRun()){
+            fillDbWithDefaultValues();
+        }
     }
 
-    private void eraseDB() {
 
-        //Crear objeto administrador de base de datos
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-
-        //Se utiliza el objeto "admin" para obtener la base de datos (en modo lectura y escritura)
-        SQLiteDatabase BD = admin.getWritableDatabase();
-
-        BD.delete("cards", null, null);
-
-        BD.close();
-
-    }
 
     private void fillDbWithDefaultValues() {
 
