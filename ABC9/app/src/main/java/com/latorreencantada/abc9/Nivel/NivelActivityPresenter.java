@@ -139,7 +139,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
                     // asignar al textview vacío el texto de la silaba i
 
-                    if (Capslock()&& capslock){
+                    if (Capslock()&& Global.capsLock){
                         view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toUpperCase(),tv_Aleatorio);
                     } else {
                         view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toLowerCase(Locale.ROOT),tv_Aleatorio);
@@ -181,7 +181,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
 
                     if (!sonIguales){
-                        if(Capslock()&& capslock){
+                        if(Capslock()&& Global.capsLock){
                             view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),textView_t);
                         } else {
                             view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),textView_t);
@@ -207,7 +207,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             // construir la palabra con esa letra por un guión
             palabraActual = palabraActual.replaceFirst(unChar, "_");
 
-            if (Capslock() && capslock){
+            if (Capslock() && Global.capsLock){
                 view.setAnswer(palabraActual.toUpperCase(Locale.ROOT));
             } else {
                 view.setAnswer(palabraActual.toLowerCase(Locale.ROOT));
@@ -216,7 +216,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             // colocar la letra correcta en un text view aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
 
-            if (Capslock()&& capslock){
+            if (Capslock()&& Global.capsLock){
                 view.setSyllableButtonText(unChar.toUpperCase(Locale.ROOT),tv_aleatorio);
             } else {
                 view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
@@ -246,7 +246,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     if (i!=tv_aleatorio){
                         //entonces colocar esa letra en el textView
 
-                        if (Capslock()&& capslock){
+                        if (Capslock()&& Global.capsLock){
                             view.setSyllableButtonText(string_letter.toUpperCase(),i);
                         } else {
                             view.setSyllableButtonText(string_letter.toLowerCase(),i);
@@ -301,7 +301,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 textViewPresionado[p]=true;
                 nueva_resp = resp_temp+silaba_presionada;
 
-                if (Capslock()&& capslock){
+                if (Capslock()&& Global.capsLock){
                     view.setAnswer(nueva_resp.toUpperCase(Locale.ROOT));
                 } else {
                     view.setAnswer(nueva_resp.toLowerCase(Locale.ROOT));
@@ -316,7 +316,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
                 }
 
-                if (Capslock()&& capslock){
+                if (Capslock()&& Global.capsLock){
                     view.setAnswer(palabraActual.toUpperCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
                 } else {
                     view.setAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
@@ -378,7 +378,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             }
 
             if (playerLevel==(Global.defaultLevels.length)+1){
-                if (Capslock()&&capslock){
+                if (Capslock() && Global.capsLock){
                     Global.capsLock= false;
                     playerLevel=1;
                     NuevaCarta(playerLevel);
