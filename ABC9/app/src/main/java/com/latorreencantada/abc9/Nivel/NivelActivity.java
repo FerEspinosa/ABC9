@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.latorreencantada.abc9.Global;
+import com.latorreencantada.abc9.OpcionesActivity;
 import com.latorreencantada.abc9.Pantalla_Game_Over;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
@@ -53,7 +54,11 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     public static final String SHARED_PREFS = "SharedPrefs";
     public static final String FIRST_RUN = "firstRun";
     public static final String SWITCH1 = "switch1";
+    public static final String MUSIC = "music";
     private boolean firstRun;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -73,6 +78,9 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     private void configView() {
 
+        sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         //fuente supersonic
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
@@ -85,7 +93,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
         boolean capslock = Global.capsLock;
 
-        if (Global.musica){
+        if (sharedPreferences.getBoolean(MUSIC, true)){
             mp.start();
             mp.setLooping(true);
         }
@@ -122,7 +130,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         bt_musica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.bt_music_clicked(mp, view);
+                presenter.bt_music_clicked();
             }
         });
 
@@ -148,7 +156,10 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         super.onResume();
         presenter.setView(this);
 
-        presenter.startMusic(mp);
+        if (sharedPreferences.getBoolean(MUSIC, true)){
+            presenter.startMusic(mp);
+        }
+
 
         View decorView = getWindow().getDecorView();
         int uiOptions = 0;
@@ -254,6 +265,13 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         Intent intent = new Intent (getApplicationContext(), Pantalla_Game_Over.class);
         intent.putExtra("jugador", jugador);
         intent.putExtra("score", tv_score.getText().toString());
+        startActivity(intent);
+    }
+
+    @Override
+    public void goToOptionScreen() {
+        Intent intent = new Intent(getContext(), OpcionesActivity.class);
+        intent.putExtra("comming_from", "level");
         startActivity(intent);
     }
 

@@ -19,6 +19,9 @@ import java.util.Locale;
 
 public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
+    private static final String MUSIC = "music";
+    private static final String SOUND = "sound";
+    private static final String SHARED_PREFS = "SharedPrefs";
 
     @Nullable
     //variable que hace referencia a la vista
@@ -340,20 +343,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
 
     @Override
-    public void bt_music_clicked(MediaPlayer mp, View view) {
-        if (Global.musica){
-            Global.musica= false;
-            posicion = mp.getCurrentPosition();
-            mp.pause();
-            view.setBackgroundResource(android.R.drawable.ic_lock_silent_mode);
-
-        } else {
-            Global.musica=true;
-            mp.seekTo(posicion);
-            mp.start();
-            mp.setLooping(true);
-            view.setBackgroundResource(android.R.drawable.ic_lock_silent_mode_off);
-        }
+    public void bt_music_clicked() {
+        view.goToOptionScreen();
     }
 
     @Override
@@ -378,8 +369,11 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             score++;
             if (score%4==0){
                 playerLevel++;
-                view.playNewLevelSound();
-            } else {
+            }
+
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            boolean snd = sharedPreferences.getBoolean(SOUND, true);
+            if (snd){
                 playCorrectAnswerSound();
             }
 
@@ -442,36 +436,46 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void startMusic(MediaPlayer mp) {
-        if (Global.musica){
-            if (!mp.isPlaying()){
-                if (posicion!=0){
-                    mp.seekTo(posicion);
-                    mp.start();
-                    mp.setLooping(true);
-                }
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+        //        if (sharedPreferences.getBoolean(MUSIC, true)){}
+
+        if (!mp.isPlaying()){
+            if (posicion!=0){
+                mp.seekTo(posicion);
+                mp.start();
+                mp.setLooping(true);
             }
         }
+
+
+
+
     }
 
     @Override
     public void pauseMusic(MediaPlayer mp) {
-
-        if (Global.musica){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(MUSIC, true)){
             if (mp.isPlaying()){
                 posicion = mp.getCurrentPosition();
                 mp.pause();
             }
         }
+
     }
 
     public void playCorrectAnswerSound () {
-        if (Global.sonidos){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(SOUND, true)){
             view.playCorrectAnswerSound();
         }
     }
 
     public void playWrongAnswerSound () {
-        if (Global.sonidos){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(SOUND, true)){
             view.playWrongAnswerSound();
         }
     }

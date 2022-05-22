@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/score_gameover"
-        android:layout_width="299dp"
-        android:layout_height="255dp"
+        android:layout_width="289dp"
+        android:layout_height="150dp"
         android:layout_marginTop="4dp"
         android:text="24"
         android:textAlignment="center"
@@ -38,8 +38,8 @@
 
     <TextView
         android:id="@+id/txt_play_again"
-        android:layout_width="155dp"
-        android:layout_height="176dp"
+        android:layout_width="157dp"
+        android:layout_height="154dp"
         android:layout_marginTop="40dp"
         android:text="JUGAR OTRA VEZ"
         android:textAlignment="center"
@@ -49,6 +49,19 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_gameover" />
+
+    <ImageView
+        android:id="@+id/im_goHome"
+        android:layout_width="108dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_play_again"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_baseline_home_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

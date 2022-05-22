@@ -3,6 +3,7 @@ package com.latorreencantada.abc9;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -104,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
         bt_opciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,OpcionesActivity.class));
+                Intent intent = new Intent(MainActivity.this,OpcionesActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -197,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, "first run!", Toast.LENGTH_SHORT).show();
             return true;
 
-
         } else {
             //Toast.makeText(this, "not first run", Toast.LENGTH_SHORT).show();
             return false;
@@ -208,13 +209,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (Global.musica){
-            //mp.start();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+
+        if (sharedPreferences.getBoolean("music",true)){
+            mp.seekTo(posicion);
+            mp.start();
         }
 
         getWindow().getDecorView().setSystemUiVisibility(
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
                         View.SYSTEM_UI_FLAG_FULLSCREEN|
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("musica", true)){
+            posicion = mp.getCurrentPosition();
+            mp.pause();
+        }
+
     }
 }

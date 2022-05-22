@@ -1,7 +1,7 @@
 package com.latorreencantada.abc9;
 
 public class Global {
-    public static Boolean musica = false;
+    //public static Boolean musica = false;
     public static Boolean sonidos = true;
     public static Boolean capsLock = true;
     public static String BackgroundImage = "rojo";

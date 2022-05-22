@@ -1,6 +1,7 @@
 package com.latorreencantada.abc9.Nivel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
 import com.latorreencantada.abc9.Card;
@@ -29,6 +30,7 @@ interface View {
     void stopMusic();
 
     void goToGameOverScreen();
+    void goToOptionScreen();
     void checkFirstRun();
 
     Context getContext();
@@ -42,7 +44,7 @@ interface Presenter {
     void NuevaCarta(int playerLevel);
     void sylablePressed(android.view.View v);
     void bt_borrar_clicked();
-    void bt_music_clicked(MediaPlayer mp, android.view.View v);
+    void bt_music_clicked();
     void bt_enviar_clicked();
     void startMusic(MediaPlayer mp);
     void pauseMusic(MediaPlayer mp);

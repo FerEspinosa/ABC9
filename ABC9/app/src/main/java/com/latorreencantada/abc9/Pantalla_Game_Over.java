@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.latorreencantada.abc9.Nivel.NivelActivity;
@@ -13,6 +14,7 @@ import com.latorreencantada.abc9.Nivel.NivelActivity;
 public class Pantalla_Game_Over extends AppCompatActivity {
 
     TextView tv_congrats, tv_score, playAgain;
+    ImageView bt_home;
     private MediaPlayer mp;
 
     @Override
@@ -34,14 +36,23 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         tv_score = findViewById(R.id.score_gameover);
         tv_score.setText(getIntent().getStringExtra("score"));
 
-
-
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Pantalla_Game_Over.this, NivelActivity.class));
+                Intent intent = new Intent(Pantalla_Game_Over.this, NivelActivity.class);
+                intent.putExtra("nombre", getIntent().getStringExtra("jugador"));
+                startActivity(intent);
+            }
+        });
+
+        //boton home (es un imageView)
+        bt_home = findViewById(R.id.im_goHome);
+        bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Pantalla_Game_Over.this, MainActivity.class));
             }
         });
     }
