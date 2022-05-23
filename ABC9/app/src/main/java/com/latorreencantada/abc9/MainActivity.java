@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(MainActivity.this, NivelActivity.class);
-                intent.putExtra("nombre", et_nombre.getText().toString());
-                posicion = mp.getCurrentPosition();
                 mp.stop();
                 startActivity(intent);
                 finish();

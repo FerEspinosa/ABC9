@@ -30,7 +30,7 @@ public class Pantalla_Game_Over extends AppCompatActivity {
 
         mp = MediaPlayer.create(this, R.raw.end);
         tv_congrats = findViewById(R.id.txt_congrats);
-        String congrats = "MUY BIEN "+getIntent().getStringExtra("jugador");
+        String congrats = "MUY BIEN";
         tv_congrats.setText(congrats);
 
         tv_score = findViewById(R.id.score_gameover);
@@ -41,9 +41,7 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Pantalla_Game_Over.this, NivelActivity.class);
-                intent.putExtra("nombre", getIntent().getStringExtra("jugador"));
-                startActivity(intent);
+                startActivity(new Intent(Pantalla_Game_Over.this, NivelActivity.class));
             }
         });
 
@@ -71,5 +69,9 @@ public class Pantalla_Game_Over extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
         decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

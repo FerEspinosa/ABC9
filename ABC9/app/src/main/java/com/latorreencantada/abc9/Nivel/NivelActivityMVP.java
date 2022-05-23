@@ -44,7 +44,7 @@ interface Presenter {
     void NuevaCarta(int playerLevel);
     void sylablePressed(android.view.View v);
     void bt_borrar_clicked();
-    void bt_music_clicked();
+    void bt_options_clicked();
     void bt_enviar_clicked();
     void startMusic(MediaPlayer mp);
     void pauseMusic(MediaPlayer mp);

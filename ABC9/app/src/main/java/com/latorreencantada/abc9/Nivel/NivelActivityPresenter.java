@@ -181,7 +181,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
 
                     if (!sonIguales){
-                        if(Capslock()&& Global.capsLock){
+                        if(Capslock()&& capslock){
                             view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),textView_t);
                         } else {
                             view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),textView_t);
@@ -343,7 +343,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
 
     @Override
-    public void bt_music_clicked() {
+    public void bt_options_clicked() {
         view.goToOptionScreen();
     }
 
@@ -444,13 +444,10 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         if (!mp.isPlaying()){
             if (posicion!=0){
                 mp.seekTo(posicion);
-                mp.start();
-                mp.setLooping(true);
             }
+            mp.start();
+            mp.setLooping(true);
         }
-
-
-
 
     }
 

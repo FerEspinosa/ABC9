@@ -102,7 +102,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         iv_estrellas = findViewById(R.id.iv_estrellas);
         iv = findViewById(R.id.mainImage);
         tv_score = findViewById(R.id.tv_puntaje);
-        tv_nombre = findViewById(R.id.tv_nombre);
         tv_respuesta = findViewById(R.id.tv_respuesta_2);
         bt_musica = findViewById(R.id.id_switch_musica);
         bt_borrar = findViewById(R.id.bt_borrar);
@@ -118,19 +117,15 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         textView[2] = findViewById(R.id.bt3);
         textView[3] = findViewById(R.id.bt4);
 
-        jugador = getIntent().getStringExtra("nombre");
-
-        tv_nombre.setText(jugador);
         tv_score.setText("0");
         tv_respuesta.setText("");
-
 
         // botones con click listeners:
 
         bt_musica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.bt_music_clicked();
+                presenter.bt_options_clicked();
             }
         });
 
@@ -159,7 +154,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         if (sharedPreferences.getBoolean(MUSIC, true)){
             presenter.startMusic(mp);
         }
-
 
         View decorView = getWindow().getDecorView();
         int uiOptions = 0;
@@ -191,6 +185,13 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+
     }
 
     /////////////////////////////////////////////////////////////////////////////
