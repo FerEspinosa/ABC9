@@ -2,6 +2,7 @@ package com.latorreencantada.abc9.Nivel;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +13,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.latorreencantada.abc9.Global;
-import com.latorreencantada.abc9.OpcionesActivity;
+import com.latorreencantada.abc9.MainActivity;
 import com.latorreencantada.abc9.Pantalla_Game_Over;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
@@ -36,11 +39,10 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     private TextView tv_score;
     private TextView tv_respuesta;
-    private TextView tv_nombre;
 
     private TextView[] textView = new TextView[4];
 
-    private Button bt_borrar, bt_enviar, bt_musica;
+    private Button bt_borrar, bt_enviar, bt_opciones, bt_closeOptionMenu, bt_goHome;
 
     private ImageView iv_estrellas;
     private ImageView iv;
@@ -50,12 +52,19 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     int textViewCount = 4 ;
 
+    FrameLayout optionMenu;
+    boolean optionMenuIsVisible;
+    int posicion;
+
     // prueba de shared preference
     public static final String SHARED_PREFS = "SharedPrefs";
     public static final String FIRST_RUN = "firstRun";
     public static final String SWITCH1 = "switch1";
     public static final String MUSIC = "music";
+    private final String SOUND = "sound";
     private boolean firstRun;
+    private SwitchCompat sw_music, sw_sound;
+    private boolean noButtonsPressed = true;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -69,11 +78,98 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         ((App) getApplication()).getComponent().inject(this);
 
         configView();
+        configOptionMenu();
         presenter.setView(this);
 
         // por ahora mando el player level manualmente
         // más adelante (cuando desarrolle la clase "player") lo obtendré de manera programática
         presenter.NuevaCarta(playerLevel);
+
+    }
+
+    private void configOptionMenu() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // ocultar menu opciones
+        optionMenu = (FrameLayout)findViewById(R.id.option_menu_frame);
+        optionMenu.setVisibility(View.INVISIBLE);
+        optionMenuIsVisible = false;
+
+        bt_opciones = findViewById(R.id.bt_Options);
+        bt_opciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OptionMenuIsVisible(!optionMenuIsVisible);
+            }
+        });
+
+        bt_closeOptionMenu = findViewById(R.id.close_option_menu);
+        bt_closeOptionMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OptionMenuIsVisible(optionMenuIsVisible);
+            }
+        });
+
+        sw_music = findViewById(R.id.sw_music);
+        sw_music.setChecked(sharedPreferences.getBoolean(MUSIC,true));
+        sw_music.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                editor.putBoolean(MUSIC, b);
+                editor.apply();
+
+                if (b) {
+                    startMusic();
+                } else {
+                    pauseMusic();
+                }
+            }
+        });
+
+        sw_sound = findViewById(R.id.sw_sound);
+        boolean aux2 = sharedPreferences.getBoolean(SOUND,true);
+        sw_sound.setChecked(sharedPreferences.getBoolean(SOUND,true));
+        sw_sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean(SOUND, b);
+                editor.apply();
+            }
+        });
+
+        bt_goHome = findViewById(R.id.bt_goHome_from_lvl);
+        bt_goHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NivelActivity.this, MainActivity.class));
+            }
+        });
+
+    }
+
+    private void OptionMenuIsVisible (boolean b) {
+
+        if (b){
+            optionMenu.setVisibility(View.VISIBLE);
+        } else {
+            optionMenu.setVisibility(View.INVISIBLE);
+        }
+
+        for (int tv_i=0; tv_i<textViewCount; tv_i++){
+            textView[tv_i].setClickable(!b);
+        }
+        bt_borrar.setClickable(!b);
+        bt_enviar.setClickable(!b);
+
+    }
+
+    private void pauseMusic() {
+        posicion = mp.getCurrentPosition();
+        mp.pause();
     }
 
     private void configView() {
@@ -85,25 +181,22 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
 
+
         // musica y sonidos
-        wonderful = MediaPlayer.create(this, R.raw.wonderful);
+      //  wonderful = MediaPlayer.create(this, R.raw.wonderful);
         wrong = MediaPlayer.create(this, R.raw.bad);
         mp = MediaPlayer.create(this, R.raw.goats);
         correctAnswer = MediaPlayer.create(this,R.raw.correct);
 
         boolean capslock = Global.capsLock;
 
-        if (sharedPreferences.getBoolean(MUSIC, true)){
-            mp.start();
-            mp.setLooping(true);
-        }
+
 
         // elementos gráficos
         iv_estrellas = findViewById(R.id.iv_estrellas);
         iv = findViewById(R.id.mainImage);
         tv_score = findViewById(R.id.tv_puntaje);
         tv_respuesta = findViewById(R.id.tv_respuesta_2);
-        bt_musica = findViewById(R.id.id_switch_musica);
         bt_borrar = findViewById(R.id.bt_borrar);
         bt_enviar = findViewById(R.id.bt_enviar);
 
@@ -122,13 +215,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
         // botones con click listeners:
 
-        bt_musica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.bt_options_clicked();
-            }
-        });
-
         bt_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +229,8 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
             }
         });
 
+        noButtonsPressed = true;
+        allowClickOnSend(false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -151,9 +239,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         super.onResume();
         presenter.setView(this);
 
-        if (sharedPreferences.getBoolean(MUSIC, true)){
-            presenter.startMusic(mp);
-        }
+        startMusic();
 
         View decorView = getWindow().getDecorView();
         int uiOptions = 0;
@@ -178,6 +264,14 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 */
     }
 
+    private void startMusic() {
+        if (sharedPreferences.getBoolean(MUSIC, true)){
+            mp.seekTo(posicion);
+            mp.start();
+            mp.setLooping(true);
+        }
+    }
+
     @Override
     protected void onPause() { super.onPause();
         presenter.pauseMusic(mp);
@@ -198,12 +292,22 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public void buttonPress(View v) {
+        allowClickOnSend(true);
+
         presenter.sylablePressed(v);
+
     }
 
-    @Override
-    public void setPlayerName (String name){
-        this.tv_nombre.setText(name);
+    public void allowClickOnSend(boolean b) {
+        bt_enviar.setClickable(b);
+        noButtonsPressed = !b;
+        if (b){
+            // cambiar aqui el background del botón por uno que denote que está clickeable
+            bt_enviar.setBackgroundResource(R.drawable.boton_verde);
+        } else {
+            // cambiar aqui el background del botón por uno que denote que NO está clickeable
+            bt_enviar.setBackgroundResource(R.drawable.boton_verde);
+        }
     }
 
     @Override
@@ -248,7 +352,9 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public void playCorrectAnswerSound() {
-        correctAnswer.start();
+        if (sharedPreferences.getBoolean(SOUND, true)){
+            correctAnswer.start();
+        }
     }
 
     @Override
@@ -269,12 +375,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         startActivity(intent);
     }
 
-    @Override
-    public void goToOptionScreen() {
-        Intent intent = new Intent(getContext(), OpcionesActivity.class);
-        intent.putExtra("comming_from", "level");
-        startActivity(intent);
-    }
 
     @Override
     public void checkFirstRun() {
@@ -289,6 +389,14 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         }
 
 
+    }
+
+    @Override
+    public void showOptions() {
+        if (!optionMenuIsVisible){
+            optionMenu.setVisibility(View.VISIBLE);
+            optionMenuIsVisible=true;
+        }
     }
 
     @Override

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public interface NivelActivityMVP {
 
 interface View {
-    void setPlayerName (String name);
     void setMainImage (String nombreDeImagen);
     void setScore (String score);
     void setSyllableButtonText (String syllable, int tvNumber);
@@ -28,11 +27,10 @@ interface View {
     void playCorrectAnswerSound();
     void playNewLevelSound();
     void stopMusic();
-
     void goToGameOverScreen();
-    void goToOptionScreen();
     void checkFirstRun();
-
+    void showOptions();
+    void allowClickOnSend(boolean b);
     Context getContext();
 }
 
@@ -40,7 +38,6 @@ interface Presenter {
 
     //el primero es para indicar al presenter qué vista gobierna
     void setView (NivelActivityMVP.View view);
-
     void NuevaCarta(int playerLevel);
     void sylablePressed(android.view.View v);
     void bt_borrar_clicked();

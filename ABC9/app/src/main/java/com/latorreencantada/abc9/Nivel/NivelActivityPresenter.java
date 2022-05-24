@@ -5,6 +5,7 @@ import static com.latorreencantada.abc9.Global.silabas;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaActionSound;
 import android.media.MediaPlayer;
 import android.view.View;
 
@@ -79,6 +80,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
 
         clearAllSylButtons();
+
+        view.allowClickOnSend(false);
 
         //generar tipo de carta aleatoria (0 o 1)
         tipoDeCarta = (int)(Math.random()*2);
@@ -175,7 +178,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     // (de nuevo) para cada textView n
                     for (int tv_n = 0; tv_n<textViewCount; tv_n++){
                         // comparar: silabaAleatoria.toLowerCase(Locale.ROOT) con: view.textView n
-                        if (silabaAleatoria.toLowerCase(Locale.ROOT).equals(view.getSyllableButtonText(tv_n))){
+                        String aux = view.getSyllableButtonText(tv_n);
+                        if (silabaAleatoria.toLowerCase(Locale.ROOT).equals(view.getSyllableButtonText(tv_n).toLowerCase(Locale.ROOT))){
                             sonIguales=true;
                         }
                     }
@@ -344,7 +348,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void bt_options_clicked() {
-        view.goToOptionScreen();
+        //view.goToOptionScreen();
+        view.showOptions();
     }
 
     @Override
@@ -371,11 +376,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 playerLevel++;
             }
 
-            SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-            boolean snd = sharedPreferences.getBoolean(SOUND, true);
-            if (snd){
-                playCorrectAnswerSound();
-            }
+            playCorrectAnswerSound();
 
             if (playerLevel==(Global.defaultLevels.length)+1){
                 if (Capslock() && Global.capsLock){
@@ -426,7 +427,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     }
 
 
-
     private void clearAllSylButtons() {
         //vaciar todos los textviews
         for (int i=0;i<4;i++) {
@@ -439,14 +439,15 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
-        //        if (sharedPreferences.getBoolean(MUSIC, true)){}
-
-        if (!mp.isPlaying()){
-            if (posicion!=0){
-                mp.seekTo(posicion);
+        if (sharedPreferences.getBoolean(MUSIC, true)){
+            if (!mp.isPlaying()){
+                if (posicion!=0){
+                    mp.seekTo(posicion);
+                }
+                mp.start();
+                mp.setLooping(true);
             }
-            mp.start();
-            mp.setLooping(true);
+
         }
 
     }

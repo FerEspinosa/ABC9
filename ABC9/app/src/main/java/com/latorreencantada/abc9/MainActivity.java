@@ -2,6 +2,7 @@ package com.latorreencantada.abc9;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -15,8 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +29,17 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FIRST_RUN = "firstRun";
     public static final String SHARED_PREFS = "SharedPrefs";
+    public static final String MUSIC = "music";
+    public static final String SOUND = "sound";
+    LinearLayout optionMenu;
 
     private EditText et_nombre;
-    private MediaPlayer mp;
+    //private MediaPlayer mp;
     private ImageView fondo;
     private TextView tv_bestScore;
 
     Button bt_jugar, bt_opciones, bt_probar;
+    SwitchCompat sw_sonido, sw_musica;
 
     int posicion=0;
 
@@ -43,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configView();
-        mp = MediaPlayer.create(this, R.raw.alphabet_song);
+        //mp = MediaPlayer.create(this, R.raw.alphabet_song);
 
         fondo = findViewById(R.id.id_fondo);
 
@@ -78,13 +85,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void configView() {
 
+        if (itsTheFirstRun()){
+            fillDbWithDefaultValues();
+        }
+
+        optionMenu = (LinearLayout)findViewById(R.id.layout_opciones_home);
+        optionMenu.setVisibility(View.INVISIBLE);
+
         bt_jugar = findViewById(R.id.bt_jugar);
         bt_jugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(MainActivity.this, NivelActivity.class);
-                mp.stop();
+                //mp.stop();
                 startActivity(intent);
                 finish();
             }
@@ -94,15 +108,56 @@ public class MainActivity extends AppCompatActivity {
         bt_opciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,OpcionesActivity.class);
-                startActivity(intent);
+                // hacer visible el menu de opciones
+                optionMenu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        sw_musica = findViewById(R.id.sw_musica_home);
+        sw_musica.setChecked(sharedPreferences.getBoolean(MUSIC, true));
+        sw_musica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean(MUSIC, b);
+                editor.apply();
             }
         });
 
 
-        if (itsTheFirstRun()){
-            fillDbWithDefaultValues();
-        }
+        sw_sonido = findViewById(R.id.sw_sonido_home);
+        sw_sonido.setChecked(sharedPreferences.getBoolean(SOUND, true));
+        sw_sonido.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean(SOUND, b);
+                editor.apply();
+            }
+        });
+
+
+        /* Reemplazar el siguiente switch por botones
+
+        sw_mayuscMinusc = findViewById(R.id.sw_mayúsculas);
+        sw_mayuscMinusc.setChecked(!sharedPreferences.getBoolean(CAPSLOCK, true));
+        sw_mayuscMinusc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b){
+                    // modo abc
+                    editor.putBoolean(CAPSLOCK, false);
+                } else {
+                    // modo ABCabc
+                    editor.putBoolean(CAPSLOCK, true);
+                }
+                editor.apply();
+            }
+        });
+        */
+
     }
 
 
@@ -170,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+/*
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
 
@@ -178,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             mp.seekTo(posicion);
             mp.start();
         }
-
+*/
         getWindow().getDecorView().setSystemUiVisibility(
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
                         View.SYSTEM_UI_FLAG_FULLSCREEN|
@@ -188,12 +243,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+/*
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean("musica", true)){
             posicion = mp.getCurrentPosition();
             mp.pause();
         }
-
+*/
     }
 }
