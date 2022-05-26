@@ -201,7 +201,7 @@
         <Button
             android:id="@+id/bt_borrar"
             android:layout_width="170dp"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
             android:layout_margin="15dp"
             android:background="@drawable/boton_naranja"
             android:padding="25dp"
@@ -210,7 +210,7 @@
         <Button
             android:id="@+id/bt_enviar"
             android:layout_width="170dp"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
             android:layout_margin="15dp"
             android:background="@drawable/boton_verde"
             android:padding="25dp"

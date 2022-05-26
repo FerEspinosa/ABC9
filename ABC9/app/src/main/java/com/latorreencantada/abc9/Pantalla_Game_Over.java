@@ -1,12 +1,15 @@
 package com.latorreencantada.abc9;
 
+import static java.sql.Types.INTEGER;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.latorreencantada.abc9.Nivel.NivelActivity;
@@ -14,8 +17,11 @@ import com.latorreencantada.abc9.Nivel.NivelActivity;
 public class Pantalla_Game_Over extends AppCompatActivity {
 
     TextView tv_congrats, tv_score, playAgain;
-    ImageView bt_home;
+    Button bt_home;
+    int score;
     private MediaPlayer mp;
+
+    public static final String MUSIC = "music";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +29,29 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_game_over);
 
         configView();
-        mp.start();
+        playEndingMusic();
+
+    }
+
+    private void playEndingMusic() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs",MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean("sound",true)||sharedPreferences.getBoolean("music",true)){
+            mp.start();
+        }
+
     }
 
     private void configView() {
 
         mp = MediaPlayer.create(this, R.raw.end);
         tv_congrats = findViewById(R.id.txt_congrats);
-        String congrats = "MUY BIEN";
-        tv_congrats.setText(congrats);
+
+        setResultText();
 
         tv_score = findViewById(R.id.score_gameover);
-        tv_score.setText(getIntent().getStringExtra("score"));
+        score = Integer.parseInt(getIntent().getStringExtra("score"));
+        tv_score.setText(String.valueOf(score));
 
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
@@ -53,6 +70,26 @@ public class Pantalla_Game_Over extends AppCompatActivity {
                 startActivity(new Intent(Pantalla_Game_Over.this, MainActivity.class));
             }
         });
+    }
+
+    private void setResultText() {
+        if (score<10){
+            tv_congrats.setText("No está mal para empezar");
+        } else if (score < 20) {
+            tv_congrats.setText("ok, ya estas mejorando.");
+        } else if (score < 40) {
+            tv_congrats.setText("¡Bien!");
+        } else if (score <60) {
+            tv_congrats.setText("¡has practicado bastante!");
+        } else if (score <80) {
+            tv_congrats.setText("¡Qué orgullo cómo lees!");
+        } else if (score <100) {
+            tv_congrats.setText("¡wooow! ¡Increíble!");
+        } else if (score <111) {
+            tv_congrats.setText("¡Excelente!");
+        } else if (score == 111) {
+            tv_congrats.setText("¡Puntuación PERFECTA!");
+        }
     }
 
     @Override

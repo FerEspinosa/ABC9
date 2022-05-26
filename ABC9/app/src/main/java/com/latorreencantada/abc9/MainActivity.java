@@ -1,18 +1,13 @@
 package com.latorreencantada.abc9;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 
@@ -29,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FIRST_RUN = "firstRun";
     public static final String SHARED_PREFS = "SharedPrefs";
+    public static final String CAPSLOCK = "capslock";
     public static final String MUSIC = "music";
     public static final String SOUND = "sound";
     LinearLayout optionMenu;
@@ -36,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_nombre;
     //private MediaPlayer mp;
     private ImageView fondo;
-    private TextView tv_bestScore;
+    private TextView tv_caps_mode;
 
-    Button bt_jugar, bt_opciones, bt_probar;
+    Button bt_jugar, bt_opciones, bt_mayusc, bt_minusc, bt_mayusminus_in_order, bt_mayuminusc_random;
     SwitchCompat sw_sonido, sw_musica;
 
     int posicion=0;
-
+    boolean optionsMenuShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configView();
-        //mp = MediaPlayer.create(this, R.raw.alphabet_song);
 
         fondo = findViewById(R.id.id_fondo);
 
@@ -98,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(MainActivity.this, NivelActivity.class);
-                //mp.stop();
                 startActivity(intent);
                 finish();
             }
@@ -108,8 +101,20 @@ public class MainActivity extends AppCompatActivity {
         bt_opciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // hacer visible el menu de opciones
-                optionMenu.setVisibility(View.VISIBLE);
+
+                if (optionsMenuShown){
+                    // hacer invisible el menu de opciones
+                    optionMenu.setVisibility(View.INVISIBLE);
+                    optionsMenuShown = false;
+                    bt_opciones.setBackgroundResource(R.color.button_red);
+
+                } else {
+                    // hacer visible el menu de opciones
+                    optionMenu.setVisibility(View.VISIBLE);
+                    optionsMenuShown = true;
+                    bt_opciones.setBackgroundResource(R.color.light_grey);
+                }
+
             }
         });
 
@@ -138,29 +143,58 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /* Reemplazar el siguiente switch por botones
+        tv_caps_mode = findViewById(R.id.txt_modo_mayuminu);
 
-        sw_mayuscMinusc = findViewById(R.id.sw_mayúsculas);
-        sw_mayuscMinusc.setChecked(!sharedPreferences.getBoolean(CAPSLOCK, true));
-        sw_mayuscMinusc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        bt_minusc = findViewById(R.id.bt_minusc);
+        if (sharedPreferences.getBoolean(CAPSLOCK,true)){
+            bt_minusc.setBackgroundResource(R.color.button_red);
+            tv_caps_mode.setText(R.string.mode_capslock_on);
+        } else {
+            bt_minusc.setBackgroundResource(R.color.light_grey);
+            tv_caps_mode.setText(R.string.mode_capslock_off);
+        }
+        bt_minusc.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                if (b){
-                    // modo abc
-                    editor.putBoolean(CAPSLOCK, false);
-                } else {
-                    // modo ABCabc
-                    editor.putBoolean(CAPSLOCK, true);
-                }
+            public void onClick(View view) {
+                editor.putBoolean(CAPSLOCK, false);
                 editor.apply();
+                tv_caps_mode.setText(R.string.mode_capslock_off);
+                bt_minusc.setBackgroundResource(R.color.light_grey);
+                bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
+                bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
+                bt_mayusc.setBackgroundResource(R.color.button_red);
             }
         });
-        */
+
+
+        bt_mayusminus_in_order = findViewById(R.id.bt_mayu_minus_in_order);
+
+        if (sharedPreferences.getBoolean(CAPSLOCK, true)){
+            bt_mayusminus_in_order.setBackgroundResource(R.color.light_grey);
+        } else {
+            bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
+        }
+
+        bt_mayusminus_in_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putBoolean(CAPSLOCK, true);
+                editor.apply();
+
+                tv_caps_mode.setText(R.string.mode_capslock_on);
+                bt_mayusminus_in_order.setBackgroundResource(R.color.light_grey);
+                bt_minusc.setBackgroundResource(R.color.button_red);
+                bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
+                bt_mayusc.setBackgroundResource(R.color.button_red);
+            }
+        });
+
+        bt_mayuminusc_random = findViewById(R.id.bt_mayuminus_random);
+
+        bt_mayusc = findViewById(R.id.bt_mayusc);
 
     }
-
-
 
     private void fillDbWithDefaultValues() {
 

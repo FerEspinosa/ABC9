@@ -302,13 +302,14 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         bt_enviar.setClickable(b);
         noButtonsPressed = !b;
         if (b){
-            // cambiar aqui el background del botón por uno que denote que está clickeable
             bt_enviar.setBackgroundResource(R.drawable.boton_verde);
+            // cambiar aquí tb "el color" del botón de borrar
         } else {
             // cambiar aqui el background del botón por uno que denote que NO está clickeable
-            bt_enviar.setBackgroundResource(R.drawable.boton_verde);
+            bt_enviar.setBackgroundResource(R.drawable.boton_verde_apagado);
         }
     }
+
 
     @Override
     public void setScore (String score){

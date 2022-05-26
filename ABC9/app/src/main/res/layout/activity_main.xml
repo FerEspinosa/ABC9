@@ -14,15 +14,15 @@
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-171dp" />
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/bt_jugar"
         android:layout_width="201dp"
         android:layout_height="114dp"
-        android:background="@drawable/silaba_presionada"
-        android:text="@string/txt_comenzar"
-        android:textColor="@color/white"
+        android:background="@drawable/boton_jugar"
+        android:textAllCaps="false"
+        android:textColor="@color/light_blue"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/id_fondo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,52 +31,150 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.335" />
 
+
     <Button
         android:id="@+id/bt_opciones"
         android:layout_width="196dp"
         android:layout_height="78dp"
         android:layout_marginTop="88dp"
+        android:textSize="20sp"
         android:text="@string/title_activity_opciones"
+        android:backgroundTint="@color/colorRedButton"
         app:layout_constraintBottom_toBottomOf="@+id/id_fondo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_jugar"
-        app:layout_constraintVertical_bias="0.279" />
+        app:layout_constraintVertical_bias="0.0" />
+
 
 
     <LinearLayout
         android:id="@+id/layout_opciones_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_opciones"
-        android:orientation="vertical">
+        app:layout_constraintVertical_bias="0.104">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_sonido_home"
+
+        <LinearLayout
+            android:id="@+id/layout_switches"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sonido  "
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_opciones" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_musica_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Música  "
-            android:layout_margin="10dp"
-            android:textSize="20sp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_opciones" />
+            app:layout_constraintTop_toBottomOf="@+id/bt_opciones"
+            app:layout_constraintVertical_bias="0.104">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_sonido_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Sonido  "
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_opciones" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_musica_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Música  "
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_opciones" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_opciones"
+            app:layout_constraintVertical_bias="0.104">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_mayusc"
+                    android:layout_width="122dp"
+                    android:layout_height="38dp"
+                    android:textAllCaps="false"
+                    android:text="ABC"
+                    android:background="@drawable/ic_fondo_mayusc_minusc"
+                    android:layout_margin="5dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/bt_minusc"
+                    android:layout_width="122dp"
+                    android:layout_height="38dp"
+                    android:textAllCaps="false"
+                    android:text="abc"
+                    android:background="@drawable/ic_fondo_mayusc_minusc"
+                    android:textSize="18sp"
+                    android:layout_margin="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_mayuminus_random"
+                    android:layout_width="122dp"
+                    android:layout_height="38dp"
+                    android:textAllCaps="false"
+                    android:text="AbCAbc"
+                    android:background="@drawable/ic_fondo_mayusc_minusc"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/bt_mayu_minus_in_order"
+                    android:layout_width="122dp"
+                    android:layout_height="38dp"
+                    android:textAllCaps="false"
+                    android:text="ABCabc"
+                    android:background="@drawable/ic_fondo_mayusc_minusc"
+                    android:textSize="18sp"
+                    android:layout_margin="15dp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_modo_mayuminu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo: mayúsculas + minúsculas"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"/>
 
     </LinearLayout>
 

@@ -7,61 +7,73 @@
     android:background="@drawable/fondo"
     tools:context=".Pantalla_Game_Over">
 
-    <TextView
-        android:id="@+id/txt_congrats"
-        android:layout_width="351dp"
-        android:layout_height="146dp"
-        android:layout_marginTop="76dp"
-        android:text="MUY BIEN BAUTISTA"
-        android:textAlignment="center"
+
+    <Button
+        android:id="@+id/txt_play_again"
+        android:layout_width="192dp"
+        android:layout_height="113dp"
+        android:layout_marginBottom="104dp"
+        android:background="@drawable/boton_play_again"
+        android:minLines="2"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/im_goHome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_congrats"
+        app:layout_constraintVertical_bias="0.339" />
+
+    <Button
+        android:id="@+id/im_goHome"
+        android:layout_width="39dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/ic_baseline_home_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_puntaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:text="Puntaje:"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/score_gameover"
-        android:layout_width="289dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="4dp"
-        android:text="24"
-        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-8dp"
+        android:text="123"
         android:textColor="@color/white"
-        android:textSize="100sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_congrats" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_puntaje" />
 
     <TextView
-        android:id="@+id/txt_play_again"
-        android:layout_width="157dp"
-        android:layout_height="154dp"
-        android:layout_marginTop="40dp"
-        android:text="JUGAR OTRA VEZ"
+        android:id="@+id/txt_congrats"
+        android:layout_width="370dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="¡Muy bien!"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score_gameover" />
-
-    <ImageView
-        android:id="@+id/im_goHome"
-        android:layout_width="108dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_play_again"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_home_24" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_puntaje" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

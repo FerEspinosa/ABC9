@@ -2,7 +2,7 @@
     <string name="app_name">ABC9</string>
 
     <string name="txt_nombre">Nombre</string>
-    <string name="txt_comenzar">Jugar</string>
+    <string name="txt_comenzar">¡Jugar!</string>
     <string name="txt_vacío"></string>
 
     <string name="jugador">BAUTISTA</string>
@@ -42,4 +42,6 @@
     <string name="txt_salir">Salir</string>
     <string name="erase">borrar</string>
     <string name="send">Enviar</string>
+    <string name="mode_capslock_on">Modo: Mayúsculas + minúsculas</string>
+    <string name="mode_capslock_off">Modo: Minúsculas</string>
 </resources>

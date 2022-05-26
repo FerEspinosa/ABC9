@@ -56,8 +56,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     int ultimaCarta=99999;
     int posicion = 0;
 
-    boolean capslock = Global.capsLock;
-
     // el siguiente booleano debe estar en true por default
     // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
     // el switch para que el usuario seleccione la opcion que quiera.
@@ -80,8 +78,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
 
         clearAllSylButtons();
-
-        view.allowClickOnSend(false);
 
         //generar tipo de carta aleatoria (0 o 1)
         tipoDeCarta = (int)(Math.random()*2);
@@ -185,7 +181,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     }
 
                     if (!sonIguales){
-                        if(Capslock()&& capslock){
+                        if(Capslock()&& Global.capsLock){
                             view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),textView_t);
                         } else {
                             view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),textView_t);
@@ -272,6 +268,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         String nueva_resp;
         String resp_temp = view.getAnswerText();
 
+        view.allowClickOnSend(true);
+
         int p=0;
 
         switch (v.getId()) {
@@ -331,10 +329,17 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void bt_borrar_clicked() {
+        view.allowClickOnSend(false);
+
         if (tipoDeCarta==1){
             view.setAnswer("");
         } else {
-            view.setAnswer(palabraActual);
+
+            if (Capslock()&& Global.capsLock){
+                view.setAnswer(palabraActual.toUpperCase());
+            } else {
+                view.setAnswer(palabraActual.toLowerCase());
+            }
         }
 
         for (int p=0; p<textViewCount; p++) {
@@ -354,6 +359,9 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void bt_enviar_clicked() {
+
+        view.allowClickOnSend(false);
+
         // resetear botones de silabas
         for (int p=0; p<textViewCount; p++) {
             textViewPresionado[p] = false;
@@ -367,12 +375,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         if ///////////////////// RESPUESTA CORRECTA /////////////////////////////
         (view.getAnswerText().toLowerCase(Locale.ROOT).equals(cartaActual.getWord().toLowerCase(Locale.ROOT))) {
 
-
-
             view.setAnswer("");
 
             score++;
-            if (score%4==0){
+            int drawsPerLevel = 4;
+            //int cardsDrawnNumber = 0;
+            if (score%drawsPerLevel==0){
                 playerLevel++;
             }
 
