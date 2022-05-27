@@ -4,7 +4,7 @@
 
     <item
         android:state_checked="false"
-        android:drawable="@drawable/ic_music_note_black_24dp"
+        android:drawable="@drawable/ic_baseline_music_note_black_24dp"
         />
 
     <item

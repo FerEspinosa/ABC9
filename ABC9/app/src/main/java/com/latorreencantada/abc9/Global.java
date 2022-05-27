@@ -233,21 +233,20 @@ public class Global {
             },
 
             { // NIVEL 28
-                {"MARIO", "MA", "RIO", "", "", "28"},
                 {"GLOBO","GLO","BO", "", "", "28"},
                 {"TIBURON", "TI", "BU", "RON", "", "28"},
-                {"GODZILLA", "GOD", "ZI", "LLA", "", "28"},
+                {"LEON", "LE", "ON", "", "", "28"},
+                {"LUNA", "LU", "NA", "", "", "28"},
+                {"TIGRE", "TI", "GRE", "", "", "28"},
+                {"BICICLETA", "BI", "CI", "CLE", "TA", "28"},
+                {"CARAMELO", "CA", "RA", "ME", "LO", "28"},
+                {"CEBRA", "CE", "BRA", "", "", "28"},
                 {"DINOSAURIO", "DI", "NO", "SAU", "RIO", "28"}
             }
 
             /*
 
-            {"LEON", "LE", "ON", "", "", "1"},
-            {"LUNA", "LU", "NA", "", "", "1"},
-            {"TIGRE", "TI", "GRE", "", "", "1"},
-            {"BICICLETA", "BI", "CI", "CLE", "TA", "1"},
-            {"CARAMELO", "CA", "RA", "ME", "LO", "1"},
-            {"CEBRA", "CE", "BRA", "", "", "1"}},
+
 
 
             puma

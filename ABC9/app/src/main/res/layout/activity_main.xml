@@ -109,37 +109,12 @@
             app:layout_constraintTop_toBottomOf="@+id/bt_opciones"
             app:layout_constraintVertical_bias="0.104">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bt_mayusc"
-                    android:layout_width="122dp"
-                    android:layout_height="38dp"
-                    android:textAllCaps="false"
-                    android:text="ABC"
-                    android:background="@drawable/ic_fondo_mayusc_minusc"
-                    android:layout_margin="5dp"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/bt_minusc"
-                    android:layout_width="122dp"
-                    android:layout_height="38dp"
-                    android:textAllCaps="false"
-                    android:text="abc"
-                    android:background="@drawable/ic_fondo_mayusc_minusc"
-                    android:textSize="18sp"
-                    android:layout_margin="15dp"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/bt_mayuminus_random"
@@ -164,6 +139,31 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_mayusc"
+                    android:layout_width="122dp"
+                    android:layout_height="38dp"
+                    android:textAllCaps="false"
+                    android:text="ABC"
+                    android:background="@drawable/ic_fondo_mayusc_minusc"
+                    android:layout_margin="15dp"/>
+
+                <Button
+                    android:id="@+id/bt_minusc"
+                    android:layout_width="122dp"
+                    android:layout_height="38dp"
+                    android:textAllCaps="false"
+                    android:text="abc"
+                    android:background="@drawable/ic_fondo_mayusc_minusc"
+                    android:textSize="18sp"
+                    android:layout_margin="15dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 
@@ -176,24 +177,29 @@ public class MainActivity extends AppCompatActivity {
             bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
         }
 
-        bt_mayusminus_in_order.setOnClickListener(new View.OnClickListener() {
+
+        bt_mayuminusc_random = findViewById(R.id.bt_mayuminus_random);
+
+        bt_mayusc = findViewById(R.id.bt_mayusc);
+        if (sharedPreferences.getBoolean(CAPSLOCK, true)){
+            bt_mayusc.setBackgroundResource(R.color.light_grey);
+        } else {
+            bt_mayusc.setBackgroundResource(R.color.button_red);
+        }
+
+        bt_mayusc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editor.putBoolean(CAPSLOCK, true);
                 editor.apply();
 
                 tv_caps_mode.setText(R.string.mode_capslock_on);
-                bt_mayusminus_in_order.setBackgroundResource(R.color.light_grey);
+                bt_mayusc.setBackgroundResource(R.color.light_grey);
                 bt_minusc.setBackgroundResource(R.color.button_red);
                 bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
-                bt_mayusc.setBackgroundResource(R.color.button_red);
+                bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
             }
         });
-
-        bt_mayuminusc_random = findViewById(R.id.bt_mayuminus_random);
-
-        bt_mayusc = findViewById(R.id.bt_mayusc);
-
     }
 
     private void fillDbWithDefaultValues() {
@@ -244,10 +250,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        //sharedPreferences.getBoolean(FIRST_RUN, true)
+
         if (sharedPreferences.getBoolean(FIRST_RUN, true)){
             editor.putBoolean(FIRST_RUN, false);
             editor.apply();
-            //Toast.makeText(this, "first run!", Toast.LENGTH_SHORT).show();
+
             return true;
 
         } else {
@@ -284,5 +292,9 @@ public class MainActivity extends AppCompatActivity {
             mp.pause();
         }
 */
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

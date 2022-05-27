@@ -387,6 +387,10 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             playCorrectAnswerSound();
 
             if (playerLevel==(Global.defaultLevels.length)+1){
+
+                view.goToGameOverScreen();
+
+                /*
                 if (Capslock() && Global.capsLock){
                     Global.capsLock= false;
                     playerLevel=1;
@@ -394,6 +398,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 } else {
                     view.goToGameOverScreen();
                 }
+                */
+
             } else {
                 NuevaCarta(playerLevel);
             }

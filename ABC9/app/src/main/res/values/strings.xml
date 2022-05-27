@@ -42,6 +42,6 @@
     <string name="txt_salir">Salir</string>
     <string name="erase">borrar</string>
     <string name="send">Enviar</string>
-    <string name="mode_capslock_on">Modo: Mayúsculas + minúsculas</string>
+    <string name="mode_capslock_on">Modo: Mayúsculas</string>
     <string name="mode_capslock_off">Modo: Minúsculas</string>
 </resources>

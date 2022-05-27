@@ -227,7 +227,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#593FB5"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/close_option_menu"

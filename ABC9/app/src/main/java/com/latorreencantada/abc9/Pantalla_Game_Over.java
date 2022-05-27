@@ -47,11 +47,11 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         mp = MediaPlayer.create(this, R.raw.end);
         tv_congrats = findViewById(R.id.txt_congrats);
 
-        setResultText();
-
         tv_score = findViewById(R.id.score_gameover);
         score = Integer.parseInt(getIntent().getStringExtra("score"));
         tv_score.setText(String.valueOf(score));
+
+        setResultText();
 
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
@@ -76,14 +76,14 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         if (score<10){
             tv_congrats.setText("No está mal para empezar");
         } else if (score < 20) {
-            tv_congrats.setText("ok, ya estas mejorando.");
-        } else if (score < 40) {
             tv_congrats.setText("¡Bien!");
-        } else if (score <60) {
-            tv_congrats.setText("¡has practicado bastante!");
-        } else if (score <80) {
+        } else if (score < 30) {
+            tv_congrats.setText("¡Muy bien!");
+        } else if (score <40) {
+            tv_congrats.setText("¡Estas avanzado un monton!");
+        } else if (score <55) {
             tv_congrats.setText("¡Qué orgullo cómo lees!");
-        } else if (score <100) {
+        } else if (score <80) {
             tv_congrats.setText("¡wooow! ¡Increíble!");
         } else if (score <111) {
             tv_congrats.setText("¡Excelente!");
