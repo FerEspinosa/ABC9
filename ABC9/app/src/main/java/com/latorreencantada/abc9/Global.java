@@ -5,7 +5,9 @@ public class Global {
     public static Boolean sonidos = true;
     public static Boolean capsLock = true;
     public static String BackgroundImage = "rojo";
-    public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};;
+    public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};
+
+    public static int drawsPerLevel = 2;
 
 
     public static String [][][] defaultLevels = { //  [índice nivel] [indice palabra] [palabra, syl1, syl2, syl3 syl4, level]
@@ -217,9 +219,9 @@ public class Global {
                 {"JUGO", "JU", "GO", "", "", "26"},
                 {"LECHE", "LE", "CHE", "", "", "26"},
                 {"NARANJA", "NA", "RAN", "JA", "", "26"},
-                {"NEMO", "NE", "MO", "", "", "26"},
                 {"PERA", "P", "E", "R", "A", "26"},
-                {"PEZ", "P", "E", "Z", "S", "26"}},
+                {"PEZ", "P", "E", "Z", "S", "26"}
+            },
 
             { // NIVEL 27
                 {"SANDIA", "SAN", "DIA", "", "", "27"},
@@ -247,16 +249,11 @@ public class Global {
             /*
 
 
-
-
-            puma
             lampara
             pantera
             cocodrilo
             paloma
-            abuelo/a
-            luna
-            caramelo
+
             bebe
             CAMALEON
             rombo

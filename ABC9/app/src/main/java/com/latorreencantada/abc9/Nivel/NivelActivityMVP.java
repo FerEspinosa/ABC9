@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
 import com.latorreencantada.abc9.Card;
+import com.latorreencantada.abc9.Global;
 
 import java.util.ArrayList;
 
@@ -28,10 +29,13 @@ interface View {
     void playNewLevelSound();
     void stopMusic();
     void goToGameOverScreen();
-    void checkFirstRun();
     void showOptions();
     void allowClickOnSend(boolean b);
     Context getContext();
+
+    //para pruebas
+    void showToast(String message);
+
 }
 
 interface Presenter {

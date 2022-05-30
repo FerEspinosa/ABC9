@@ -20,7 +20,7 @@ public class Pantalla_Game_Over extends AppCompatActivity {
     Button bt_home;
     int score;
     private MediaPlayer mp;
-
+    int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
     public static final String MUSIC = "music";
 
     @Override
@@ -55,40 +55,34 @@ public class Pantalla_Game_Over extends AppCompatActivity {
 
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
-        playAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Pantalla_Game_Over.this, NivelActivity.class));
-            }
-        });
+        playAgain.setOnClickListener(view -> startActivity(new Intent(Pantalla_Game_Over.this, NivelActivity.class)));
 
         //boton home (es un imageView)
         bt_home = findViewById(R.id.im_goHome);
-        bt_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Pantalla_Game_Over.this, MainActivity.class));
-            }
-        });
+        bt_home.setOnClickListener(view -> startActivity(new Intent(Pantalla_Game_Over.this, MainActivity.class)));
     }
 
     private void setResultText() {
-        if (score<10){
-            tv_congrats.setText("No está mal para empezar");
-        } else if (score < 20) {
-            tv_congrats.setText("¡Bien!");
-        } else if (score < 30) {
-            tv_congrats.setText("¡Muy bien!");
-        } else if (score <40) {
-            tv_congrats.setText("¡Estas avanzado un monton!");
-        } else if (score <55) {
-            tv_congrats.setText("¡Qué orgullo cómo lees!");
-        } else if (score <80) {
-            tv_congrats.setText("¡wooow! ¡Increíble!");
-        } else if (score <111) {
-            tv_congrats.setText("¡Excelente!");
-        } else if (score == 111) {
-            tv_congrats.setText("¡Puntuación PERFECTA!");
+        if (score<cardsToBeDrawn/10){
+            tv_congrats.setText(R.string.final_message_1);
+        } else if (score < cardsToBeDrawn/5) {
+            tv_congrats.setText(R.string.final_message_2);
+        } else if (score < cardsToBeDrawn*3/10) {
+            tv_congrats.setText(R.string.final_message_3);
+        } else if (score < cardsToBeDrawn*4/10) {
+            tv_congrats.setText(R.string.final_message_4);
+        } else if (score < cardsToBeDrawn/2) {
+            tv_congrats.setText(R.string.final_message_5);
+        } else if (score < cardsToBeDrawn*6/10) {
+            tv_congrats.setText(R.string.final_message_6);
+        } else if (score < cardsToBeDrawn*7/10) {
+            tv_congrats.setText(R.string.final_message_7);
+        } else if (score < cardsToBeDrawn*8/10) {
+            tv_congrats.setText(R.string.final_message_8);
+        } else if (score < cardsToBeDrawn*9/10) {
+            tv_congrats.setText(R.string.final_message_9);
+        } else if (score == cardsToBeDrawn-1) {
+            tv_congrats.setText(R.string.final_message_10);
         }
     }
 
@@ -97,7 +91,7 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         super.onStart();
 
         View decorView = getWindow().getDecorView();
-        int uiOptions = 0;
+        int uiOptions;
         uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY

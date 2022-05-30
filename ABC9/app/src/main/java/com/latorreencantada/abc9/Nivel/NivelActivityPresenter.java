@@ -5,7 +5,6 @@ import static com.latorreencantada.abc9.Global.silabas;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaActionSound;
 import android.media.MediaPlayer;
 import android.view.View;
 
@@ -55,6 +54,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     int tipoDeCarta;
     int ultimaCarta=99999;
     int posicion = 0;
+    int cardsDrawn=0;
+    int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
 
     // el siguiente booleano debe estar en true por default
     // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
@@ -71,6 +72,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void NuevaCarta(int playerLevel) {
+
+        cardsDrawn++;
 
         if (view!=null){
             //vaciar textView principal
@@ -260,33 +263,40 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 }
             }
         }
+
     }
 
     @Override
     public void sylablePressed(View v) {
         String silaba_presionada;
         String nueva_resp;
+        assert view != null;
         String resp_temp = view.getAnswerText();
 
         view.allowClickOnSend(true);
 
         int p=0;
 
+        final int int1 = R.id.bt1;
+        final int int2 = R.id.bt2;
+        final int int3 = R.id.bt3;
+        final int int4 = R.id.bt4;
+
         switch (v.getId()) {
 
-            case R.id.bt1:
+            case int1:
                 p=0;
                 break;
 
-            case R.id.bt2:
+            case int2:
                 p=1;
                 break;
 
-            case R.id.bt3:
+            case int3:
                 p=2;
                 break;
 
-            case R.id.bt4:
+            case int4:
                 p=3;
                 break;
         }
@@ -329,6 +339,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void bt_borrar_clicked() {
+        assert view != null;
         view.allowClickOnSend(false);
 
         if (tipoDeCarta==1){
@@ -354,12 +365,14 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     @Override
     public void bt_options_clicked() {
         //view.goToOptionScreen();
+        assert view != null;
         view.showOptions();
     }
 
     @Override
     public void bt_enviar_clicked() {
 
+        assert view != null;
         view.allowClickOnSend(false);
 
         // resetear botones de silabas
@@ -378,15 +391,15 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             view.setAnswer("");
 
             score++;
-            int drawsPerLevel = 4;
+
             //int cardsDrawnNumber = 0;
-            if (score%drawsPerLevel==0){
+            if (score%Global.drawsPerLevel==0){
                 playerLevel++;
             }
 
             playCorrectAnswerSound();
 
-            if (playerLevel==(Global.defaultLevels.length)+1){
+            if (cardsDrawn == cardsToBeDrawn){
 
                 view.goToGameOverScreen();
 
@@ -444,6 +457,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     private void clearAllSylButtons() {
         //vaciar todos los textviews
         for (int i=0;i<4;i++) {
+            assert view != null;
             view.setSyllableButtonText("",i);
         }
     }
@@ -481,6 +495,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public void playCorrectAnswerSound () {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
+            assert view != null;
             view.playCorrectAnswerSound();
         }
     }
@@ -488,6 +503,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public void playWrongAnswerSound () {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
+            assert view != null;
             view.playWrongAnswerSound();
         }
     }
@@ -511,11 +527,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         String SHARED_PREFS = "SharedPrefs";
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
-        if (sharedPreferences.getBoolean("capslock", true)){
-            return true;
-        } else {
-            return false;
-        }
+        return sharedPreferences.getBoolean("capslock", true);
     }
 
 }

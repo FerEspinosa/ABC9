@@ -66,6 +66,8 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     private SwitchCompat sw_music, sw_sound;
     private boolean noButtonsPressed = true;
 
+    int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
+
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -89,6 +91,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     private void configOptionMenu() {
 
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -98,56 +101,35 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         optionMenuIsVisible = false;
 
         bt_opciones = findViewById(R.id.bt_Options);
-        bt_opciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OptionMenuIsVisible(!optionMenuIsVisible);
-            }
-        });
+        bt_opciones.setOnClickListener(view -> OptionMenuIsVisible(!optionMenuIsVisible));
 
         bt_closeOptionMenu = findViewById(R.id.close_option_menu);
-        bt_closeOptionMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OptionMenuIsVisible(optionMenuIsVisible);
-            }
-        });
+        bt_closeOptionMenu.setOnClickListener(view -> OptionMenuIsVisible(optionMenuIsVisible));
 
         sw_music = findViewById(R.id.sw_music);
         sw_music.setChecked(sharedPreferences.getBoolean(MUSIC,true));
-        sw_music.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        sw_music.setOnCheckedChangeListener((compoundButton, b) -> {
 
-                editor.putBoolean(MUSIC, b);
-                editor.apply();
+            editor.putBoolean(MUSIC, b);
+            editor.apply();
 
-                if (b) {
-                    startMusic();
-                } else {
-                    pauseMusic();
-                }
+            if (b) {
+                startMusic();
+            } else {
+                pauseMusic();
             }
         });
 
         sw_sound = findViewById(R.id.sw_sound);
         boolean aux2 = sharedPreferences.getBoolean(SOUND,true);
         sw_sound.setChecked(sharedPreferences.getBoolean(SOUND,true));
-        sw_sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean(SOUND, b);
-                editor.apply();
-            }
+        sw_sound.setOnCheckedChangeListener((compoundButton, b) -> {
+            editor.putBoolean(SOUND, b);
+            editor.apply();
         });
 
         bt_goHome = findViewById(R.id.bt_goHome_from_lvl);
-        bt_goHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NivelActivity.this, MainActivity.class));
-            }
-        });
+        bt_goHome.setOnClickListener(view -> startActivity(new Intent(NivelActivity.this, MainActivity.class)));
 
     }
 
@@ -215,19 +197,9 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
         // botones con click listeners:
 
-        bt_enviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.bt_enviar_clicked();
-            }
-        });
+        bt_enviar.setOnClickListener(view -> presenter.bt_enviar_clicked());
 
-        bt_borrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.bt_borrar_clicked();
-            }
-        });
+        bt_borrar.setOnClickListener(view -> presenter.bt_borrar_clicked());
 
         noButtonsPressed = true;
         allowClickOnSend(false);
@@ -242,15 +214,13 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         startMusic();
 
         View decorView = getWindow().getDecorView();
-        int uiOptions = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        }
+        int uiOptions;
+        uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
         decorView.setSystemUiVisibility(uiOptions);
 
@@ -377,20 +347,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     }
 
 
-    @Override
-    public void checkFirstRun() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        if (sharedPreferences.getBoolean(FIRST_RUN, true)){
-            editor.putBoolean(FIRST_RUN, false);
-            Toast.makeText(this, "first run!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "not first run", Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
 
     @Override
     public void showOptions() {
@@ -426,5 +382,11 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     public void setAnswer (String answer){
         tv_respuesta.setText(answer);
     }
+
+    @Override
+    public void showToast (String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 
 }

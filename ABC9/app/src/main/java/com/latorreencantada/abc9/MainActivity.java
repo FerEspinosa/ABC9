@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private void configView() {
 
         if (itsTheFirstRun()){
+            //eraseDB();
             fillDbWithDefaultValues();
         }
 
@@ -88,35 +89,29 @@ public class MainActivity extends AppCompatActivity {
         optionMenu.setVisibility(View.INVISIBLE);
 
         bt_jugar = findViewById(R.id.bt_jugar);
-        bt_jugar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        bt_jugar.setOnClickListener(view -> {
 
-                Intent intent = new Intent(MainActivity.this, NivelActivity.class);
-                startActivity(intent);
-                finish();
-            }
+            Intent intent = new Intent(MainActivity.this, NivelActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         bt_opciones = findViewById(R.id.bt_opciones);
-        bt_opciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        bt_opciones.setOnClickListener(view -> {
 
-                if (optionsMenuShown){
-                    // hacer invisible el menu de opciones
-                    optionMenu.setVisibility(View.INVISIBLE);
-                    optionsMenuShown = false;
-                    bt_opciones.setBackgroundResource(R.color.button_red);
+            if (optionsMenuShown){
+                // hacer invisible el menu de opciones
+                optionMenu.setVisibility(View.INVISIBLE);
+                optionsMenuShown = false;
+                bt_opciones.setBackgroundResource(R.color.button_red);
 
-                } else {
-                    // hacer visible el menu de opciones
-                    optionMenu.setVisibility(View.VISIBLE);
-                    optionsMenuShown = true;
-                    bt_opciones.setBackgroundResource(R.color.light_grey);
-                }
-
+            } else {
+                // hacer visible el menu de opciones
+                optionMenu.setVisibility(View.VISIBLE);
+                optionsMenuShown = true;
+                bt_opciones.setBackgroundResource(R.color.light_grey);
             }
+
         });
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -124,23 +119,17 @@ public class MainActivity extends AppCompatActivity {
 
         sw_musica = findViewById(R.id.sw_musica_home);
         sw_musica.setChecked(sharedPreferences.getBoolean(MUSIC, true));
-        sw_musica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean(MUSIC, b);
-                editor.apply();
-            }
+        sw_musica.setOnCheckedChangeListener((compoundButton, b) -> {
+            editor.putBoolean(MUSIC, b);
+            editor.apply();
         });
 
 
         sw_sonido = findViewById(R.id.sw_sonido_home);
         sw_sonido.setChecked(sharedPreferences.getBoolean(SOUND, true));
-        sw_sonido.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean(SOUND, b);
-                editor.apply();
-            }
+        sw_sonido.setOnCheckedChangeListener((compoundButton, b) -> {
+            editor.putBoolean(SOUND, b);
+            editor.apply();
         });
 
 
@@ -154,18 +143,14 @@ public class MainActivity extends AppCompatActivity {
             bt_minusc.setBackgroundResource(R.color.light_grey);
             tv_caps_mode.setText(R.string.mode_capslock_off);
         }
-        bt_minusc.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                editor.putBoolean(CAPSLOCK, false);
-                editor.apply();
-                tv_caps_mode.setText(R.string.mode_capslock_off);
-                bt_minusc.setBackgroundResource(R.color.light_grey);
-                bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
-                bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
-                bt_mayusc.setBackgroundResource(R.color.button_red);
-            }
+        bt_minusc.setOnClickListener(view -> {
+            editor.putBoolean(CAPSLOCK, false);
+            editor.apply();
+            tv_caps_mode.setText(R.string.mode_capslock_off);
+            bt_minusc.setBackgroundResource(R.color.light_grey);
+            bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
+            bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
+            bt_mayusc.setBackgroundResource(R.color.button_red);
         });
 
 
@@ -187,19 +172,30 @@ public class MainActivity extends AppCompatActivity {
             bt_mayusc.setBackgroundResource(R.color.button_red);
         }
 
-        bt_mayusc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editor.putBoolean(CAPSLOCK, true);
-                editor.apply();
+        bt_mayusc.setOnClickListener(view -> {
+            editor.putBoolean(CAPSLOCK, true);
+            editor.apply();
 
-                tv_caps_mode.setText(R.string.mode_capslock_on);
-                bt_mayusc.setBackgroundResource(R.color.light_grey);
-                bt_minusc.setBackgroundResource(R.color.button_red);
-                bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
-                bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
-            }
+            tv_caps_mode.setText(R.string.mode_capslock_on);
+            bt_mayusc.setBackgroundResource(R.color.light_grey);
+            bt_minusc.setBackgroundResource(R.color.button_red);
+            bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
+            bt_mayusminus_in_order.setBackgroundResource(R.color.button_red);
         });
+    }
+
+    private void eraseDB() {
+
+        //Crear objeto administrador de base de datos
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+
+        //Se utiliza el objeto "admin" para obtener la base de datos (en modo lectura y escritura)
+        SQLiteDatabase BD = admin.getWritableDatabase();
+
+        BD.delete("cards", null, null);
+
+        BD.close();
+
     }
 
     private void fillDbWithDefaultValues() {
@@ -250,18 +246,15 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        //sharedPreferences.getBoolean(FIRST_RUN, true)
-
         if (sharedPreferences.getBoolean(FIRST_RUN, true)){
             editor.putBoolean(FIRST_RUN, false);
             editor.apply();
-
             return true;
 
         } else {
-            //Toast.makeText(this, "not first run", Toast.LENGTH_SHORT).show();
             return false;
         }
+
     }
 
     @Override
