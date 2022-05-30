@@ -54,4 +54,17 @@
     <string name="final_message_8">¡¡¡Excelente!!!</string>
     <string name="final_message_9">¡¡¡Espectacular!!!</string>
     <string name="final_message_10">¡Puntuación PERFECTA!</string>
+    <string name="txt_borrar">borrar</string>
+    <string name="txt_enviar_respuesta">enviar respuesta</string>
+    <string name="txt_go_home">pantalla de inicio</string>
+    <string name="lives_left">vidas restantes</string>
+    <string name="main_image">Imagen principal</string>
+    <string name="score">Puntaje:</string>
+    <string name="sound">Sonido</string>
+    <string name="music">Música</string>
+    <string name="random_capslock">AbCAbc</string>
+    <string name="first_mayu_then_minu">ABCabc</string>
+    <string name="abc_mayusculas">ABC</string>
+    <string name="abc_minusculas">abc</string>
+    <string name="initial_capslock_mode">Modo: mayúsculas + minúsculas</string>
 </resources>

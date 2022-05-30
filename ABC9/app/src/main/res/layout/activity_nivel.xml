@@ -29,6 +29,7 @@
 
             <ImageView
                 android:id="@+id/iv_estrellas"
+                android:contentDescription="@string/lives_left"
                 android:layout_width="87dp"
                 android:layout_height="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +45,7 @@
                 android:layout_width="36dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="44dp"
-                android:text="123"
+                android:text="@string/puntaje_inicial"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -55,9 +56,11 @@
 
             <Button
                 android:id="@+id/bt_Options"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@drawable/ic_baseline_menu_24"
+                android:alpha="0.6"
+                android:contentDescription="@string/txt_Opciones"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.836"
@@ -71,6 +74,7 @@
 
         <ImageView
             android:id="@+id/iv_marco_monitor"
+            android:contentDescription="@string/app_name"
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:layout_margin="8dp"
@@ -84,6 +88,7 @@
 
         <ImageView
             android:id="@+id/mainImage"
+            android:contentDescription="@string/main_image"
             android:layout_width="270dp"
             android:layout_height="211dp"
             android:layout_marginTop="64dp"
@@ -95,6 +100,7 @@
 
         <ImageView
             android:id="@+id/mainImageBackground"
+            android:contentDescription="@string/app_name"
             android:layout_width="270dp"
             android:layout_height="211dp"
             android:layout_marginTop="64dp"
@@ -109,7 +115,7 @@
             android:layout_width="240dp"
             android:layout_height="50dp"
             android:layout_marginTop="284dp"
-            android:text="RESPUESTA"
+            android:text="@string/respuesta_inicial"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -119,75 +125,70 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+
+    <GridLayout
         android:id="@+id/botonera_acciones2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:columnCount="2"
         app:layout_constraintBottom_toTopOf="@+id/botonera_acciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/monitor">
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
             android:layout_margin="10dp"
-            android:columnCount="2">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/boton_silaba"
+            android:text="@string/silaba_inicial"
+            android:onClick="buttonPress"
+            android:textAllCaps="false"
+            android:textSize="35sp"
+            tools:ignore="OnClick,UsingOnClickInXml" />
 
-            <Button
-                android:id="@+id/bt1"
-                android:layout_width="170dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/boton_silaba"
-                android:text="ABCD"
-                android:onClick="buttonPress"
-                android:textAllCaps="false"
-                android:textSize="35sp"
-                tools:ignore="OnClick" />
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/boton_silaba"
+            android:onClick="buttonPress"
+            android:text="@string/silaba_inicial"
+            android:textAllCaps="false"
+            android:textSize="35sp"
+            tools:ignore="OnClick,UsingOnClickInXml" />
 
-            <Button
-                android:id="@+id/bt2"
-                android:layout_width="170dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/boton_silaba"
-                android:onClick="buttonPress"
-                android:text="ABCD"
-                android:textAllCaps="false"
-                android:textSize="35sp"
-                tools:ignore="OnClick,UsingOnClickInXml" />
+        <Button
+            android:id="@+id/bt3"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/boton_silaba"
+            android:onClick="buttonPress"
+            android:text="@string/silaba_inicial"
+            android:textAllCaps="false"
+            android:textSize="35sp"
+            tools:ignore="OnClick,UsingOnClickInXml"/>
 
-            <Button
-                android:id="@+id/bt3"
-                android:layout_width="170dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/boton_silaba"
-                android:onClick="buttonPress"
-                android:text="ABCD"
-                android:textAllCaps="false"
-                android:textSize="35sp"
-                tools:ignore="OnClick,UsingOnClickInXml"/>
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/boton_silaba"
+            android:onClick="buttonPress"
+            android:text="@string/silaba_inicial"
+            android:textAllCaps="false"
+            android:textSize="35sp"
+            tools:ignore="OnClick,UsingOnClickInXml"/>
 
-            <Button
-                android:id="@+id/bt4"
-                android:layout_width="170dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/boton_silaba"
-                android:onClick="buttonPress"
-                android:text="ABCD"
-                android:textAllCaps="false"
-                android:textSize="35sp"
-                tools:ignore="OnClick,UsingOnClickInXml"/>
+    </GridLayout>
 
-        </GridLayout>
 
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/botonera_acciones"
@@ -200,6 +201,7 @@
 
         <Button
             android:id="@+id/bt_borrar"
+            android:contentDescription="@string/txt_borrar"
             android:layout_width="170dp"
             android:layout_height="65dp"
             android:layout_margin="15dp"
@@ -209,6 +211,7 @@
 
         <Button
             android:id="@+id/bt_enviar"
+            android:contentDescription="@string/txt_enviar_respuesta"
             android:layout_width="170dp"
             android:layout_height="65dp"
             android:layout_margin="15dp"
@@ -227,15 +230,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#593FB5"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <Button
             android:id="@+id/close_option_menu"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_baseline_close_24_white"
             android:layout_margin="10dp"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             >
 
         </Button>
@@ -253,24 +256,25 @@
                 android:id="@+id/sw_music"
                 android:textSize="20sp"
                 android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:textColor="@color/white"
-                android:text="Música  "
+                android:text="@string/music"
                 android:layout_marginBottom="20sp"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_sound"
                 android:textSize="20sp"
                 android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:textColor="@color/white"
-                android:text="Sonidos  "
+                android:text="@string/sound"
                 android:layout_margin="10dp"/>
 
             <Button
                 android:id="@+id/bt_goHome_from_lvl"
-                android:layout_width="wrap_content"
-                android:layout_height="70sp"
+                android:contentDescription="@string/txt_go_home"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="60sp"
                 android:background="@drawable/ic_baseline_home_24"
                 android:backgroundTint="#112959">

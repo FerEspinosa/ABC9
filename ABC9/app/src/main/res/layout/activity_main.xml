@@ -76,9 +76,9 @@
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_sonido_home"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_margin="20dp"
-                android:text="Sonido  "
+                android:text="@string/sound"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,9 +87,9 @@
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_musica_home"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_margin="20dp"
-                android:text="Música  "
+                android:text="@string/music"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
                     android:layout_width="122dp"
                     android:layout_height="38dp"
                     android:textAllCaps="false"
-                    android:text="AbCAbc"
+                    android:text="@string/random_capslock"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
                     android:layout_margin="5dp"
@@ -132,7 +132,7 @@
                     android:layout_width="122dp"
                     android:layout_height="38dp"
                     android:textAllCaps="false"
-                    android:text="ABCabc"
+                    android:text="@string/first_mayu_then_minu"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
                     android:layout_margin="15dp"/>
@@ -147,18 +147,18 @@
                 <Button
                     android:id="@+id/bt_mayusc"
                     android:layout_width="122dp"
-                    android:layout_height="38dp"
+                    android:layout_height="48dp"
                     android:textAllCaps="false"
-                    android:text="ABC"
+                    android:text="@string/abc_mayusculas"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:layout_margin="15dp"/>
 
                 <Button
                     android:id="@+id/bt_minusc"
                     android:layout_width="122dp"
-                    android:layout_height="38dp"
+                    android:layout_height="48dp"
                     android:textAllCaps="false"
-                    android:text="abc"
+                    android:text="@string/abc_minusculas"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
                     android:layout_margin="15dp"/>
@@ -171,7 +171,7 @@
             android:id="@+id/txt_modo_mayuminu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modo: mayúsculas + minúsculas"
+            android:text="@string/initial_capslock_mode"
             android:textSize="15sp"
             android:layout_gravity="center"
             android:layout_margin="5dp"/>

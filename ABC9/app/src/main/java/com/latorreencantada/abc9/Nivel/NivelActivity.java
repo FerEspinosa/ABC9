@@ -236,6 +236,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     private void startMusic() {
         if (sharedPreferences.getBoolean(MUSIC, true)){
+            assert mp != null;
             mp.seekTo(posicion);
             mp.start();
             mp.setLooping(true);
