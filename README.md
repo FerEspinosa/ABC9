@@ -4,6 +4,8 @@ This is an app that helps children to practice as they are learning to read and 
 
 Here are some app features expressed as user stories that are met by the app so far:
 
+Version: 1.0.2.3
+
 - The game shows an image, and the user is prompt to complete the word corresponding with that image, 
   with one or more of the 4 options the player gets to choose from.
 
@@ -28,7 +30,6 @@ Here are some app features expressed as user stories that are met by the app so 
 - The user can turn the music and sound on and off, separately.
 
 
-
 Roadmap
 
 // technic debt:
@@ -46,16 +47,18 @@ Roadmap
 
 // Firebase:
 - The user should be able to create an account with Firebase.
-- Every user will be a "tutor account" and every "tutor account" will be able to manage several "student accounts"
-- User should be able to create "win prizes" 
-(setting an image, a description of the prize, and the condition/s. e.g: achieving 200 points, or playing 10 days in a row, etc)
+- Every new user will become a "tutor account" and every "tutor account" will be able to manage several "student accounts"
+- User should be able to create "win prizes", by setting an image, a description of the prize, and the condition/s. 
+  (e.g: "achieving 200 points", or "playing 10 days in a row", etc)
 - The data base should be stored in Firestore and also persist on the local SQLite database (using Room)
 
 // More
-- Users can share, download, edit, and rate collections of cards* that they create (*a card mainly bundles an image, a word, and its correct sylables)
+- Users can share, download, edit, and rate collections of cards* that they create (*a card bundles an image, a word, and its correct sylables)
 
-// I wouldn't like to spoil what´s next from this point, so this will the sight limit of this roadmap so far.    
+// so... this will be the public sight limit of this roadmap so far.
 
+Thank you for reading!
+If you have any comments, feel free to contact me at: la.torre.encantada@gmail.com
 
-feel free to contact me at: la.torre.encantada@gmail.com
+Fernando Espinosa
 
