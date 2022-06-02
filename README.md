@@ -1,5 +1,5 @@
 # ABC9
-I'm working on this project with the purpose of learning to program for Android. 
+I'm working on this project with the purpose of learning to program Android apps, and at the same time, to help others to learn something as well. 
 This is an app that helps children to practice as they are learning to read and write.
 
 Here are some app features expressed as user stories that are met by the app so far:
