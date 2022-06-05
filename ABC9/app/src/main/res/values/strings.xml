@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ABC9</string>
+    <string name="app_name">Maratón de palabras</string>
 
     <string name="txt_nombre">Nombre</string>
     <string name="txt_comenzar">¡Jugar!</string>
@@ -67,4 +67,6 @@
     <string name="abc_mayusculas">ABC</string>
     <string name="abc_minusculas">abc</string>
     <string name="initial_capslock_mode">Modo: mayúsculas + minúsculas</string>
+    <string name="close">cerrar</string>
+    <string name="play_again">jugar de nuevo</string>
 </resources>

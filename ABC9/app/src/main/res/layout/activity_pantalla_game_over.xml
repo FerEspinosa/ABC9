@@ -10,6 +10,7 @@
 
     <Button
         android:id="@+id/txt_play_again"
+        android:contentDescription="@string/play_again"
         android:layout_width="192dp"
         android:layout_height="113dp"
         android:layout_marginBottom="104dp"
@@ -26,6 +27,7 @@
 
     <Button
         android:id="@+id/im_goHome"
+        android:contentDescription="@string/txt_go_home"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginBottom="40dp"
@@ -49,6 +51,7 @@
 
     <TextView
         android:id="@+id/score_gameover"
+        android:contentDescription="@string/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-8dp"

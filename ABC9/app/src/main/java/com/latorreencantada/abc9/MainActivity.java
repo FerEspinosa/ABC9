@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             fillDbWithDefaultValues();
         }
 
-        optionMenu = (LinearLayout)findViewById(R.id.layout_opciones_home);
+        optionMenu = findViewById(R.id.layout_opciones_home);
         optionMenu.setVisibility(View.INVISIBLE);
 
         bt_jugar = findViewById(R.id.bt_jugar);
@@ -289,5 +289,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    public void buttonPress(View view) {
     }
 }

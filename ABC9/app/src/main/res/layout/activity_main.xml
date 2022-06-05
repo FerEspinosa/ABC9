@@ -21,6 +21,7 @@
         android:layout_width="201dp"
         android:layout_height="114dp"
         android:background="@drawable/boton_jugar"
+        android:contentDescription="@string/txt_comenzar"
         android:textAllCaps="false"
         android:textColor="@color/light_blue"
         android:textSize="36sp"
@@ -114,7 +115,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="gone"
+                style="?android:attr/buttonBarStyle">
 
                 <Button
                     android:id="@+id/bt_mayuminus_random"
@@ -125,6 +127,7 @@
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
                     android:layout_margin="5dp"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:visibility="gone"/>
 
                 <Button
@@ -135,6 +138,7 @@
                     android:text="@string/first_mayu_then_minu"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_margin="15dp"/>
 
             </LinearLayout>
@@ -142,7 +146,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                style="?android:attr/buttonBarStyle">
 
                 <Button
                     android:id="@+id/bt_mayusc"
@@ -151,6 +156,7 @@
                     android:textAllCaps="false"
                     android:text="@string/abc_mayusculas"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_margin="15dp"/>
 
                 <Button
@@ -161,7 +167,8 @@
                     android:text="@string/abc_minusculas"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
-                    android:layout_margin="15dp"/>
+                    android:layout_margin="15dp"
+                    style="?android:attr/buttonBarButtonStyle"/>
 
             </LinearLayout>
 

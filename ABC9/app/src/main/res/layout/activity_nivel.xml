@@ -56,8 +56,8 @@
 
             <Button
                 android:id="@+id/bt_Options"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="@drawable/ic_baseline_menu_24"
                 android:alpha="0.6"
                 android:contentDescription="@string/txt_Opciones"
@@ -197,7 +197,8 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="20sp">
+        android:layout_marginBottom="20sp"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:id="@+id/bt_borrar"
@@ -207,7 +208,8 @@
             android:layout_margin="15dp"
             android:background="@drawable/boton_naranja"
             android:padding="25dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            style="?android:attr/buttonBarButtonStyle"/>
 
         <Button
             android:id="@+id/bt_enviar"
@@ -217,7 +219,8 @@
             android:layout_margin="15dp"
             android:background="@drawable/boton_verde"
             android:padding="25dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            style="?android:attr/buttonBarButtonStyle"/>
 
     </LinearLayout>
 
@@ -230,10 +233,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#593FB5"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/close_option_menu"
+            android:contentDescription="@string/close"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/ic_baseline_close_24_white"
@@ -254,6 +258,7 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_music"
+                android:contentDescription="@string/music"
                 android:textSize="20sp"
                 android:layout_width="130dp"
                 android:layout_height="48dp"
@@ -263,6 +268,7 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_sound"
+                android:contentDescription="@string/sound"
                 android:textSize="20sp"
                 android:layout_width="130dp"
                 android:layout_height="48dp"
