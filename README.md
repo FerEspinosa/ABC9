@@ -1,10 +1,16 @@
-# ABC9
-I'm working on this project with the purpose of learning to program Android apps, and at the same time, to help others to learn something as well. 
-This is an app that helps children to practice as they are learning to read and write.
+# Hello world!
 
-Here are some app features expressed as user stories that are met by the app so far:
+This is an android app that helps children to practice as they are learning to read and write (In spanish).
+It is the project I am using to learn to program android apps.
 
-Version: 1.0.2.3
+In the last version (1.0.2.5):
+
+I am using 100% java.
+The Level Activity has a MVP architechtural pattern. 
+The MainActivity (Home) and GameOverActivity contain all their respective methods within each respective class 
+(no architectural pattern nor interfaces)   
+
+user's stories already met by the app:
 
 - The game shows an image, and the user is prompt to complete the word corresponding with that image, 
   with one or more of the 4 options the player gets to choose from.
@@ -13,17 +19,20 @@ Version: 1.0.2.3
 - In the first one, the user must write the whole word with the sylables shown.
   Once all the correct syllables are put each on a different random answer button, the program should fill then all the buttons left with random incorrect syllables.
   These must not repeat themselves nor the correct syllables.
-- In the second display mode, the answer is shown lacking a letter. The user must choose the correct letter from the 4 given ones to complete the word.
-  Once the correct letter is put on a random answer button, the program should fill all the buttons left with random letters. 
+- In the second display mode, the answer is shown with a missing letter. The user must choose the correct letter from the 4 given ones to complete the word.
+  Once the correct letter is put on a random answer button, the program should fill the rest of the buttons with random letters. 
   These must not repeat themselves nor the correct letter.
   
-- Every word correspond to a level (it is posible for a word to be present in more than one level). When the player accumulate 4 correct answers, the player levels up. 
+- Every word correspond to at least one level. 
+- When the player accumulates 4 correct answers, the player levels up 
+- only random words from the corresponding level will show up in every turn.
 
 - If the player makes a mistake, he/she loses one of three stars (lives). The game shows another image with its corresponding word to solve 
 
-- In the end, when the player makes 3 mistakes, the score is shown. And he/she can restart the game or go to the homescreen.
-
-- LevelActivity is working with a MVP pattern
+- When the player makes 3 mistakes, the game is over. 
+- The score is shown on the "game over screen". 
+- From there, the player can play again or go to the homescreen.
+- The maximun posible score divided by 10, decides wich of the 10 predetermined messages are shown to the player. 
 
 - The player can choose to play in lowercase or uppercase mode
 
@@ -34,7 +43,7 @@ Roadmap
 
 // technic debt:
 - HomeActivity (actual MainACtivity) should be structured with MVP pattern
-- GameOverActivity should de strictured with MVP pattern
+- GameOverActivity should be structured with MVP pattern
 - Build unit testing with Mockito
 - Build UI testing with Espresso
 
@@ -55,7 +64,9 @@ Roadmap
 // More
 - Users can share, download, edit, and rate collections of cards* that they create (*a card bundles an image, a word, and its correct sylables)
 
-// so... this will be the public sight limit of this roadmap so far.
+// Even more? 
+Yes! I have seen this project go so big in my mind! 
+Anyway, I think the roadmap up to this point is already a nice challenge to focus on for a while.
 
 Thank you for reading!
 If you have any comments, feel free to contact me at: la.torre.encantada@gmail.com
