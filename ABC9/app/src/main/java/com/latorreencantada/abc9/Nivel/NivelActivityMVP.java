@@ -42,12 +42,12 @@ interface Presenter {
 
     //el primero es para indicar al presenter qué vista gobierna
     void setView (NivelActivityMVP.View view);
+
     void NuevaCarta(int playerLevel);
     void sylablePressed(android.view.View v);
     void bt_borrar_clicked();
     void bt_options_clicked();
     void bt_enviar_clicked();
-    void startMusic(MediaPlayer mp);
     void pauseMusic(MediaPlayer mp);
     void playCorrectAnswerSound ();
     void playWrongAnswerSound ();

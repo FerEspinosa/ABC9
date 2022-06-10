@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +20,7 @@ import android.widget.Toast;
 
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.MainActivity;
-import com.latorreencantada.abc9.Pantalla_Game_Over;
+import com.latorreencantada.abc9.GameOver.GameOverActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
 
@@ -77,7 +76,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nivel);
 
-        ((App) getApplication()).getComponent().inject(this);
+        ((App) getApplication()).getComponent().injectNivel(this);
 
         configView();
         configOptionMenu();
@@ -96,7 +95,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // ocultar menu opciones
-        optionMenu = (FrameLayout)findViewById(R.id.option_menu_frame);
+        optionMenu = findViewById(R.id.option_menu_frame);
         optionMenu.setVisibility(View.INVISIBLE);
         optionMenuIsVisible = false;
 
@@ -205,7 +204,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         allowClickOnSend(false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onResume() {
         super.onResume();
@@ -341,7 +339,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public void goToGameOverScreen() {
-        Intent intent = new Intent (getApplicationContext(), Pantalla_Game_Over.class);
+        Intent intent = new Intent (getApplicationContext(), GameOverActivity.class);
         intent.putExtra("jugador", jugador);
         intent.putExtra("score", tv_score.getText().toString());
         startActivity(intent);

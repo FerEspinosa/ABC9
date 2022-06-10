@@ -61,8 +61,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
     // el switch para que el usuario seleccione la opcion que quiera.
 
-
-
     Card cartaActual;
 
     boolean sonIguales = false;
@@ -361,7 +359,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
     }
 
-
     @Override
     public void bt_options_clicked() {
         //view.goToOptionScreen();
@@ -425,23 +422,20 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         else{ ////////////////// RESPUESTA INCORRECTA ///////////////////////////
 
-            playWrongAnswerSound();
-
             vidas--;
 
             switch (vidas){
-                case 3:
-                    view.setThreeStars();
-                    break;
 
                 case 2:
                     view.setTwoStars();
                     NuevaCarta(playerLevel);
+                    playWrongAnswerSound();
                     break;
 
                 case 1:
                     view.setOneStar();
                     NuevaCarta(playerLevel);
+                    playWrongAnswerSound();
                     break;
 
                 case 0:
@@ -453,31 +447,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
     }
 
-
     private void clearAllSylButtons() {
         //vaciar todos los textviews
         for (int i=0;i<4;i++) {
             assert view != null;
             view.setSyllableButtonText("",i);
         }
-    }
-
-    @Override
-    public void startMusic(MediaPlayer mp) {
-
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-
-        if (sharedPreferences.getBoolean(MUSIC, true)){
-            if (!mp.isPlaying()){
-                if (posicion!=0){
-                    mp.seekTo(posicion);
-                }
-                mp.start();
-                mp.setLooping(true);
-            }
-
-        }
-
     }
 
     @Override
