@@ -1,25 +1,31 @@
-package com.latorreencantada.abc9;
-
-import static java.sql.Types.INTEGER;
+package com.latorreencantada.abc9.GameOver;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import com.latorreencantada.abc9.Global;
+import com.latorreencantada.abc9.Home.HomeActivity;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
+import com.latorreencantada.abc9.R;
+import com.latorreencantada.abc9.root.App;
 
-public class Pantalla_Game_Over extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class GameOverActivity extends AppCompatActivity implements GameOverMVP.View{
+
+    @Inject
+    GameOverMVP.Presenter presenter;
 
     TextView tv_congrats, tv_score, playAgain;
     Button bt_home;
     int score;
-    private MediaPlayer mp;
+    private MediaPlayer endingTune;
     int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
     public static final String MUSIC = "music";
 
@@ -28,23 +34,19 @@ public class Pantalla_Game_Over extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_game_over);
 
+        ((App) getApplication()).getComponent().injectGameOver(this);
+
+        presenter.setView(this);
+
         configView();
-        playEndingMusic();
+        presenter.playEndingTune();
 
     }
 
-    private void playEndingMusic() {
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs",MODE_PRIVATE);
-
-        if (sharedPreferences.getBoolean("sound",true)||sharedPreferences.getBoolean("music",true)){
-            mp.start();
-        }
-
-    }
 
     private void configView() {
 
-        mp = MediaPlayer.create(this, R.raw.end);
+        endingTune = MediaPlayer.create(this, R.raw.end);
         tv_congrats = findViewById(R.id.txt_congrats);
 
         tv_score = findViewById(R.id.score_gameover);
@@ -55,14 +57,24 @@ public class Pantalla_Game_Over extends AppCompatActivity {
 
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
-        playAgain.setOnClickListener(view -> startActivity(new Intent(Pantalla_Game_Over.this, NivelActivity.class)));
+        playAgain.setOnClickListener(view -> startActivity(new Intent(GameOverActivity.this, NivelActivity.class)));
 
         //boton home (es un imageView)
         bt_home = findViewById(R.id.im_goHome);
-        bt_home.setOnClickListener(view -> startActivity(new Intent(Pantalla_Game_Over.this, MainActivity.class)));
+        bt_home.setOnClickListener(view -> startActivity(new Intent(GameOverActivity.this, HomeActivity.class)));
     }
 
-    private void setResultText() {
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void playEndingTune() {
+        endingTune.start();
+    }
+
+    public void setResultText() {
         if (score<cardsToBeDrawn/10){
             tv_congrats.setText(R.string.final_message_1);
         } else if (score < cardsToBeDrawn/5) {
@@ -104,5 +116,11 @@ public class Pantalla_Game_Over extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.setView(this);
     }
 }

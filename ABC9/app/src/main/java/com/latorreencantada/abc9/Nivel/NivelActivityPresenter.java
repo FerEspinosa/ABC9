@@ -33,7 +33,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         this.view = view;
     }
 
-
     //variable que hace referencia al modelo
     private final NivelActivityMVP.Model model;
 
@@ -60,8 +59,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     // el siguiente booleano debe estar en true por default
     // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
     // el switch para que el usuario seleccione la opcion que quiera.
-
-
 
     Card cartaActual;
 

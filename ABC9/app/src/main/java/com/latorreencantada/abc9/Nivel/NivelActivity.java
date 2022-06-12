@@ -1,6 +1,5 @@
 package com.latorreencantada.abc9.Nivel;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -9,19 +8,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.latorreencantada.abc9.Global;
-import com.latorreencantada.abc9.MainActivity;
-import com.latorreencantada.abc9.Pantalla_Game_Over;
+import com.latorreencantada.abc9.Home.HomeActivity;
+import com.latorreencantada.abc9.GameOver.GameOverActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
 
@@ -77,7 +74,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nivel);
 
-        ((App) getApplication()).getComponent().inject(this);
+        ((App) getApplication()).getComponent().injectNivel(this);
 
         configView();
         configOptionMenu();
@@ -129,7 +126,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         });
 
         bt_goHome = findViewById(R.id.bt_goHome_from_lvl);
-        bt_goHome.setOnClickListener(view -> startActivity(new Intent(NivelActivity.this, MainActivity.class)));
+        bt_goHome.setOnClickListener(view -> startActivity(new Intent(NivelActivity.this, HomeActivity.class)));
 
     }
 
@@ -205,7 +202,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         allowClickOnSend(false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onResume() {
         super.onResume();
@@ -256,17 +252,15 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-
     }
 
     /////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public void buttonPress(View v) {
+    public void buttonPress(View view) {
         allowClickOnSend(true);
 
-        presenter.sylablePressed(v);
-
+        presenter.sylablePressed(view);
     }
 
     public void allowClickOnSend(boolean b) {
@@ -341,13 +335,11 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public void goToGameOverScreen() {
-        Intent intent = new Intent (getApplicationContext(), Pantalla_Game_Over.class);
+        Intent intent = new Intent (getApplicationContext(), GameOverActivity.class);
         intent.putExtra("jugador", jugador);
         intent.putExtra("score", tv_score.getText().toString());
         startActivity(intent);
     }
-
-
 
     @Override
     public void showOptions() {
@@ -359,7 +351,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     public Context getContext() {
-        return getApplicationContext();
+        return this;
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.latorreencantada.abc9.GameOver;
 
 public class GameOverModel implements GameOverMVP.Model{
 
-    private final MemoryInterface memory;
+    private final MemoryInterface repository;
 
-    public GameOverModel(MemoryInterface memory) {
-        this.memory = memory;
+    public GameOverModel(MemoryInterface repository) {
+        this.repository = repository;
     }
 }

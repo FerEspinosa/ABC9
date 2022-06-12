@@ -26,13 +26,12 @@ public class GameOverPresenter implements GameOverMVP.Presenter{
     }
 
     //variable que hace referencia al modelo
-    private final GameOverMVP.Model model;
+    private GameOverMVP.Model model;
 
     // constructor que configura la dependencia con el modelo
     public GameOverPresenter(GameOverMVP.Model model){
         this.model = model;
     }
-
 
     @Override
     public void playEndingTune() {

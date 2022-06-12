@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
-    tools:context=".MainActivity">
+    tools:context=".Nivel.NivelActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/monitor"
@@ -144,8 +144,8 @@
             android:layout_margin="10dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/boton_silaba"
-            android:text="@string/silaba_inicial"
             android:onClick="buttonPress"
+            android:text="@string/silaba_inicial"
             android:textAllCaps="false"
             android:textSize="35sp"
             tools:ignore="OnClick,UsingOnClickInXml" />
@@ -233,7 +233,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#593FB5"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <Button
             android:id="@+id/close_option_menu"

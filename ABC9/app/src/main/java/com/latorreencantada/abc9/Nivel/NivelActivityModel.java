@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
 import com.latorreencantada.abc9.Card;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class NivelActivityModel implements NivelActivityMVP.Model{
 
