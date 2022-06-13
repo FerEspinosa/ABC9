@@ -26,7 +26,6 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
     Button bt_home;
     int score;
     private MediaPlayer endingTune;
-    int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
     public static final String MUSIC = "music";
 
     @Override
@@ -40,9 +39,7 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
 
         configView();
         presenter.playEndingTune();
-
     }
-
 
     private void configView() {
 
@@ -53,7 +50,7 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
         score = Integer.parseInt(getIntent().getStringExtra("score"));
         tv_score.setText(String.valueOf(score));
 
-        setResultText();
+        presenter.setFinalMessage(score);
 
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
@@ -74,28 +71,9 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
         endingTune.start();
     }
 
-    public void setResultText() {
-        if (score<cardsToBeDrawn/10){
-            tv_congrats.setText(R.string.final_message_1);
-        } else if (score < cardsToBeDrawn/5) {
-            tv_congrats.setText(R.string.final_message_2);
-        } else if (score < cardsToBeDrawn*3/10) {
-            tv_congrats.setText(R.string.final_message_3);
-        } else if (score < cardsToBeDrawn*4/10) {
-            tv_congrats.setText(R.string.final_message_4);
-        } else if (score < cardsToBeDrawn/2) {
-            tv_congrats.setText(R.string.final_message_5);
-        } else if (score < cardsToBeDrawn*6/10) {
-            tv_congrats.setText(R.string.final_message_6);
-        } else if (score < cardsToBeDrawn*7/10) {
-            tv_congrats.setText(R.string.final_message_7);
-        } else if (score < cardsToBeDrawn*8/10) {
-            tv_congrats.setText(R.string.final_message_8);
-        } else if (score < cardsToBeDrawn*9/10) {
-            tv_congrats.setText(R.string.final_message_9);
-        } else if (score == cardsToBeDrawn-1) {
-            tv_congrats.setText(R.string.final_message_10);
-        }
+    @Override
+    public void setFinalMessage(String message) {
+        tv_congrats.setText(message);
     }
 
     @Override

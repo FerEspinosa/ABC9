@@ -44,16 +44,18 @@
     <string name="send">Enviar</string>
     <string name="mode_capslock_on">Modo: Mayúsculas</string>
     <string name="mode_capslock_off">Modo: Minúsculas</string>
+
     <string name="final_message_1">¡Buen comienzo!</string>
     <string name="final_message_2">¡Bien!</string>
     <string name="final_message_3">¡Muy bien!</string>
     <string name="final_message_4">¡Estas avanzado mucho!</string>
     <string name="final_message_5">¡Brillante!</string>
     <string name="final_message_6">¡Qué orgullo cómo lees!</string>
-    <string name="final_message_7">¡wooow! ¡Increíble!</string>
+    <string name="final_message_7">¡wooow!¡Increíble!</string>
     <string name="final_message_8">¡¡¡Excelente!!!</string>
     <string name="final_message_9">¡¡¡Espectacular!!!</string>
     <string name="final_message_10">¡Puntuación PERFECTA!</string>
+
     <string name="txt_borrar">borrar</string>
     <string name="txt_enviar_respuesta">enviar respuesta</string>
     <string name="txt_go_home">pantalla de inicio</string>

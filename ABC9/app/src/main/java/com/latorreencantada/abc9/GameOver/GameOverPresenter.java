@@ -7,7 +7,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
-import com.latorreencantada.abc9.Nivel.NivelActivityMVP;
+import com.latorreencantada.abc9.Global;
+import com.latorreencantada.abc9.R;
 
 public class GameOverPresenter implements GameOverMVP.Presenter{
 
@@ -23,6 +24,34 @@ public class GameOverPresenter implements GameOverMVP.Presenter{
     @Override
     public void setView(@Nullable GameOverMVP.View view) {
         this.view = view;
+    }
+
+    @Override
+    public void setFinalMessage(int score) {
+
+        int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
+        assert view != null;
+        if (score<cardsToBeDrawn/10){
+            view.setFinalMessage("Ok. Nadie nace sabiendo");
+        } else if (score < cardsToBeDrawn/5) {
+            view.setFinalMessage("¡Bien!");
+        } else if (score < cardsToBeDrawn*3/10) {
+            view.setFinalMessage("¡Muy bien!");
+        } else if (score < cardsToBeDrawn*4/10) {
+            view.setFinalMessage("¡cada vez mejor!");
+        } else if (score < cardsToBeDrawn/2) {
+            view.setFinalMessage("¡Brillante!");
+        } else if (score < cardsToBeDrawn*6/10) {
+            view.setFinalMessage("¡Tu progreso es un orgullo!");
+        } else if (score < cardsToBeDrawn*7/10) {
+            view.setFinalMessage("¡Wow, increìble!");
+        } else if (score < cardsToBeDrawn*8/10) {
+            view.setFinalMessage("¡Espectacular!");
+        } else if (score < cardsToBeDrawn*9/10) {
+            view.setFinalMessage("¡¡¡Excelente!!!");
+        } else if (score == cardsToBeDrawn-1) {
+            view.setFinalMessage("¡Puntuaciòn perfecta!");
+        }
     }
 
     //variable que hace referencia al modelo

@@ -8,18 +8,19 @@ import com.latorreencantada.abc9.Nivel.NivelActivityMVP;
 
 public interface GameOverMVP {
 
-
     interface View {
         Context getContext();
 
         void playEndingTune();
 
-        void setResultText();
+        void setFinalMessage(String message);
+
     }
 
     interface Presenter {
         void setView (GameOverMVP.View view);
 
+        void setFinalMessage(int score);
         void playEndingTune();
     }
 
