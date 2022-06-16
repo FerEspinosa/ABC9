@@ -18,23 +18,24 @@ interface View {
     String getSyllableButtonText (int tvNumber);
     void buttonPress(android.view.View v);
     void setAnswer (String answer);
+    String getAnswerText();
     void setOneStar ();
     void setTwoStars ();
     void setThreeStars ();
     void changeTvBgImagePressed(int tvNum);
     void changeTvBgImageUnpressed(int tvNum);
-    String getAnswerText();
-    void playWrongAnswerSound();
-    void playCorrectAnswerSound();
-    void playNewLevelSound();
-    void stopMusic();
     void goToGameOverScreen();
-    void showOptions();
-    void allowClickOnSend(boolean b);
+    void showOptionsMenu();
+    void hideOptionMenu();
+    void allowClickOnSend();
+    void disableClickOnSend();
     Context getContext();
-
-    //para pruebas
-    void showToast(String message);
+    void startMusic(int position);
+    void pauseMusic();
+    void stopMusic();
+    void playCorrectSound();
+    void playWrongSound();
+    int getMusicPosition();
 
 }
 
@@ -42,16 +43,26 @@ interface Presenter {
 
     //el primero es para indicar al presenter qué vista gobierna
     void setView (NivelActivityMVP.View view);
+
     void NuevaCarta(int playerLevel);
     void sylablePressed(android.view.View v);
     void bt_borrar_clicked();
     void bt_options_clicked();
+    void setOptionMenuVisibility(boolean visibility);
     void bt_enviar_clicked();
     void startMusic(MediaPlayer mp);
     void pauseMusic(MediaPlayer mp);
+    void stopMusic();
     void playCorrectAnswerSound ();
     void playWrongAnswerSound ();
+    void musicSwitched(boolean b);
+    boolean getMusicPreference();
+    boolean getSoundPreference();
+
     Context getContext();
+
+    void soundSwitched(boolean b);
+
 }
 
 interface Model {

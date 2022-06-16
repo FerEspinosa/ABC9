@@ -55,6 +55,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     int posicion = 0;
     int cardsDrawn=0;
     int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
+    boolean optionMenuIsVisible = false;
 
     // el siguiente booleano debe estar en true por default
     // Yo ahora lo cambio a false para que bauti practique la minuscula hasta que implemente
@@ -196,7 +197,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         } else { //                                                                 TIPO DE CARTA 0: Completar la letra que falta.
 
-
             //generar numero aleatorio menor que longitud de palabra actual
             palabraActual = cartaActual.getWord();
             int num_aleat = (int) (Math.random()*palabraActual.length());
@@ -265,14 +265,15 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     @Override
     public void sylablePressed(View v) {
+
         String silaba_presionada;
         String nueva_resp;
         assert view != null;
         String resp_temp = view.getAnswerText();
 
-        view.allowClickOnSend(true);
+        view.allowClickOnSend();
 
-        int p=0;
+        int p;
 
         final int int1 = R.id.bt1;
         final int int2 = R.id.bt2;
@@ -296,6 +297,8 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             case int4:
                 p=3;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
 
         //si el boton aún no había sido presionado
@@ -337,7 +340,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     @Override
     public void bt_borrar_clicked() {
         assert view != null;
-        view.allowClickOnSend(false);
+        view.disableClickOnSend();
 
         if (tipoDeCarta==1){
             view.setAnswer("");
@@ -358,19 +361,35 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         }
     }
 
-
     @Override
     public void bt_options_clicked() {
         //view.goToOptionScreen();
         assert view != null;
-        view.showOptions();
+
+        if (!Global.optionMenuIsVisible){
+            view.showOptionsMenu();
+            Global.optionMenuIsVisible=true;
+        }
+
+    }
+
+    @Override
+    public void setOptionMenuVisibility(boolean visible) {
+        assert view != null;
+        if (visible){
+            view.showOptionsMenu();
+            Global.optionMenuIsVisible= true;
+        } else {
+            view.hideOptionMenu();
+            Global.optionMenuIsVisible= false;
+        }
     }
 
     @Override
     public void bt_enviar_clicked() {
 
         assert view != null;
-        view.allowClickOnSend(false);
+        view.disableClickOnSend();
 
         // resetear botones de silabas
         for (int p=0; p<textViewCount; p++) {
@@ -442,14 +461,13 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     break;
 
                 case 0:
-                    view.stopMusic();
+                    stopMusic();
                     view.goToGameOverScreen();
                     break;
             }
 
         }
     }
-
 
     private void clearAllSylButtons() {
         //vaciar todos los textviews
@@ -465,6 +483,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean(MUSIC, true)){
+
             if (!mp.isPlaying()){
                 if (posicion!=0){
                     mp.seekTo(posicion);
@@ -472,9 +491,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 mp.start();
                 mp.setLooping(true);
             }
-
         }
-
     }
 
     @Override
@@ -482,18 +499,24 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(MUSIC, true)){
             if (mp.isPlaying()){
-                posicion = mp.getCurrentPosition();
-                mp.pause();
+                assert view != null;
+                posicion = view.getMusicPosition();
+                view.pauseMusic();
             }
         }
+    }
 
+    @Override
+    public void stopMusic() {
+        assert view != null;
+        view.stopMusic();
     }
 
     public void playCorrectAnswerSound () {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
             assert view != null;
-            view.playCorrectAnswerSound();
+            view.playCorrectSound();
         }
     }
 
@@ -501,8 +524,46 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
             assert view != null;
-            view.playWrongAnswerSound();
+            view.playWrongSound();
         }
+    }
+
+    @Override
+    public void musicSwitched(boolean b) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(MUSIC, b);
+        editor.apply();
+
+        assert view != null;
+        if (b) {
+            int position = view.getMusicPosition();
+            view.startMusic(position);
+        } else {
+            view.pauseMusic();
+        }
+    }
+
+    @Override
+    public void soundSwitched(boolean b) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(SOUND, b);
+        editor.apply();
+    }
+
+    @Override
+    public boolean getMusicPreference() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        return sharedPreferences.getBoolean(MUSIC,true);
+    }
+
+    @Override
+    public boolean getSoundPreference() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        return sharedPreferences.getBoolean(SOUND,true);
     }
 
     @Override
@@ -518,7 +579,6 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         editor.putBoolean(SHARED_PREFS, false);
         editor.apply();
     }
-
 
     public boolean Capslock(){
         String SHARED_PREFS = "SharedPrefs";
