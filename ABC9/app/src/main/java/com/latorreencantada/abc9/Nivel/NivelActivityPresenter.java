@@ -94,27 +94,11 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
             cartaActual = levelCardList.get(cartaActualInt);
 
-            String nombreDeImagen = cartaActual.getWord();
+            String nombreDeImagen = cartaActual.getWord().replaceAll("Ñ", "NY").toLowerCase();
 
-            if (nombreDeImagen.equals("MONTAÑA")) {
-                nombreDeImagen = "montania";
-            }
-            if (nombreDeImagen.equals("MOÑO")) {
-                nombreDeImagen = "monio";
-            }
-            if (nombreDeImagen.equals("BAÑO")) {
-                nombreDeImagen = "banio";
-            }
-            if (nombreDeImagen.equals("CABAÑA")) {
-                nombreDeImagen = "cabania";
-            }
-            if (nombreDeImagen.equals("CAÑA")) {
-                nombreDeImagen = "cania";
-            }
 
             //colocar imagen
             if (view != null){
-                nombreDeImagen = nombreDeImagen.toLowerCase();
                 view.setMainImage(nombreDeImagen);
             }
 
