@@ -3,11 +3,8 @@ package com.latorreencantada.abc9.Home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -17,10 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
-import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
-import com.latorreencantada.abc9.Nivel.NivelActivityMVP;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
 
@@ -52,7 +46,7 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         ((App) getApplication()).getComponent().injectHome(this);
 

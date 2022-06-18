@@ -36,7 +36,6 @@ interface View {
     void playCorrectSound();
     void playWrongSound();
     int getMusicPosition();
-
 }
 
 interface Presenter {
@@ -58,11 +57,8 @@ interface Presenter {
     void musicSwitched(boolean b);
     boolean getMusicPreference();
     boolean getSoundPreference();
-
     Context getContext();
-
     void soundSwitched(boolean b);
-
 }
 
 interface Model {
