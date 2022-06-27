@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.latorreencantada.abc9.Card;
+import com.latorreencantada.abc9.Models.Card;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class NivelActivityModel implements NivelActivityMVP.Model{
         // construir un ArrayList de cards del nivel recibido
         if (c !=null && c.moveToFirst()){
 
-            ArrayList<Card> levelCardList = new ArrayList<Card>();
+            ArrayList<Card> levelCardList = new ArrayList<>();
             c.moveToFirst();
 
             while(!c.isAfterLast()) {

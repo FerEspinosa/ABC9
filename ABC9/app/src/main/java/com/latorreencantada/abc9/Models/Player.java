@@ -1,15 +1,17 @@
-package com.latorreencantada.abc9;
+package com.latorreencantada.abc9.Models;
 
 public class Player {
 
     String name;
     int bestScore;
     int userLevel;
+    String profileImage;
 
-    public Player(String name, int bestScore, int level) {
+    public Player(String name, int bestScore, int level, String profileImage) {
         this.name = name;
         this.bestScore = bestScore;
         this.userLevel = level;
+        this.profileImage = profileImage;
     }
 
     public String getName() {
@@ -32,7 +34,15 @@ public class Player {
         return userLevel;
     }
 
-    public void setPlayerLevel(int userLevel) {
+    public void setUserLevel(int userLevel) {
         this.userLevel = userLevel;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

@@ -4,10 +4,6 @@ package com.latorreencantada.abc9.Home;
 import android.content.ContentValues;
 import android.content.Context;
 
-import com.latorreencantada.abc9.Card;
-
-import java.util.ArrayList;
-
 public interface HomeMVP {
 
     interface View {

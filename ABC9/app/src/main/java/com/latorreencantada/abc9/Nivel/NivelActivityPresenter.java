@@ -10,7 +10,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.latorreencantada.abc9.Card;
+import com.latorreencantada.abc9.Models.Card;
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.R;
 

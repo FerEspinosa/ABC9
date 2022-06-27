@@ -1,11 +1,9 @@
 package com.latorreencantada.abc9.Nivel;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
-import com.latorreencantada.abc9.Card;
-import com.latorreencantada.abc9.Global;
+import com.latorreencantada.abc9.Models.Card;
 
 import java.util.ArrayList;
 

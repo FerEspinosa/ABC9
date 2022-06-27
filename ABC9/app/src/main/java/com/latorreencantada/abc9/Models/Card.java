@@ -1,4 +1,4 @@
-package com.latorreencantada.abc9;
+package com.latorreencantada.abc9.Models;
 
 public class Card {
     String word;
