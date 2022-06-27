@@ -1,43 +1,57 @@
 package com.latorreencantada.abc9.Home;
 
 
+import android.content.ContentValues;
 import android.content.Context;
+
+import com.latorreencantada.abc9.Card;
+
+import java.util.ArrayList;
 
 public interface HomeMVP {
 
     interface View {
 
-        void goToLevel();
-        void setOptionMenuVisible();
-        void setOptionMenuInvisible();
+        void GoToLevel();
+        void SetOptionMenuVisible();
+        void SetOptionMenuInvisible();
         void MinuscOn();
 
-        Context getContext();
+        Context GetContext();
 
-        void setMayuscOn();
+        void SetMayuscOn();
     }
 
     interface Presenter {
-        void setView(HomeMVP.View view);
-
-        void musicSwitched(boolean musicOn);
-        void soundSwitched(boolean b);
-
-        boolean musicOn();
-        boolean soundOn();
-        void btJugarPressed();
-        void btOptionsPressed();
-        void btMinuscPressed();
-        void btMayuscPressed();
-        void fillDbWithDefaultValues();
+        void SetView(HomeMVP.View view);
 
         void FirstRun();
+        void FillDbWithDefaultValues();
+
+        void MusicSwitched(boolean musicOn);
+        boolean MusicOn();
+
+        void SoundSwitched(boolean b);
+        boolean SoundOn();
+
+        void BtJugarPressed();
+        void BtOptionsPressed();
+        void BtMinuscPressed();
+        void BtMayuscPressed();
 
         void SetInitialCapsMode();
     }
 
     interface Model {
 
+        int getGlobalLevelsCount();
+        String GetGlobalString(int level, int wordPosition, int cardPart);
+        void InsertCardIntoDb(ContentValues registro, Context context);
+        boolean IsFirstRun(Context context);
+
+        void SetNotFirstRun(Context context);
+
+        int GetLevelWordsCount(int level);
     }
 
 

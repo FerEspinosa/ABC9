@@ -40,7 +40,7 @@
         android:layout_marginTop="88dp"
         android:textSize="20sp"
         android:text="@string/title_activity_opciones"
-        android:backgroundTint="@color/colorRedButton"
+        android:backgroundTint="@color/button_red"
         app:layout_constraintBottom_toBottomOf="@+id/id_fondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,12 +56,9 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_opciones"
-        app:layout_constraintVertical_bias="0.104">
-
-
+>
         <LinearLayout
             android:id="@+id/layout_switches"
             android:layout_width="wrap_content"
@@ -80,6 +77,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="20dp"
                 android:text="@string/sound"
+                android:theme="@style/SCBSwitch"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +89,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="20dp"
                 android:text="@string/music"
+                android:theme="@style/SCBSwitch"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,8 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                style="?android:attr/buttonBarStyle">
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/bt_mayuminus_random"
@@ -127,7 +125,6 @@
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
                     android:layout_margin="5dp"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:visibility="gone"/>
 
                 <Button
@@ -138,7 +135,6 @@
                     android:text="@string/first_mayu_then_minu"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_margin="15dp"/>
 
             </LinearLayout>
@@ -147,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                style="?android:attr/buttonBarStyle">
+                >
 
                 <Button
                     android:id="@+id/bt_mayusc"
@@ -156,7 +152,6 @@
                     android:textAllCaps="false"
                     android:text="@string/abc_mayusculas"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_margin="15dp"/>
 
                 <Button
@@ -167,8 +162,7 @@
                     android:text="@string/abc_minusculas"
                     android:background="@drawable/ic_fondo_mayusc_minusc"
                     android:textSize="18sp"
-                    android:layout_margin="15dp"
-                    style="?android:attr/buttonBarButtonStyle"/>
+                    android:layout_margin="15dp" />
 
             </LinearLayout>
 

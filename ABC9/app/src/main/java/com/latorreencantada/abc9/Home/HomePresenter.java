@@ -5,13 +5,8 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
-
-import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
-import com.latorreencantada.abc9.Global;
-import com.latorreencantada.abc9.R;
 
 public class HomePresenter implements HomeMVP.Presenter{
 
@@ -27,13 +22,13 @@ public class HomePresenter implements HomeMVP.Presenter{
     private HomeMVP.View view;
 
     // constructor que configura la dependencia con la vista
-    public void setView (@Nullable HomeMVP.View view) {
+    public void SetView(@Nullable HomeMVP.View view) {
         this.view = view;
     }
 
 
     @Override
-    public boolean musicOn() {
+    public boolean MusicOn() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(MUSIC, true)){
             return true;
@@ -43,7 +38,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     }
 
     @Override
-    public void musicSwitched(boolean musicOnOrOff) {
+    public void MusicSwitched(boolean musicOnOrOff) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -52,7 +47,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     }
 
     @Override
-    public boolean soundOn() {
+    public boolean SoundOn() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
             return true;
@@ -62,7 +57,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     }
 
     @Override
-    public void soundSwitched(boolean b) {
+    public void SoundSwitched(boolean b) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -71,22 +66,22 @@ public class HomePresenter implements HomeMVP.Presenter{
     }
 
     @Override
-    public void btJugarPressed() {
+    public void BtJugarPressed() {
         assert view != null;
-        view.goToLevel();
+        view.GoToLevel();
     }
 
     @Override
-    public void btOptionsPressed() {
+    public void BtOptionsPressed() {
         if (optionMenuShown){
             // hacer invisible el menu de opciones
             assert view != null;
-            view.setOptionMenuInvisible();
+            view.SetOptionMenuInvisible();
             optionMenuShown = false;
         } else {
             // hacer visible el menu de opciones
             assert view != null;
-            view.setOptionMenuVisible();
+            view.SetOptionMenuVisible();
             optionMenuShown = true;
         }
     }
@@ -97,7 +92,7 @@ public class HomePresenter implements HomeMVP.Presenter{
 
         if (sharedPreferences.getBoolean(CAPSLOCK,true)){
             assert view != null;
-            view.setMayuscOn();
+            view.SetMayuscOn();
 
         } else {
             view.MinuscOn();
@@ -105,7 +100,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     }
 
     @Override
-    public void btMinuscPressed() {
+    public void BtMinuscPressed() {
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -118,77 +113,60 @@ public class HomePresenter implements HomeMVP.Presenter{
     }
 
     @Override
-    public void btMayuscPressed() {
+    public void BtMayuscPressed() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putBoolean(CAPSLOCK, true);
         editor.apply();
 
-        view.setMayuscOn();
-    }
-
-    @Override
-    public void fillDbWithDefaultValues() {
-        if (itsTheFirstRun()){
-            //Crear objeto administrador de base de datos
-            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getContext(), "administracion", null, 1);
-
-            //Se utiliza el objeto "admin" para obtener la base de datos (en modo lectura y escritura)
-            SQLiteDatabase BD = admin.getWritableDatabase();
-
-            //contar niveles
-            int levelCount = Global.defaultLevels.length;
-
-            // para cada nivel
-            for (int level_i =0; level_i<levelCount; level_i++){
-                //contar palabras de level_i
-                int levelWordsCount = Global.defaultLevels[level_i].length;
-
-                // para cada palabra de ese nivel:
-                for (int word_i=0 ; word_i<levelWordsCount; word_i++) {
-                    String word= Global.defaultLevels[level_i][word_i][0];
-                    String syl1= Global.defaultLevels[level_i][word_i][1];
-                    String syl2= Global.defaultLevels[level_i][word_i][2];
-                    String syl3= Global.defaultLevels[level_i][word_i][3];
-                    String syl4= Global.defaultLevels[level_i][word_i][4];
-                    String level = Global.defaultLevels[level_i][word_i][5] ;
-
-                    // Crear un objeto que almacenará los datos que deseamos pasar a la base de datos
-                    ContentValues registro = new ContentValues();
-
-                    registro.put("word", word);
-                    registro.put("syl1", syl1);
-                    registro.put("syl2", syl2);
-                    registro.put("syl3", syl3);
-                    registro.put("syl4", syl4);
-                    registro.put("level", Integer.parseInt(level));
-
-                    // Luego insertamos el objeto "registro" (que contiene los datos) en la BdD
-                    BD.insert("cards", null, registro);
-                }
-            }
-
-            //close DB
-            BD.close();
-        }
+        view.SetMayuscOn();
     }
 
     @Override
     public void FirstRun() {
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        if (sharedPreferences.getBoolean(FIRST_RUN, true)){
-            editor.putBoolean(FIRST_RUN, false);
-            editor.apply();
-            fillDbWithDefaultValues();
+        if (model.IsFirstRun(getContext())){
+            model.SetNotFirstRun(getContext());
+            FillDbWithDefaultValues();
         }
-
     }
 
+    @Override
+    public void FillDbWithDefaultValues() {
 
+        //contar niveles default
+        int levelCount = model.getGlobalLevelsCount();
+
+        // para cada nivel
+        for (int level_i =0; level_i<levelCount; level_i++){
+            //contar palabras de level_i
+            int levelWordsCount = model.GetLevelWordsCount(level_i);
+
+            // para cada palabra de ese nivel:
+            for (int word_i=0 ; word_i<levelWordsCount; word_i++) {
+                String word= model.GetGlobalString(level_i, word_i,0);
+                String syl1= model.GetGlobalString(level_i, word_i,1);
+                String syl2= model.GetGlobalString(level_i, word_i,2);
+                String syl3= model.GetGlobalString(level_i, word_i,3);
+                String syl4= model.GetGlobalString(level_i, word_i,4);
+                String level= model.GetGlobalString(level_i, word_i,5);
+
+                // Crear un objeto que almacenará los datos que deseamos pasar a la base de datos
+                ContentValues registro = new ContentValues();
+
+                registro.put("word", word);
+                registro.put("syl1", syl1);
+                registro.put("syl2", syl2);
+                registro.put("syl3", syl3);
+                registro.put("syl4", syl4);
+                registro.put("level", Integer.parseInt(level));
+
+                // Luego insertamos el objeto "registro" (que contiene los datos) en la BdD
+                model.InsertCardIntoDb(registro, getContext());
+            }
+        }
+    }
 
     //variable que hace referencia al modelo
     private final HomeMVP.Model model;
@@ -198,23 +176,9 @@ public class HomePresenter implements HomeMVP.Presenter{
         this.model = model;
     }
 
-    public boolean itsTheFirstRun() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        if (sharedPreferences.getBoolean(FIRST_RUN, true)){
-            editor.putBoolean(FIRST_RUN, false);
-            editor.apply();
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
     private Context getContext() {
         assert view != null;
-        return view.getContext();
+        return view.GetContext();
     }
 
 }

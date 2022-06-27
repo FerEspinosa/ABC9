@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Home.HomeActivity;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 import com.latorreencantada.abc9.R;
@@ -35,10 +34,10 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
 
         ((App) getApplication()).getComponent().injectGameOver(this);
 
-        presenter.setView(this);
+        presenter.SetView(this);
 
         configView();
-        presenter.playEndingTune();
+        presenter.PlayEndingTune();
     }
 
     private void configView() {
@@ -50,7 +49,7 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
         score = Integer.parseInt(getIntent().getStringExtra("score"));
         tv_score.setText(String.valueOf(score));
 
-        presenter.setFinalMessage(score);
+        presenter.SetFinalMessage(score);
 
         //botón jugar de nuevo
         playAgain = findViewById(R.id.txt_play_again);
@@ -62,17 +61,17 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
     }
 
     @Override
-    public Context getContext() {
+    public Context GetContext() {
         return this;
     }
 
     @Override
-    public void playEndingTune() {
+    public void PlayEndingTune() {
         endingTune.start();
     }
 
     @Override
-    public void setFinalMessage(String message) {
+    public void SetFinalMessage(String message) {
         tv_congrats.setText(message);
     }
 
@@ -99,6 +98,6 @@ public class GameOverActivity extends AppCompatActivity implements GameOverMVP.V
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.setView(this);
+        presenter.SetView(this);
     }
 }

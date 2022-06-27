@@ -12,61 +12,61 @@ import java.util.ArrayList;
 public interface NivelActivityMVP {
 
 interface View {
-    void setMainImage (String nombreDeImagen);
-    void setScore (String score);
-    void setSyllableButtonText (String syllable, int tvNumber);
-    String getSyllableButtonText (int tvNumber);
-    void buttonPress(android.view.View v);
-    void setAnswer (String answer);
-    String getAnswerText();
-    void setOneStar ();
-    void setTwoStars ();
-    void setThreeStars ();
-    void changeTvBgImagePressed(int tvNum);
-    void changeTvBgImageUnpressed(int tvNum);
-    void goToGameOverScreen();
-    void showOptionsMenu();
-    void hideOptionMenu();
-    void allowClickOnSend();
-    void disableClickOnSend();
-    Context getContext();
-    void startMusic(int position);
-    void pauseMusic();
-    void stopMusic();
-    void playCorrectSound();
-    void playWrongSound();
-    int getMusicPosition();
+    void SetMainImage(String nombreDeImagen);
+    void SetScore(String score);
+    void SetSyllableButtonText(String syllable, int tvNumber);
+    String GetSyllableButtonText(int tvNumber);
+    void ButtonPress(android.view.View v);
+    void SetAnswer(String answer);
+    String GetAnswerText();
+    void SetOneStar();
+    void SetTwoStars();
+    void SetThreeStars();
+    void ChangeTvBgImagePressed(int tvNum);
+    void ChangeTvBgImageUnpressed(int tvNum);
+    void GoToGameOverScreen();
+    void ShowOptionsMenu();
+    void HideOptionMenu();
+    void AllowClickOnSend();
+    void DisableClickOnSend();
+    Context GetContext();
+    void StartMusic(int position);
+    void PauseMusic();
+    void StopMusic();
+    void PlayCorrectSound();
+    void PlayWrongSound();
+    int GetMusicPosition();
 
 }
 
 interface Presenter {
 
     //el primero es para indicar al presenter qué vista gobierna
-    void setView (NivelActivityMVP.View view);
+    void SetView(NivelActivityMVP.View view);
 
     void NuevaCarta(int playerLevel);
-    void sylablePressed(android.view.View v);
-    void bt_borrar_clicked();
-    void bt_options_clicked();
-    void setOptionMenuVisibility(boolean visibility);
-    void bt_enviar_clicked();
-    void startMusic(MediaPlayer mp);
-    void pauseMusic(MediaPlayer mp);
-    void stopMusic();
-    void playCorrectAnswerSound ();
-    void playWrongAnswerSound ();
-    void musicSwitched(boolean b);
-    boolean getMusicPreference();
-    boolean getSoundPreference();
+    void SylablePressed(android.view.View v);
+    void Bt_borrar_clicked();
+    void Bt_options_clicked();
+    void SetOptionMenuVisibility(boolean visibility);
+    void Bt_enviar_clicked();
+    void StartMusic(MediaPlayer mp);
+    void PauseMusic(MediaPlayer mp);
+    void StopMusic();
+    void PlayCorrectAnswerSound();
+    void PlayWrongAnswerSound();
+    void MusicSwitched(boolean b);
+    boolean GetMusicPreference();
+    boolean GetSoundPreference();
 
-    Context getContext();
+    Context GetContext();
 
-    void soundSwitched(boolean b);
+    void SoundSwitched(boolean b);
 
 }
 
 interface Model {
-    ArrayList<Card> getLevelWords(int level, Context context);
+    ArrayList<Card> GetLevelWords(int level, Context context);
 }
 
 }

@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import androidx.annotation.Nullable;
 
 import com.latorreencantada.abc9.Global;
-import com.latorreencantada.abc9.R;
 
 public class GameOverPresenter implements GameOverMVP.Presenter{
 
@@ -22,35 +21,35 @@ public class GameOverPresenter implements GameOverMVP.Presenter{
 
     // constructor que configura la dependencia con la vista
     @Override
-    public void setView(@Nullable GameOverMVP.View view) {
+    public void SetView(@Nullable GameOverMVP.View view) {
         this.view = view;
     }
 
     @Override
-    public void setFinalMessage(int score) {
+    public void SetFinalMessage(int score) {
 
         int cardsToBeDrawn= (Global.defaultLevels.length) * Global.drawsPerLevel;
         assert view != null;
         if (score<cardsToBeDrawn/10){
-            view.setFinalMessage("Ok. Nadie nace sabiendo");
+            view.SetFinalMessage("Ok. Nadie nace sabiendo");
         } else if (score < cardsToBeDrawn/5) {
-            view.setFinalMessage("¡Bien!");
+            view.SetFinalMessage("¡Bien!");
         } else if (score < cardsToBeDrawn*3/10) {
-            view.setFinalMessage("¡Muy bien!");
+            view.SetFinalMessage("¡Muy bien!");
         } else if (score < cardsToBeDrawn*4/10) {
-            view.setFinalMessage("¡cada vez mejor!");
+            view.SetFinalMessage("¡cada vez mejor!");
         } else if (score < cardsToBeDrawn/2) {
-            view.setFinalMessage("¡Brillante!");
+            view.SetFinalMessage("¡Brillante!");
         } else if (score < cardsToBeDrawn*6/10) {
-            view.setFinalMessage("¡Tu progreso es un orgullo!");
+            view.SetFinalMessage("¡Tu progreso es un orgullo!");
         } else if (score < cardsToBeDrawn*7/10) {
-            view.setFinalMessage("¡Wow, increìble!");
+            view.SetFinalMessage("¡Wow, increìble!");
         } else if (score < cardsToBeDrawn*8/10) {
-            view.setFinalMessage("¡Espectacular!");
+            view.SetFinalMessage("¡Espectacular!");
         } else if (score < cardsToBeDrawn*9/10) {
-            view.setFinalMessage("¡¡¡Excelente!!!");
+            view.SetFinalMessage("¡¡¡Excelente!!!");
         } else if (score == cardsToBeDrawn-1) {
-            view.setFinalMessage("¡Puntuaciòn perfecta!");
+            view.SetFinalMessage("¡Puntuaciòn perfecta!");
         }
     }
 
@@ -63,12 +62,12 @@ public class GameOverPresenter implements GameOverMVP.Presenter{
     }
 
     @Override
-    public void playEndingTune() {
+    public void PlayEndingTune() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean(SOUND,true)||sharedPreferences.getBoolean(MUSIC,true)){
             assert view != null;
-            view.playEndingTune();
+            view.PlayEndingTune();
         }
 
     }
@@ -76,6 +75,6 @@ public class GameOverPresenter implements GameOverMVP.Presenter{
     private Context getContext() {
 
             assert view != null;
-            return view.getContext();
+            return view.GetContext();
     }
 }
