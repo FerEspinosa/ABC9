@@ -42,11 +42,15 @@ Roadmap
 - Build UI testing with Espresso
 
 // Future features:
+
 - The user should be able to create an account on a local DB. (playername, level, records)
-- The top 10 all players highscore should be kept and shown.
-- User should be able to create its own "card" (set of: word, syllables, level, image).
+
 - There should be 2 game modes: The existing one as a Marathon. 
-  The second game mode should separate all the words from a single level into different playable levels/lessons (as in duolingo for example)
+  The second game mode should separate all the words from the single level into different playable levels/lessons (think of the way duolingo shows its lessons)
+  Words will be grouped together in different units. For example, the first unit could contain the words MAMA and PAPA. And the level could consist in solving those two words like 5 or 6 times. Then, the next level will contain words with the same syllables as the previous level/s, plus another syllable. For example the word MAPA (that contains the same syllables from level 1), and the word CAMA (with the new syllable "CA"), and so forth.
+This will make the game sessions smaller, so that the kids don't get bored. And also, it would let them see their progress as they advance from one level to another.
+
+- User should be able to create their own "cards" (set of: word, correct syllables, level, image), that would be added to new levels.
 
 // Firebase:
 - The user should be able to create an account with Firebase.
