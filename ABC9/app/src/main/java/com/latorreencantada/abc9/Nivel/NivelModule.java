@@ -12,13 +12,13 @@ public class NivelModule {
     }
 
     @Provides
-    public NivelActivityMVP.Model provideNivelModel (MemoryInterface repository) {
+    public NivelActivityMVP.Model provideNivelModel (NivelInterface repository) {
         return new NivelActivityModel(repository);
     }
 
     @Provides
-    public MemoryInterface provideNivelRepository(){
-        return new MemoryRepository();
+    public NivelInterface provideNivelRepository(){
+        return new NivelRepository();
         // cambiar aqui si queremos que el repo sea en memoria, en una BdD, un cloud...
     }
 }

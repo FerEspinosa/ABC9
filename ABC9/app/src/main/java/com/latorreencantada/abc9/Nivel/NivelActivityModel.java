@@ -3,9 +3,7 @@ package com.latorreencantada.abc9.Nivel;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
 import com.latorreencantada.abc9.Card;
 
 import java.util.ArrayList;
@@ -13,26 +11,21 @@ import java.util.ArrayList;
 
 public class NivelActivityModel implements NivelActivityMVP.Model{
 
-    private final MemoryInterface memory;
+    private final NivelInterface dataInterface;
 
-    public NivelActivityModel(MemoryInterface memory) {
-        this.memory = memory;
+    public NivelActivityModel(NivelInterface dataInterface) {
+        this.dataInterface = dataInterface;
     }
 
 
     @SuppressLint("Range")
     @Override
-    public ArrayList<Card> getLevelWords (int playerLevel, Context context) {
+    public ArrayList<Card> GetLevelWords(int playerLevel, Context context) {
 
-        //Crear objeto administrador de base de datos
-
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "administracion", null, 1);
-        SQLiteDatabase bd= admin.getWritableDatabase();
-        Cursor c = bd.rawQuery
-                ("SELECT * FROM cards WHERE level = "+playerLevel, null);
+        // Obtener cursor con las palabaras del nivel del usuario
+        Cursor c = dataInterface.getLevelWordsFromDb(playerLevel, context);
 
         // construir un ArrayList de cards del nivel recibido
-
         if (c !=null && c.moveToFirst()){
 
             ArrayList<Card> levelCardList = new ArrayList<Card>();

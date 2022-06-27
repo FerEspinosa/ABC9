@@ -29,7 +29,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     // constructor que configura la dependencia con la vista
     @Override
-    public void setView(@Nullable NivelActivityMVP.View view) {
+    public void SetView(@Nullable NivelActivityMVP.View view) {
         this.view = view;
     }
 
@@ -75,7 +75,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         if (view!=null){
             //vaciar textView principal
-            view.setAnswer("");
+            view.SetAnswer("");
         }
 
         clearAllSylButtons();
@@ -84,7 +84,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         tipoDeCarta = (int)(Math.random()*2);
 
         // Obtener palabras del nivel "playerLevel"
-        levelCardList = model.getLevelWords(playerLevel, view.getContext());
+        levelCardList = model.GetLevelWords (playerLevel, view.GetContext());
 
         //SELECCIONAR UNA CARTA ALEATORIA:
         cartaActualInt = (int)(Math.random()*levelCardList.size());
@@ -99,7 +99,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
             //colocar imagen
             if (view != null){
-                view.setMainImage(nombreDeImagen);
+                view.SetMainImage(nombreDeImagen);
             }
 
             ultimaCarta = cartaActualInt;
@@ -118,18 +118,16 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 tv_Aleatorio = (int)(Math.random()*textViewCount);
 
                 //si ese textview aleatorio se encuentra vacío:
-                if (view.getSyllableButtonText(tv_Aleatorio).equals("ABCD")
-                        ||view.getSyllableButtonText(tv_Aleatorio).equals("")){
+                if (view.GetSyllableButtonText(tv_Aleatorio).equals("ABCD")
+                        ||view.GetSyllableButtonText(tv_Aleatorio).equals("")){
 
                     // asignar al textview vacío el texto de la silaba i
 
                     if (Capslock()&& Global.capsLock){
-                        view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toUpperCase(),tv_Aleatorio);
+                        view.SetSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toUpperCase(),tv_Aleatorio);
                     } else {
-                        view.setSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toLowerCase(Locale.ROOT),tv_Aleatorio);
+                        view.SetSyllableButtonText(cartaActual.getSyl(silabaCorrecta_i).toLowerCase(Locale.ROOT),tv_Aleatorio);
                     }
-
-
                 }
                 else {
                     //si el textview aleatorio no está vacío,
@@ -147,7 +145,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             for (int textView_t=0 ; textView_t<textViewCount; textView_t++){
 
                 // que esté vacío
-                if (view.getSyllableButtonText(textView_t).equals("ABCD")||view.getSyllableButtonText(textView_t).equals("")){
+                if (view.GetSyllableButtonText(textView_t).equals("ABCD")||view.GetSyllableButtonText(textView_t).equals("")){
 
                     // calcular una sílaba aleatoria
                     int intSilabaAleatoria = (int)(Math.random() * silabas.length);
@@ -159,17 +157,17 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                     // (de nuevo) para cada textView n
                     for (int tv_n = 0; tv_n<textViewCount; tv_n++){
                         // comparar: silabaAleatoria.toLowerCase(Locale.ROOT) con: view.textView n
-                        String aux = view.getSyllableButtonText(tv_n);
-                        if (silabaAleatoria.toLowerCase(Locale.ROOT).equals(view.getSyllableButtonText(tv_n).toLowerCase(Locale.ROOT))){
+                        String aux = view.GetSyllableButtonText(tv_n);
+                        if (silabaAleatoria.toLowerCase(Locale.ROOT).equals(view.GetSyllableButtonText(tv_n).toLowerCase(Locale.ROOT))){
                             sonIguales=true;
                         }
                     }
 
                     if (!sonIguales){
                         if(Capslock()&& Global.capsLock){
-                            view.setSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),textView_t);
+                            view.SetSyllableButtonText(silabaAleatoria.toUpperCase(Locale.ROOT),textView_t);
                         } else {
-                            view.setSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),textView_t);
+                            view.SetSyllableButtonText(silabaAleatoria.toLowerCase(Locale.ROOT),textView_t);
                         }
                     } else {
                         textView_t--;
@@ -192,18 +190,18 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             palabraActual = palabraActual.replaceFirst(unChar, "_");
 
             if (Capslock() && Global.capsLock){
-                view.setAnswer(palabraActual.toUpperCase(Locale.ROOT));
+                view.SetAnswer(palabraActual.toUpperCase(Locale.ROOT));
             } else {
-                view.setAnswer(palabraActual.toLowerCase(Locale.ROOT));
+                view.SetAnswer(palabraActual.toLowerCase(Locale.ROOT));
             }
 
             // colocar la letra correcta en un text view aleatorio
             int tv_aleatorio = (int)(Math.random()*textViewCount);
 
             if (Capslock()&& Global.capsLock){
-                view.setSyllableButtonText(unChar.toUpperCase(Locale.ROOT),tv_aleatorio);
+                view.SetSyllableButtonText(unChar.toUpperCase(Locale.ROOT),tv_aleatorio);
             } else {
-                view.setSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
+                view.SetSyllableButtonText(unChar.toLowerCase(Locale.ROOT),tv_aleatorio);
             }
 
             //asignar un char aleatorio a los demas texviews
@@ -219,7 +217,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 //para cada textView
                 for (int x= 0; x<textViewCount; x++){
                     // verificar si string_letter es igual al contenido de textview(x)
-                    if (string_letter.toLowerCase(Locale.ROOT).equals(view.getSyllableButtonText(x).toLowerCase(Locale.ROOT))){
+                    if (string_letter.toLowerCase(Locale.ROOT).equals(view.GetSyllableButtonText(x).toLowerCase(Locale.ROOT))){
                         sonIguales=true;
                     }
                 }
@@ -231,9 +229,9 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                         //entonces colocar esa letra en el textView
 
                         if (Capslock()&& Global.capsLock){
-                            view.setSyllableButtonText(string_letter.toUpperCase(),i);
+                            view.SetSyllableButtonText(string_letter.toUpperCase(),i);
                         } else {
-                            view.setSyllableButtonText(string_letter.toLowerCase(),i);
+                            view.SetSyllableButtonText(string_letter.toLowerCase(),i);
                         }
 
                     }
@@ -248,14 +246,14 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     }
 
     @Override
-    public void sylablePressed(View v) {
+    public void SylablePressed(View v) {
 
         String silaba_presionada;
         String nueva_resp;
         assert view != null;
-        String resp_temp = view.getAnswerText();
+        String resp_temp = view.GetAnswerText();
 
-        view.allowClickOnSend();
+        view.AllowClickOnSend();
 
         int p;
 
@@ -289,18 +287,18 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         if (!textViewPresionado[p]){
 
             //cambiar background del boton (mas oscuro, que parezca desabilitado)
-            view.changeTvBgImagePressed(p);
+            view.ChangeTvBgImagePressed(p);
 
-            silaba_presionada = view.getSyllableButtonText(p);
+            silaba_presionada = view.GetSyllableButtonText(p);
 
             if (tipoDeCarta==1){
                 textViewPresionado[p]=true;
                 nueva_resp = resp_temp+silaba_presionada;
 
                 if (Capslock()&& Global.capsLock){
-                    view.setAnswer(nueva_resp.toUpperCase(Locale.ROOT));
+                    view.SetAnswer(nueva_resp.toUpperCase(Locale.ROOT));
                 } else {
-                    view.setAnswer(nueva_resp.toLowerCase(Locale.ROOT));
+                    view.SetAnswer(nueva_resp.toLowerCase(Locale.ROOT));
                 }
 
             } else { // si tipo de carta == 0
@@ -308,32 +306,32 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 // reestablecer el fondo a los botones que habian quedado "presionados" (fondo oscuro)
                 for (int z=0; z<textViewCount;z++) {
                     if (p!=z){
-                        view.changeTvBgImageUnpressed(z);
+                        view.ChangeTvBgImageUnpressed(z);
                     }
                 }
 
                 if (Capslock()&& Global.capsLock){
-                    view.setAnswer(palabraActual.toUpperCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
+                    view.SetAnswer(palabraActual.toUpperCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
                 } else {
-                    view.setAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
+                    view.SetAnswer(palabraActual.toLowerCase(Locale.ROOT).replaceFirst("_", silaba_presionada));
                 }
             }
         }
     }
 
     @Override
-    public void bt_borrar_clicked() {
+    public void Bt_borrar_clicked() {
         assert view != null;
-        view.disableClickOnSend();
+        view.DisableClickOnSend();
 
         if (tipoDeCarta==1){
-            view.setAnswer("");
+            view.SetAnswer("");
         } else {
 
             if (Capslock()&& Global.capsLock){
-                view.setAnswer(palabraActual.toUpperCase());
+                view.SetAnswer(palabraActual.toUpperCase());
             } else {
-                view.setAnswer(palabraActual.toLowerCase());
+                view.SetAnswer(palabraActual.toLowerCase());
             }
         }
 
@@ -341,54 +339,54 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             textViewPresionado[p] = false;
             // cambiar background del boton (al estado inicial)
 
-            view.changeTvBgImageUnpressed(p);
+            view.ChangeTvBgImageUnpressed(p);
         }
     }
 
     @Override
-    public void bt_options_clicked() {
+    public void Bt_options_clicked() {
         //view.goToOptionScreen();
         assert view != null;
 
         if (!Global.optionMenuIsVisible){
-            view.showOptionsMenu();
+            view.ShowOptionsMenu();
             Global.optionMenuIsVisible=true;
         }
 
     }
 
     @Override
-    public void setOptionMenuVisibility(boolean visible) {
+    public void SetOptionMenuVisibility(boolean visible) {
         assert view != null;
         if (visible){
-            view.showOptionsMenu();
+            view.ShowOptionsMenu();
             Global.optionMenuIsVisible= true;
         } else {
-            view.hideOptionMenu();
+            view.HideOptionMenu();
             Global.optionMenuIsVisible= false;
         }
     }
 
     @Override
-    public void bt_enviar_clicked() {
+    public void Bt_enviar_clicked() {
 
         assert view != null;
-        view.disableClickOnSend();
+        view.DisableClickOnSend();
 
         // resetear botones de silabas
         for (int p=0; p<textViewCount; p++) {
             textViewPresionado[p] = false;
             // cambiar background del boton (al estado inicial)
 
-            view.changeTvBgImageUnpressed(p);
+            view.ChangeTvBgImageUnpressed(p);
         }
         /////////////////////////////////////////////
 
 
         if ///////////////////// RESPUESTA CORRECTA /////////////////////////////
-        (view.getAnswerText().toLowerCase(Locale.ROOT).equals(cartaActual.getWord().toLowerCase(Locale.ROOT))) {
+        (view.GetAnswerText().toLowerCase(Locale.ROOT).equals(cartaActual.getWord().toLowerCase(Locale.ROOT))) {
 
-            view.setAnswer("");
+            view.SetAnswer("");
 
             score++;
 
@@ -397,11 +395,11 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 playerLevel++;
             }
 
-            playCorrectAnswerSound();
+            PlayCorrectAnswerSound();
 
             if (cardsDrawn == cardsToBeDrawn){
 
-                view.goToGameOverScreen();
+                view.GoToGameOverScreen();
 
                 /*
                 if (Capslock() && Global.capsLock){
@@ -419,34 +417,34 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
             //convertir el INT score en un STRING
             stringScore = Integer.toString(score);
-            view.setScore(stringScore);
+            view.SetScore(stringScore);
 
         }
 
         else{ ////////////////// RESPUESTA INCORRECTA ///////////////////////////
 
-            playWrongAnswerSound();
+            PlayWrongAnswerSound();
 
             vidas--;
 
             switch (vidas){
                 case 3:
-                    view.setThreeStars();
+                    view.SetThreeStars();
                     break;
 
                 case 2:
-                    view.setTwoStars();
+                    view.SetTwoStars();
                     NuevaCarta(playerLevel);
                     break;
 
                 case 1:
-                    view.setOneStar();
+                    view.SetOneStar();
                     NuevaCarta(playerLevel);
                     break;
 
                 case 0:
-                    stopMusic();
-                    view.goToGameOverScreen();
+                    StopMusic();
+                    view.GoToGameOverScreen();
                     break;
             }
 
@@ -457,14 +455,14 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         //vaciar todos los textviews
         for (int i=0;i<4;i++) {
             assert view != null;
-            view.setSyllableButtonText("",i);
+            view.SetSyllableButtonText("",i);
         }
     }
 
     @Override
-    public void startMusic(MediaPlayer mp) {
+    public void StartMusic(MediaPlayer mp) {
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean(MUSIC, true)){
 
@@ -479,42 +477,42 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     }
 
     @Override
-    public void pauseMusic(MediaPlayer mp) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+    public void PauseMusic(MediaPlayer mp) {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(MUSIC, true)){
             if (mp.isPlaying()){
                 assert view != null;
-                posicion = view.getMusicPosition();
-                view.pauseMusic();
+                posicion = view.GetMusicPosition();
+                view.PauseMusic();
             }
         }
     }
 
     @Override
-    public void stopMusic() {
+    public void StopMusic() {
         assert view != null;
-        view.stopMusic();
+        view.StopMusic();
     }
 
-    public void playCorrectAnswerSound () {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+    public void PlayCorrectAnswerSound() {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
             assert view != null;
-            view.playCorrectSound();
+            view.PlayCorrectSound();
         }
     }
 
-    public void playWrongAnswerSound () {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+    public void PlayWrongAnswerSound() {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         if (sharedPreferences.getBoolean(SOUND, true)){
             assert view != null;
-            view.playWrongSound();
+            view.PlayWrongSound();
         }
     }
 
     @Override
-    public void musicSwitched(boolean b) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+    public void MusicSwitched(boolean b) {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putBoolean(MUSIC, b);
@@ -522,16 +520,16 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
         assert view != null;
         if (b) {
-            int position = view.getMusicPosition();
-            view.startMusic(position);
+            int position = view.GetMusicPosition();
+            view.StartMusic(position);
         } else {
-            view.pauseMusic();
+            view.PauseMusic();
         }
     }
 
     @Override
-    public void soundSwitched(boolean b) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+    public void SoundSwitched(boolean b) {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putBoolean(SOUND, b);
@@ -539,26 +537,26 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     }
 
     @Override
-    public boolean getMusicPreference() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+    public boolean GetMusicPreference() {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         return sharedPreferences.getBoolean(MUSIC,true);
     }
 
     @Override
-    public boolean getSoundPreference() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+    public boolean GetSoundPreference() {
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
         return sharedPreferences.getBoolean(SOUND,true);
     }
 
     @Override
-    public Context getContext() {
+    public Context GetContext() {
         assert view != null;
-        return view.getContext();
+        return view.GetContext();
     }
 
     private void CapslockOff() {
         String SHARED_PREFS = "SharedPrefs";
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(SHARED_PREFS, false);
         editor.apply();
@@ -566,7 +564,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     public boolean Capslock(){
         String SHARED_PREFS = "SharedPrefs";
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = GetContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
         return sharedPreferences.getBoolean("capslock", true);
     }

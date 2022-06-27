@@ -50,7 +50,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
         ((App) getApplication()).getComponent().injectNivel(this);
 
-        presenter.setView(this);
+        presenter.SetView(this);
         configView();
         configOptionMenu();
 
@@ -90,30 +90,30 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         textView[3] = findViewById(R.id.bt4);
         tv_score.setText("0");
         tv_respuesta.setText("");
-        bt_enviar.setOnClickListener(view -> presenter.bt_enviar_clicked());
-        bt_borrar.setOnClickListener(view -> presenter.bt_borrar_clicked());
-        disableClickOnSend();
+        bt_enviar.setOnClickListener(view -> presenter.Bt_enviar_clicked());
+        bt_borrar.setOnClickListener(view -> presenter.Bt_borrar_clicked());
+        DisableClickOnSend();
     }
 
     private void configOptionMenu() {
 
         optionMenu = findViewById(R.id.option_menu_frame);
 
-        presenter.setOptionMenuVisibility(false);
+        presenter.SetOptionMenuVisibility(false);
 
         Button bt_opciones = findViewById(R.id.bt_Options);
-        bt_opciones.setOnClickListener(view -> presenter.bt_options_clicked());
+        bt_opciones.setOnClickListener(view -> presenter.Bt_options_clicked());
 
         Button bt_closeOptionMenu = findViewById(R.id.close_option_menu);
-        bt_closeOptionMenu.setOnClickListener(view -> presenter.setOptionMenuVisibility(false));
+        bt_closeOptionMenu.setOnClickListener(view -> presenter.SetOptionMenuVisibility(false));
 
         SwitchCompat sw_music = findViewById(R.id.sw_music);
-        sw_music.setChecked(presenter.getMusicPreference());
-        sw_music.setOnCheckedChangeListener((compoundButton, b) -> presenter.musicSwitched(b));
+        sw_music.setChecked(presenter.GetMusicPreference());
+        sw_music.setOnCheckedChangeListener((compoundButton, b) -> presenter.MusicSwitched(b));
 
         SwitchCompat sw_sound = findViewById(R.id.sw_sound);
-        sw_sound.setChecked(presenter.getSoundPreference());
-        sw_sound.setOnCheckedChangeListener((compoundButton, b) -> presenter.soundSwitched(b));
+        sw_sound.setChecked(presenter.GetSoundPreference());
+        sw_sound.setOnCheckedChangeListener((compoundButton, b) -> presenter.SoundSwitched(b));
 
         Button bt_goHome = findViewById(R.id.bt_goHome_from_lvl);
         bt_goHome.setOnClickListener(view -> startActivity(new Intent(NivelActivity.this, HomeActivity.class)));
@@ -122,9 +122,9 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.setView(this);
+        presenter.SetView(this);
 
-        presenter.startMusic(mp);
+        presenter.StartMusic(mp);
 
         View decorView = getWindow().getDecorView();
         int uiOptions;
@@ -140,7 +140,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
 
     @Override
     protected void onPause() { super.onPause();
-        presenter.pauseMusic(mp);
+        presenter.PauseMusic(mp);
     }
 
     @Override
@@ -154,42 +154,42 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     }
 
     @Override
-    public void setScore (String score){
+    public void SetScore(String score){
         this.tv_score.setText(score);
     }
 
     @Override
-    public void setOneStar (){
+    public void SetOneStar(){
         this.iv_estrellas.setImageResource(R.drawable.una_estrella);
     }
 
     @Override
-    public void setTwoStars (){
+    public void SetTwoStars(){
         this.iv_estrellas.setImageResource(R.drawable.dos_estrellas);
     }
 
     @Override
-    public void setThreeStars (){
+    public void SetThreeStars(){
         this.iv_estrellas.setImageResource(R.drawable.tres_estrellas);
     }
 
     @Override
-    public void changeTvBgImagePressed (int tvNum) {
+    public void ChangeTvBgImagePressed(int tvNum) {
         this.textView[tvNum].setBackgroundResource(R.drawable.silaba_presionada);
     }
 
     @Override
-    public void changeTvBgImageUnpressed (int tvNum) {
+    public void ChangeTvBgImageUnpressed(int tvNum) {
         this.textView[tvNum].setBackgroundResource(R.drawable.boton_silaba);
     }
 
     @Override
-    public String getAnswerText() {
+    public String GetAnswerText() {
         return tv_respuesta.getText().toString();
     }
 
     @Override
-    public void goToGameOverScreen() {
+    public void GoToGameOverScreen() {
         Intent intent = new Intent (getApplicationContext(), GameOverActivity.class);
         intent.putExtra("jugador", jugador);
         intent.putExtra("score", tv_score.getText().toString());
@@ -197,84 +197,86 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     }
 
     @Override
-    public Context getContext() {
+    public Context GetContext() {
         return this;
     }
 
     @Override
-    public void startMusic(int position) {
+    public void StartMusic(int position) {
         mp.seekTo(position);
         mp.start();
     }
 
     @Override
-    public void pauseMusic() {
+    public void PauseMusic() {
         mp.pause();
     }
 
     @Override
-    public void stopMusic() {
+    public void StopMusic() {
         mp.stop();
     }
 
     @Override
-    public void playCorrectSound() {
+    public void PlayCorrectSound() {
         correctSound.start();
     }
 
     @Override
-    public void playWrongSound() {
+    public void PlayWrongSound() {
         wrongSound.start();
     }
 
     @Override
-    public int getMusicPosition() {
+    public int GetMusicPosition() {
         return mp.getCurrentPosition();
     }
 
     @Override
-    public void setMainImage (String nombreDeImagen) {
-        int id = getApplicationContext().getResources().getIdentifier(nombreDeImagen, "drawable", getPackageName());
+    public void SetMainImage(String nombreDeImagen) {
+        int id = getApplicationContext()
+                .getResources()
+                .getIdentifier (nombreDeImagen, "drawable", getPackageName());
         this.iv.setImageResource(id);
     }
 
     @Override
-    public void setSyllableButtonText (String syllable, int tvNumber){
+    public void SetSyllableButtonText(String syllable, int tvNumber){
         textView[tvNumber].setText(syllable);
     }
 
     @Override
-    public String getSyllableButtonText(int tvNumber) {
+    public String GetSyllableButtonText(int tvNumber) {
         return textView[tvNumber].getText().toString();
     }
 
     @Override
-    public void setAnswer (String answer){
+    public void SetAnswer(String answer){
         tv_respuesta.setText(answer);
     }
 
     @Override
-    public void buttonPress(View view) {
-        presenter.sylablePressed(view);
+    public void ButtonPress(View view) {
+        presenter.SylablePressed(view);
     }
 
-    public void allowClickOnSend() {
+    public void AllowClickOnSend() {
         bt_enviar.setClickable(true);
         bt_enviar.setBackgroundResource(R.drawable.boton_verde);
     }
 
-    public void disableClickOnSend() {
+    public void DisableClickOnSend() {
         bt_enviar.setClickable(false);
         bt_enviar.setBackgroundResource(R.drawable.boton_verde_apagado);
     }
 
     @Override
-    public void showOptionsMenu() {
+    public void ShowOptionsMenu() {
         optionMenu.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideOptionMenu() {
+    public void HideOptionMenu() {
         optionMenu.setVisibility(View.INVISIBLE);
     }
 }
