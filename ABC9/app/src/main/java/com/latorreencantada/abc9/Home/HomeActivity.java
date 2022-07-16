@@ -2,6 +2,7 @@ package com.latorreencantada.abc9.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.latorreencantada.abc9.Models.Employee;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -34,6 +38,14 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
     Button bt_jugar, bt_opciones, bt_mayusc, bt_minusc, bt_mayusminus_in_order, bt_mayuminusc_random;
     SwitchCompat sw_sonido, sw_musica;
 
+    // Widgets
+    private RecyclerView recyclerView;
+    private Button btn;
+
+    // Variables
+    private ArrayList<Employee> employees = new ArrayList<>();
+    private mAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +61,10 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
     }
 
     private void configView() {
+
+        recyclerView = findViewById(R.id.recycler_view);
+
+
 
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
@@ -85,7 +101,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
             presenter.SoundSwitched(b);
         });
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         tv_caps_mode = findViewById(R.id.txt_modo_mayuminu);
 
@@ -99,7 +114,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
             presenter.BtMayuscPressed();
         });
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     @Override
