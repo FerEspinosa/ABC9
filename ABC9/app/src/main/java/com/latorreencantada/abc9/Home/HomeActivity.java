@@ -2,6 +2,8 @@ package com.latorreencantada.abc9.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,13 +16,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.latorreencantada.abc9.CustomAdapter;
+import com.latorreencantada.abc9.Models.Item;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
+
+    RecyclerView list_item;
+    RecyclerView.LayoutManager layoutManager;
+    List<Item> items;
 
     @Inject
     HomeMVP.Presenter presenter;
@@ -49,6 +60,14 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
     }
 
     private void configView() {
+
+        list_item = (RecyclerView)findViewById(R.id.recycler_view);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        list_item.setHasFixedSize(true);
+        list_item.setLayoutManager(layoutManager);
+        items = new ArrayList<>();
+        getData();
+
 
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
@@ -100,6 +119,23 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
         });
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    private void getData() {
+        for (int i =0; i<10 ; i++){
+            Item item = new Item();
+            item.setName("Item "+i);
+            if (i%2==0){
+                item.setChecked(true);
+            } else {
+                item.setChecked(false);
+            }
+            items.add(item);
+        }
+
+        CustomAdapter adapter = new CustomAdapter(items, this);
+        list_item.setAdapter(adapter);
+
     }
 
     @Override

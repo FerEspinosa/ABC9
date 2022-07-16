@@ -6,12 +6,19 @@ public class Player {
     int bestScore;
     int userLevel;
     String profileImage;
+    boolean isChecked;
 
-    public Player(String name, int bestScore, int level, String profileImage) {
+
+    public Player(String name, int bestScore, int level, String profileImage, boolean isChecked) {
         this.name = name;
         this.bestScore = bestScore;
         this.userLevel = level;
         this.profileImage = profileImage;
+        this.isChecked = isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     public String getName() {

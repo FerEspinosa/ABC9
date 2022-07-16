@@ -1,5 +1,8 @@
 package com.latorreencantada.abc9;
 
+import com.latorreencantada.abc9.Models.Item;
+import com.latorreencantada.abc9.Models.Player;
+
 public class Global {
     //public static Boolean musica = false;
     public static Boolean sonidos = true;
@@ -10,6 +13,8 @@ public class Global {
     public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};
 
     public static int drawsPerLevel = 4;
+
+    public static Player currentPlayer = null;
 
 
     public static String [][][] defaultLevels = { //  [índice nivel] [indice palabra] [palabra, syl1, syl2, syl3 syl4, level]
