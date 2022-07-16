@@ -28,7 +28,7 @@ class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
 
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
-        textView = (TextView)itemView.findViewById(R.id.text_view);
+        textView = (TextView)itemView.findViewById(R.id.player_name);
         imageView = (ImageView)itemView.findViewById(R.id.image_view);
         itemView.setOnClickListener(this);
     }
@@ -54,7 +54,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View itemView = inflater.inflate(R.layout.item_employee, parent, false);
+        View itemView = inflater.inflate(R.layout.player_layout, parent, false);
         return new CustomViewHolder(itemView);
     }
 
@@ -62,9 +62,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.textView.setText(items.get(position).getName());
         if (!items.get(position).isChecked()){
-            holder.imageView.setImageResource(R.drawable.ic_baseline_home_24);
+            holder.imageView.setScaleX(1f);
+            holder.imageView.setScaleY(1f);
+            holder.textView.setTextColor(Color.parseColor("#000000"));
         } else {
-            holder.imageView.setImageResource(R.drawable.ic_baseline_close_24);
+            holder.imageView.setScaleX(3);
+            holder.imageView.setScaleY(3);
+            holder.imageView.setPadding(0,0,0,0);
+            holder.textView.setTextColor(Color.parseColor("#c5c5c7"));
         }
 
         holder.setItemClickListener(new ItemClickListener() {
@@ -77,11 +82,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         });
 
         if (row_index==position){
-            holder.itemView.setBackgroundColor(Color.parseColor("#f8f8fa"));
-            holder.textView.setTextColor(Color.parseColor("#c5c5c7"));
-        } else {
-            holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.itemView.setScaleX(1.2f);
+            holder.itemView.setScaleY(1.2f);
             holder.textView.setTextColor(Color.parseColor("#000000"));
+        } else {
+            holder.itemView.setScaleX(1f);
+            holder.itemView.setScaleY(1f);
+            holder.textView.setTextColor(Color.parseColor("#c5c5c7"));
         }
     }
 

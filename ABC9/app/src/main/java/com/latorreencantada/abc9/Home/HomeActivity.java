@@ -125,11 +125,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
         for (int i =0; i<10 ; i++){
             Item item = new Item();
             item.setName("Item "+i);
-            if (i%2==0){
-                item.setChecked(true);
-            } else {
-                item.setChecked(false);
-            }
             items.add(item);
         }
 

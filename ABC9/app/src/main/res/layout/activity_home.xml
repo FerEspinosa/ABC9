@@ -16,38 +16,35 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
     <Button
         android:id="@+id/bt_jugar"
         android:layout_width="201dp"
         android:layout_height="114dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/boton_jugar"
         android:contentDescription="@string/txt_comenzar"
         android:textAllCaps="false"
         android:textColor="@color/light_blue"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/id_fondo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335" />
-
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
 
     <Button
         android:id="@+id/bt_opciones"
         android:layout_width="196dp"
         android:layout_height="78dp"
-        android:layout_marginTop="88dp"
-        android:textSize="20sp"
-        android:text="@string/title_activity_opciones"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/button_red"
+        android:text="@string/title_activity_opciones"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/id_fondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_jugar"
         app:layout_constraintVertical_bias="0.0" />
-
-
 
     <LinearLayout
         android:id="@+id/layout_opciones_home"
@@ -183,9 +180,9 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/id_fondo" />
 
