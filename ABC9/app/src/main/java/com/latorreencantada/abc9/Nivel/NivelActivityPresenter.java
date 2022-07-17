@@ -69,7 +69,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     ArrayList<Card> levelCardList;
 
     @Override
-    public void NuevaCarta(int playerLevel) {
+    public void NuevaCarta(int level) {
 
         cardsDrawn++;
 
@@ -84,7 +84,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
         tipoDeCarta = (int)(Math.random()*2);
 
         // Obtener palabras del nivel "playerLevel"
-        levelCardList = model.GetLevelWords (playerLevel, view.GetContext());
+        levelCardList = model.GetLevelWords (level, view.GetContext());
 
         //SELECCIONAR UNA CARTA ALEATORIA:
         cartaActualInt = (int)(Math.random()*levelCardList.size());
@@ -393,13 +393,16 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             //int cardsDrawnNumber = 0;
             if (score%Global.drawsPerLevel==0){
                 playerLevel++;
-            }
+                Global.highestUnlockedLevel = playerLevel;
+                // por ahora vamos al levelMap. Luego iremos a una pantalla de LevelComplete
+                view.GoToLevelMapActivity();
+            } else {
 
-            PlayCorrectAnswerSound();
+                PlayCorrectAnswerSound();
 
-            if (cardsDrawn == cardsToBeDrawn){
+                if (cardsDrawn == cardsToBeDrawn){
 
-                view.GoToGameOverScreen();
+                    view.GoToGameOverScreen();
 
                 /*
                 if (Capslock() && Global.capsLock){
@@ -411,9 +414,11 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 }
                 */
 
-            } else {
-                NuevaCarta(playerLevel);
+                } else {
+                    NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
+                }
             }
+
 
             //convertir el INT score en un STRING
             stringScore = Integer.toString(score);
@@ -434,12 +439,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
                 case 2:
                     view.SetTwoStars();
-                    NuevaCarta(playerLevel);
+                    NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
                     break;
 
                 case 1:
                     view.SetOneStar();
-                    NuevaCarta(playerLevel);
+                    NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
                     break;
 
                 case 0:

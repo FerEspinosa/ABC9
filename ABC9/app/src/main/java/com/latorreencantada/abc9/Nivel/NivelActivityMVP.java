@@ -35,6 +35,7 @@ interface View {
     void PlayWrongSound();
     int GetMusicPosition();
 
+    void GoToLevelMapActivity();
 }
 
 interface Presenter {

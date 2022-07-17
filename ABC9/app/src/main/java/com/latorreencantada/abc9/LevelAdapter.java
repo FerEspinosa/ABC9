@@ -37,20 +37,25 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+
         holder.levelName.setText(levels.get(position).getLevel_num());
+        /*
         if (!levels.get(position).isChecked()){
             holder.levelImage.setBackgroundColor(Color.parseColor("#454545"));
             holder.levelName.setTextColor(Color.parseColor("#000000"));
         } else {
             holder.levelImage.setBackgroundColor(Color.BLACK);
             holder.levelName.setTextColor(Color.BLUE);
-        }
+        }*/
 
         holder.setLevelClickListener(new LevelClickListener() {
             @Override
             public void onClick(View view, int position) {
                 row_index=position;
                 Global.currentLevel= levels.get(position);
+                // la variable "Global.currentLevel" (luego de haber sido seteada en la línea anterior)
+                // me va a servir cuando quiera iniciar la "NivelActivity"
+
                 notifyDataSetChanged();
 
             }

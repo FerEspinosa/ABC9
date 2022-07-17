@@ -13,8 +13,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Home.HomeActivity;
 import com.latorreencantada.abc9.GameOver.GameOverActivity;
+import com.latorreencantada.abc9.LevelMapActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
 
@@ -57,7 +60,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         // por ahora mando el player level manualmente
         // más adelante (cuando desarrolle la clase "player") lo obtendré de manera programática
         int playerLevel = 1;
-        presenter.NuevaCarta(playerLevel);
+        presenter.NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
     }
 
     private void configView() {
@@ -230,6 +233,12 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     @Override
     public int GetMusicPosition() {
         return mp.getCurrentPosition();
+    }
+
+    @Override
+    public void GoToLevelMapActivity() {
+        Intent intent = new Intent(NivelActivity.this, LevelMapActivity.class);
+        startActivity(intent);
     }
 
     @Override

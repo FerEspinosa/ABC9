@@ -11,9 +11,10 @@ public class Global {
     public static String BackgroundImage = "rojo";
     public static String[] silabas = {"pa","ma","ca","sa","po","to","co","a","lo","bue","la","de","di","do","du","pi","za","ti","tis", "no"};
 
-    public static int drawsPerLevel = 4;
+    public static int drawsPerLevel = 10;
 
     public static Level currentLevel = null;
+    public static int highestUnlockedLevel = 5;
 
 
     public static String [][][] defaultLevels = { //  [índice nivel] [indice palabra] [palabra, syl1, syl2, syl3 syl4, level]
