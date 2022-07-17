@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.latorreencantada.abc9.LevelMapActivity;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
@@ -123,7 +124,9 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
 
     @Override
     public void GoToLevel() {
-        Intent intent = new Intent(HomeActivity.this, NivelActivity.class);
+
+// cambié momentánemente esta linea por la de abajo        Intent intent = new Intent(HomeActivity.this, NivelActivity.class);
+        Intent intent = new Intent(HomeActivity.this, LevelMapActivity.class);
         startActivity(intent);
         finish();
     }

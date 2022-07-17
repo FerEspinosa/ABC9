@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".LevelMapActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditWordsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Nivel.NivelActivity"
             android:exported="true"
@@ -22,12 +24,12 @@
         <activity
             android:name=".GameOver.GameOverActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Home.HomeActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
