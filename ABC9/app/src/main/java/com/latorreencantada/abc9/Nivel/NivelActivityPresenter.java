@@ -43,7 +43,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
     String stringScore;
     String palabraActual;
-    int playerLevel=1;
+    int playerLevel;
 
     int textViewCount = 4 ;
     int tv_Aleatorio;
@@ -72,6 +72,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public void NuevaCarta(int level) {
 
         cardsDrawn++;
+        playerLevel= Integer.parseInt(Global.currentLevel.getLevel_num());
 
         if (view!=null){
             //vaciar textView principal
@@ -393,7 +394,15 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
             //int cardsDrawnNumber = 0;
             if (score%Global.drawsPerLevel==0){
                 playerLevel++;
-                Global.highestUnlockedLevel = playerLevel;
+
+                // if (playerLevel > highestUnlockedLevel) guardar nuevo highestUnlockedLevel
+                if (playerLevel> model.GetHighestUnlockedLevel(view.GetContext())){
+                    model.SetHighestUnlockedLevel(view.GetContext(), playerLevel-1);
+
+                    //view.ShowMsg("New Unlocked Level Saved: "+ model.GetHighestUnlockedLevel(view.GetContext())  );
+                }
+
+
                 // por ahora vamos al levelMap. Luego iremos a una pantalla de LevelComplete
                 view.GoToLevelMapActivity();
             } else {

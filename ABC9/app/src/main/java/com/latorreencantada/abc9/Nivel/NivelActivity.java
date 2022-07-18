@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Home.HomeActivity;
@@ -239,6 +240,11 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     public void GoToLevelMapActivity() {
         Intent intent = new Intent(NivelActivity.this, LevelMapActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void ShowMsg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

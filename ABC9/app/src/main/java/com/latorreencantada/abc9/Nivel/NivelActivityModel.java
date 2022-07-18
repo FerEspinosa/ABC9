@@ -53,4 +53,16 @@ public class NivelActivityModel implements NivelActivityMVP.Model{
         }
 
     }
+
+    @Override
+    public int GetHighestUnlockedLevel(Context context) {
+        return dataInterface.GetHighestUnlockedLevelFromSharedPref(context);
+    }
+
+    @Override
+    public void SetHighestUnlockedLevel(Context context, int highestUnlockedLevel) {
+        dataInterface.SetHighestUnlockedLevelFromSharedPref(context, highestUnlockedLevel);
+    }
+
+
 }

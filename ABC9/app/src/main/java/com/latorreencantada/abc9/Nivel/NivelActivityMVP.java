@@ -36,6 +36,10 @@ interface View {
     int GetMusicPosition();
 
     void GoToLevelMapActivity();
+
+    // for quick manual testing
+    void ShowMsg(String msg);
+
 }
 
 interface Presenter {
@@ -66,6 +70,8 @@ interface Presenter {
 
 interface Model {
     ArrayList<Card> GetLevelWords(int level, Context context);
+    int GetHighestUnlockedLevel (Context context);
+    void SetHighestUnlockedLevel (Context context, int highestUnlockedLevel);
 }
 
 }

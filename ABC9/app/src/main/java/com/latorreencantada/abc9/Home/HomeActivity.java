@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,8 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        HideBars();
+
         ((App) getApplication()).getComponent().injectHome(this);
 
         presenter.SetView(this);
@@ -49,7 +52,21 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
 
     }
 
+    private void HideBars() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                        View.SYSTEM_UI_FLAG_FULLSCREEN|
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
     private void configView() {
+
+        /* RESET Highest Unlocked Level:
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("HighestUnlockedLevel", 0);
+        editor.apply();
+        */
 
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
@@ -86,8 +103,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
             presenter.SoundSwitched(b);
         });
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         tv_caps_mode = findViewById(R.id.txt_modo_mayuminu);
 
         presenter.SetInitialCapsMode();
@@ -100,7 +115,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
             presenter.BtMayuscPressed();
         });
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     @Override
@@ -120,7 +134,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
         bt_mayuminusc_random.setBackgroundResource(R.color.button_red);
         tv_caps_mode.setText(R.string.mode_capslock_on);
     }
-
 
     @Override
     public void GoToLevel() {
@@ -143,25 +156,16 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
         bt_opciones.setBackgroundResource(R.color.light_grey);
     }
 
-
-
     @Override
     public Context GetContext() {
         return this;
     }
 
-
-
-
     @Override
     protected void onResume() {
         super.onResume();
         presenter.SetView(this);
-
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                        View.SYSTEM_UI_FLAG_FULLSCREEN|
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        HideBars();
     }
 
     @Override

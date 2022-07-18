@@ -1,6 +1,7 @@
 package com.latorreencantada.abc9;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,14 +40,22 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
         holder.levelName.setText(levels.get(position).getLevel_num());
-        /*
-        if (!levels.get(position).isChecked()){
-            holder.levelImage.setBackgroundColor(Color.parseColor("#454545"));
-            holder.levelName.setTextColor(Color.parseColor("#000000"));
+
+        // obtener el máx nivel desbloqueado
+        SharedPreferences sharedPreferences = context.getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
+        int highestUnlockedLevel = sharedPreferences.getInt("HighestUnlockedLevel",0);
+
+        if (position<=highestUnlockedLevel){
+            // dar formato a nivel no seleccionado y desbloqueado
+            holder.itemView.setClickable(true);
+            holder.levelImage.setBackgroundColor(Color.parseColor("#FFF1BE"));
+            holder.levelName.setTextColor(Color.parseColor("#AB6410"));
         } else {
-            holder.levelImage.setBackgroundColor(Color.BLACK);
-            holder.levelName.setTextColor(Color.BLUE);
-        }*/
+            // dar formato a nivel no seleccionado y bloqueado
+            holder.itemView.setClickable(false);
+            holder.levelImage.setBackgroundColor(Color.parseColor("#7c7c7c"));
+            holder.levelName.setTextColor(Color.parseColor("#2B2B2B"));
+        }
 
         holder.setLevelClickListener(new LevelClickListener() {
             @Override
@@ -62,11 +71,25 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
         });
 
         if (row_index==position){
-            holder.levelImage.setBackgroundColor(Color.parseColor("#454545"));
-            holder.levelName.setTextColor(Color.parseColor("#000000"));
+            // dar formato al nivel seleccionado:
+            holder.itemView.setScaleX(1.25f);
+            holder.itemView.setScaleY(1.25f);
+            holder.levelImage.setBackgroundColor(Color.parseColor("#E4B81C"));
+            holder.levelName.setTextColor(Color.parseColor("#AB6410"));
         } else {
-            holder.levelImage.setBackgroundColor(Color.BLACK);
-            holder.levelName.setTextColor(Color.BLUE);
+
+            // dar formato a nivel no seleccionado y desbloqueado
+            if (position <= highestUnlockedLevel){
+                holder.itemView.setScaleX(1);
+                holder.itemView.setScaleY(1);
+                holder.levelImage.setBackgroundColor(Color.parseColor("#FFF1BE"));
+                holder.levelName.setTextColor(Color.parseColor("#AB6410"));
+            } else {
+                // dar formato a nivel no seleccionado y bloqueado
+                holder.levelImage.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                holder.levelName.setTextColor(Color.parseColor("#2B2B2B"));
+            }
+
         }
     }
 
