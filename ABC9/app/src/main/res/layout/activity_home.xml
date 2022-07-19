@@ -17,6 +17,9 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
+
+
     <Button
         android:id="@+id/bt_jugar"
         android:layout_width="201dp"
@@ -179,5 +182,14 @@
             android:layout_margin="5dp"/>
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id_fondo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
