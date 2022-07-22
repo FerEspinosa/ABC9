@@ -5,8 +5,13 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
+
+import com.latorreencantada.abc9.Models.Card;
+import com.latorreencantada.abc9.R;
 
 public class HomePresenter implements HomeMVP.Presenter{
 
@@ -74,6 +79,9 @@ public class HomePresenter implements HomeMVP.Presenter{
     @Override
     public void BtOptionsPressed() {
 
+        // model.deleteAllData(getContext());
+        // FillDbWithDefaultValues();
+
         if (optionMenuShown){
             // hacer invisible el menu de opciones
             assert view != null;
@@ -136,6 +144,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     @Override
     public void FillDbWithDefaultValues() {
 
+        Context context = getContext();
         //contar niveles default
         int levelCount = model.getGlobalLevelsCount();
 
@@ -153,6 +162,20 @@ public class HomePresenter implements HomeMVP.Presenter{
                 String syl4= model.GetGlobalString(level_i, word_i,4);
                 String level= model.GetGlobalString(level_i, word_i,5);
 
+
+                word = word.replaceAll("Ñ", "NY").toLowerCase();
+
+                // get resource Id by it's name
+                int ResId = context.getResources().getIdentifier(word, "drawable",  context.getPackageName());
+
+                // Save it as a Bitmap
+                Bitmap imageBitmap = BitmapFactory.decodeResource(context.getResources(), ResId);
+
+                // Convert it to String
+                String image = Card.bitmapToString(imageBitmap);
+
+                //-- End getting image and converting it to String
+
                 // Crear un objeto que almacenará los datos que deseamos pasar a la base de datos
                 ContentValues registro = new ContentValues();
 
@@ -162,6 +185,7 @@ public class HomePresenter implements HomeMVP.Presenter{
                 registro.put("syl3", syl3);
                 registro.put("syl4", syl4);
                 registro.put("level", Integer.parseInt(level));
+                registro.put("image", image);
 
                 // Luego insertamos el objeto "registro" (que contiene los datos) en la BdD
                 model.InsertCardIntoDb(registro, getContext());
