@@ -1,6 +1,7 @@
 package com.latorreencantada.abc9.Nivel;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 
 import com.latorreencantada.abc9.Models.Card;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public interface NivelActivityMVP {
 
 interface View {
-    void SetMainImage(String nombreDeImagen);
+    void SetMainImage(Bitmap imagenBitmap);
     void SetScore(String score);
     void SetSyllableButtonText(String syllable, int tvNumber);
     String GetSyllableButtonText(int tvNumber);
@@ -72,6 +73,8 @@ interface Model {
     ArrayList<Card> GetLevelWords(int level, Context context);
     int GetHighestUnlockedLevel (Context context);
     void SetHighestUnlockedLevel (Context context, int highestUnlockedLevel);
+    Bitmap getImageBitmap (String word);
+
 }
 
 }

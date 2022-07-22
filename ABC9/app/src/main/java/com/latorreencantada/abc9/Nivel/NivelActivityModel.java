@@ -3,6 +3,7 @@ package com.latorreencantada.abc9.Nivel;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 
 import com.latorreencantada.abc9.Models.Card;
 
@@ -63,6 +64,12 @@ public class NivelActivityModel implements NivelActivityMVP.Model{
     @Override
     public void SetHighestUnlockedLevel(Context context, int highestUnlockedLevel) {
         dataInterface.SetHighestUnlockedLevelFromSharedPref(context, highestUnlockedLevel);
+    }
+
+    @Override
+    public Bitmap getImageBitmap(String image) {
+
+        return Card.stringToBitmap(image);
     }
 
 

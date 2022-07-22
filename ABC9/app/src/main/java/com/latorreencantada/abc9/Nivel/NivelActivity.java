@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -248,11 +249,8 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
     }
 
     @Override
-    public void SetMainImage(String nombreDeImagen) {
-        int id = getApplicationContext()
-                .getResources()
-                .getIdentifier (nombreDeImagen, "drawable", getPackageName());
-        this.iv.setImageResource(id);
+    public void SetMainImage(Bitmap imagenBitmap) {
+        this.iv.setImageBitmap(imagenBitmap);
     }
 
     @Override

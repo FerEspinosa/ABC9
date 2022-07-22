@@ -5,6 +5,7 @@ import static com.latorreencantada.abc9.Global.silabas;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.view.View;
 
@@ -95,12 +96,10 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
             cartaActual = levelCardList.get(cartaActualInt);
 
-            String nombreDeImagen = cartaActual.getWord().replaceAll("Ñ", "NY").toLowerCase();
-
-
             //colocar imagen
+            Bitmap imageBitmap = model.getImageBitmap(cartaActual.getImageAsString());
             if (view != null){
-                view.SetMainImage(nombreDeImagen);
+                view.SetMainImage(imageBitmap);
             }
 
             ultimaCarta = cartaActualInt;
