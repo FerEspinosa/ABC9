@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.latorreencantada.abc9.EditWordsActivity;
 import com.latorreencantada.abc9.LevelMapActivity;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 import com.latorreencantada.abc9.R;
@@ -175,6 +176,10 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
 
     @Override
     public void onBackPressed() {
+    }
+
+    public void goToEditCards(View view){
+        startActivity(new Intent(HomeActivity.this, EditWordsActivity.class));
     }
 
 }

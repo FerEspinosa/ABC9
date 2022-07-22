@@ -20,7 +20,7 @@ public class NivelRepository implements NivelInterface {
 
         //Crear objeto administrador de base de datos
 
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "administracion", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context);
         SQLiteDatabase bd= admin.getWritableDatabase();
         Cursor c = bd.rawQuery
                 ("SELECT * FROM cards WHERE level = "+playerLevel, null);

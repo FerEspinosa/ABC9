@@ -51,14 +51,25 @@ public class HomeModel implements HomeMVP.Model{
     }
 
     @Override
+    public void deleteAllData(Context context) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context);
+        SQLiteDatabase BD = admin.getWritableDatabase();
+
+        BD.execSQL("delete from cards");
+        BD.close();
+    }
+
+    @Override
     public void InsertCardIntoDb(ContentValues registro, Context context) {
 
         //Crear objeto administrador de base de datos
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "administracion", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context);
         SQLiteDatabase BD = admin.getWritableDatabase();
 
         BD.insert("cards", null, registro);
 
         BD.close();
     }
+
+
 }

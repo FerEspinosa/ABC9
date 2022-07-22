@@ -48,6 +48,8 @@ public interface HomeMVP {
         void SetNotFirstRun(Context context);
 
         int GetLevelWordsCount(int level);
+
+        void deleteAllData(Context context);
     }
 
 

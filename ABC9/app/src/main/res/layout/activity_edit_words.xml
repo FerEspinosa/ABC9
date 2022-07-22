@@ -74,12 +74,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/syl4" />
 
-    <Button
+    <ImageView
         android:id="@+id/bt_upload_Image"
         android:layout_width="148dp"
         android:layout_height="165dp"
         android:layout_marginTop="28dp"
         android:hint="Cargar imagen"
+        android:src="@drawable/elefante"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,5 +96,28 @@
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toEndOf="@+id/bt_upload_Image"
         app:layout_constraintTop_toBottomOf="@+id/et_level_editword_scr" />
+
+    <Button
+        android:id="@+id/bt_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:onClick="openGallery"
+        android:text="cargar desde galería"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_upload_Image" />
+
+    <Button
+        android:id="@+id/bt_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:onClick="openCamera"
+        android:text="Caragar desde camara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toEndOf="@+id/bt_gallery"
+        app:layout_constraintTop_toBottomOf="@+id/bt_upload_Image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

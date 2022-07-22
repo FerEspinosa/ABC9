@@ -73,6 +73,7 @@ public class HomePresenter implements HomeMVP.Presenter{
 
     @Override
     public void BtOptionsPressed() {
+
         if (optionMenuShown){
             // hacer invisible el menu de opciones
             assert view != null;

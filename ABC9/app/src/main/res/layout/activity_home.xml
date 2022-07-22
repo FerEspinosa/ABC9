@@ -192,4 +192,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/id_fondo" />
 
+    <Button
+        android:id="@+id/bt_edit_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:onClick="goToEditCards"
+        android:text="crear card"
+        app:layout_constraintEnd_toStartOf="@+id/bt_opciones"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_jugar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
