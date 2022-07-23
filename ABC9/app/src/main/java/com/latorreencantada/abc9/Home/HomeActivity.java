@@ -62,13 +62,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
 
     private void configView() {
 
-        /* RESET Highest Unlocked Level:
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("HighestUnlockedLevel", 0);
-        editor.apply();
-        */
-
         String fuente1 = "fuentes/supersonic.ttf";
         Typeface supersonic = Typeface.createFromAsset(getAssets(), fuente1);
 
@@ -180,6 +173,22 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
 
     public void goToEditCards(View view){
         startActivity(new Intent(HomeActivity.this, EditWordsActivity.class));
+    }
+
+    public void ResetToDefault(View view){
+
+        // RESET Highest Unlocked Level:
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("HighestUnlockedLevel", 0);
+        editor.apply();
+
+        // erase database
+        presenter.DeleteAllData(this);
+
+        // fill database with default values
+        presenter.FillDbWithDefaultValues();
+
     }
 
 }

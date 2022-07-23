@@ -36,6 +36,8 @@ public interface HomeMVP {
         void BtMayuscPressed();
 
         void SetInitialCapsMode();
+
+        void DeleteAllData(Context context);
     }
 
     interface Model {

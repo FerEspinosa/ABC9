@@ -79,8 +79,8 @@ public class HomePresenter implements HomeMVP.Presenter{
     @Override
     public void BtOptionsPressed() {
 
-        // model.deleteAllData(getContext());
-        // FillDbWithDefaultValues();
+         //model.deleteAllData(getContext());
+         FillDbWithDefaultValues();
 
         if (optionMenuShown){
             // hacer invisible el menu de opciones
@@ -107,6 +107,8 @@ public class HomePresenter implements HomeMVP.Presenter{
             view.MinuscOn();
         }
     }
+
+
 
     @Override
     public void BtMinuscPressed() {
@@ -139,6 +141,11 @@ public class HomePresenter implements HomeMVP.Presenter{
             model.SetNotFirstRun(getContext());
             FillDbWithDefaultValues();
         }
+    }
+
+    @Override
+    public void DeleteAllData(Context context) {
+        model.deleteAllData(context);
     }
 
     @Override

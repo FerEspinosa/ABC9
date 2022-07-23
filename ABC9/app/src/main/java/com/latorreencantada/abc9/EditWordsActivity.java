@@ -65,7 +65,7 @@ public class EditWordsActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
-        Bitmap image = ((BitmapDrawable)bt_uploadImage.getDrawable()).getBitmap();
+        Bitmap image = Card.resizeBitmap(((BitmapDrawable)bt_uploadImage.getDrawable()).getBitmap());
         new AdminSQLiteOpenHelper(this).addMemory(new Card(
                 et_word.getText().toString(),
                 et_syl1.getText().toString(),

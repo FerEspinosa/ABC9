@@ -59,9 +59,6 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         configView();
         configOptionMenu();
 
-        // por ahora mando el player level manualmente
-        // más adelante (cuando desarrolle la clase "player") lo obtendré de manera programática
-        int playerLevel = 1;
         presenter.NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
     }
 
