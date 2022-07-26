@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Home.HomeActivity;
 import com.latorreencantada.abc9.GameOver.GameOverActivity;
-import com.latorreencantada.abc9.LevelMapActivity;
+import com.latorreencantada.abc9.LevelMap.LevelMapActivity;
 import com.latorreencantada.abc9.R;
 import com.latorreencantada.abc9.root.App;
 

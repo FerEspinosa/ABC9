@@ -80,7 +80,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     public void BtOptionsPressed() {
 
          //model.deleteAllData(getContext());
-         FillDbWithDefaultValues();
+         //FillDbWithDefaultValues();
 
         if (optionMenuShown){
             // hacer invisible el menu de opciones

@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.latorreencantada.abc9.EditWordsActivity;
-import com.latorreencantada.abc9.LevelMapActivity;
+import com.latorreencantada.abc9.LevelMap.LevelMapActivity;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
 import com.latorreencantada.abc9.R;
+import com.latorreencantada.abc9.WordListActivity;
 import com.latorreencantada.abc9.root.App;
 
 import javax.inject.Inject;
@@ -132,7 +132,6 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
     @Override
     public void GoToLevel() {
 
-// cambié momentánemente esta linea por la de abajo        Intent intent = new Intent(HomeActivity.this, NivelActivity.class);
         Intent intent = new Intent(HomeActivity.this, LevelMapActivity.class);
         startActivity(intent);
         finish();
@@ -172,7 +171,7 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View {
     }
 
     public void goToEditCards(View view){
-        startActivity(new Intent(HomeActivity.this, EditWordsActivity.class));
+        startActivity(new Intent(HomeActivity.this, WordListActivity.class));
     }
 
     public void ResetToDefault(View view){

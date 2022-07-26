@@ -40,7 +40,7 @@ public class NivelActivityModel implements NivelActivityMVP.Model{
                     c.getString(3), // syl3
                     c.getString(4), // syl4
                     c.getInt   (5),  // level
-                    c.getString   (6)  // level
+                    c.getString   (6)  // image
                 );
 
                 levelCardList.add(card);

@@ -1,5 +1,6 @@
-package com.latorreencantada.abc9;
+package com.latorreencantada.abc9.EditWords;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -17,12 +18,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
 import com.latorreencantada.abc9.Models.Card;
+import com.latorreencantada.abc9.R;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class EditWordsActivity extends AppCompatActivity {
+public class EditWordActivity extends AppCompatActivity {
 
     private static final int GALLERY_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -78,7 +81,7 @@ public class EditWordsActivity extends AppCompatActivity {
         finish();
     }
 
-    private void saveCard(String word, String syl1, String syl2, String syl3, String syl4, String stringLevel) {
+    private void saveCard(@NonNull String word, String syl1, String syl2, String syl3, String syl4, String stringLevel) {
 
         //get word and put it on the array
 

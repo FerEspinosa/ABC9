@@ -1,5 +1,6 @@
 package com.latorreencantada.abc9;
 
+import com.latorreencantada.abc9.Models.Card;
 import com.latorreencantada.abc9.Models.Level;
 
 public class Global {
@@ -14,6 +15,7 @@ public class Global {
     public static int drawsPerLevel = 10;
 
     public static Level currentLevel = null;
+    public static Card currentCard = null;
     public static int highestUnlockedLevel = 5;
 
 

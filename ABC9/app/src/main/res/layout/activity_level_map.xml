@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LevelMapActivity"
+    tools:context=".LevelMap.LevelMapActivity"
     android:background="@drawable/fondo">
 
     <androidx.recyclerview.widget.RecyclerView

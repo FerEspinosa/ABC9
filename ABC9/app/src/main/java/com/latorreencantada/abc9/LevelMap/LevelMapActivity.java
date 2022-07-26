@@ -1,4 +1,4 @@
-package com.latorreencantada.abc9;
+package com.latorreencantada.abc9.LevelMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Models.Level;
 import com.latorreencantada.abc9.Nivel.NivelActivity;
-import com.latorreencantada.abc9.Nivel.NivelActivityPresenter;
+import com.latorreencantada.abc9.R;
 
 import java.util.ArrayList;
 import java.util.List;

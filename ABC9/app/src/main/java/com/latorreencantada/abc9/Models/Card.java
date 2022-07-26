@@ -20,7 +20,6 @@ public class Card {
     public static final int COL_LEVEL = 6;
     public static final int COL_IMAGE = 7;
 
-
     String word;
     String syl1;
     String syl2;

@@ -1,4 +1,4 @@
-package com.latorreencantada.abc9;
+package com.latorreencantada.abc9.LevelMap;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Models.Level;
+import com.latorreencantada.abc9.R;
 
 import java.util.List;
 
