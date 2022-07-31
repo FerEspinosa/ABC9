@@ -1,24 +1,38 @@
 package com.latorreencantada.abc9.Models;
 
+import java.util.List;
+
 public class Level {
 
-    private String level_num;
+    private int levelNum;
+    private String levelName;
     private boolean isChecked;
+    private List<Card> cards;
 
     public Level() {
     }
 
-    public Level(String level_num, boolean isChecked) {
-        this.level_num = level_num;
-        this.isChecked = isChecked;
+    public Level(int level_num, String levelName, List<Card> cards) {
+        this.levelNum = level_num;
+        this.isChecked = false;
+        this.cards = cards;
+        this.levelName = levelName;
     }
 
-    public String getLevel_num() {
-        return level_num;
+    public List<Card> getCards() {
+        return cards;
     }
 
-    public void setLevel_num(String level_num) {
-        this.level_num = level_num;
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public int getLevelNum() {
+        return levelNum;
+    }
+
+    public void setLevelNum(int levelNum) {
+        this.levelNum = levelNum;
     }
 
     public boolean isChecked() {

@@ -41,7 +41,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
-        holder.levelName.setText(levels.get(position).getLevel_num());
+        holder.levelName.setText(levels.get(position).getLevelNum());
 
         // obtener el máx nivel desbloqueado
         SharedPreferences sharedPreferences = context.getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
@@ -117,8 +117,8 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            levelName = (TextView) itemView.findViewById(R.id.level_text);
-            levelImage = (ImageView) itemView.findViewById(R.id.level_image);
+            levelName =  itemView.findViewById(R.id.level_text);
+            levelImage = itemView.findViewById(R.id.level_image);
             itemView.setOnClickListener(this);
         }
 

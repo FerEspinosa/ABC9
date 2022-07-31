@@ -34,7 +34,7 @@ public class LevelMapActivity extends AppCompatActivity {
     }
 
     private void config_view() {
-        list_item = (RecyclerView) findViewById(R.id.levels_recycler_view);
+        list_item = findViewById(R.id.levels_recycler_view);
         layoutManager = new LinearLayoutManager(this);
         list_item.setHasFixedSize(true);
         list_item.setLayoutManager(layoutManager);
@@ -59,7 +59,7 @@ public class LevelMapActivity extends AppCompatActivity {
 
         for (int i =1 ; i<=levelsQuantity; i++){
             Level level = new Level ();
-            level.setLevel_num(String.valueOf(i));
+            level.setLevelNum(i);
             levels.add(level);
         }
 

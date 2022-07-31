@@ -59,7 +59,7 @@ public class NivelActivity extends AppCompatActivity implements NivelActivityMVP
         configView();
         configOptionMenu();
 
-        presenter.NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
+        presenter.NuevaCarta(Global.currentLevel.getLevelNum());
     }
 
     private void configView() {

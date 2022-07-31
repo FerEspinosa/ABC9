@@ -73,7 +73,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
     public void NuevaCarta(int level) {
 
         cardsDrawn++;
-        playerLevel= Integer.parseInt(Global.currentLevel.getLevel_num());
+        playerLevel= Global.currentLevel.getLevelNum();
 
         if (view!=null){
             //vaciar textView principal
@@ -423,7 +423,7 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
                 */
 
                 } else {
-                    NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
+                    NuevaCarta(Global.currentLevel.getLevelNum());
                 }
             }
 
@@ -447,12 +447,12 @@ public class NivelActivityPresenter implements NivelActivityMVP.Presenter{
 
                 case 2:
                     view.SetTwoStars();
-                    NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
+                    NuevaCarta(Global.currentLevel.getLevelNum());
                     break;
 
                 case 1:
                     view.SetOneStar();
-                    NuevaCarta(Integer.parseInt(Global.currentLevel.getLevel_num()));
+                    NuevaCarta(Global.currentLevel.getLevelNum());
                     break;
 
                 case 0:
