@@ -14,7 +14,7 @@ public class Global {
 
     public static int drawsPerLevel = 10;
 
-    public static Level currentLevel = null;
+    public static Level currentLevel = new Level(1, "level 1", null);
     public static Card currentCard = null;
     public static int highestUnlockedLevel = 5;
 

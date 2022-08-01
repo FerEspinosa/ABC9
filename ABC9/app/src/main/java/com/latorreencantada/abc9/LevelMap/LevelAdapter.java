@@ -34,7 +34,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View itemView = inflater.inflate(R.layout.level_item, parent, false);
+        View itemView = inflater.inflate(R.layout.levelmap_item, parent, false);
         return new CustomViewHolder(itemView);
     }
 

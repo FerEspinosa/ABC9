@@ -6,16 +6,24 @@ public class Level {
 
     private int levelNum;
     private String levelName;
-    private boolean isChecked;
-    private List<Card> cards;
+    private boolean isExpanded;
+    private List<Card> cards; // nested list
 
     public Level() {
     }
 
     public Level(int level_num, String levelName, List<Card> cards) {
         this.levelNum = level_num;
-        this.isChecked = false;
+        this.levelName = levelName;
         this.cards = cards;
+        this.isExpanded = false;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
         this.levelName = levelName;
     }
 
@@ -35,11 +43,11 @@ public class Level {
         this.levelNum = levelNum;
     }
 
-    public boolean isChecked() {
-        return isChecked;
+    public boolean isExpanded() {
+        return isExpanded;
     }
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 }

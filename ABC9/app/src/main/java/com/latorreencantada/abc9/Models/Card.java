@@ -27,6 +27,7 @@ public class Card {
     String syl4;
     int level;
     String image;
+    boolean expanded;
 
     public Card(Cursor cursor) {
         this.word = cursor.getString(COL_WORD);
@@ -46,6 +47,15 @@ public class Card {
         this.syl4 = syl4;
         this.level = level;
         this.image = image;
+        this.expanded = false;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 
     public String getWord() {
