@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.latorreencantada.abc9.Global;
 import com.latorreencantada.abc9.Models.Level;
 import com.latorreencantada.abc9.R;
+import com.latorreencantada.abc9.root.ItemClickListener;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
             holder.levelName.setTextColor(Color.parseColor("#2B2B2B"));
         }
 
-        holder.setLevelClickListener(new LevelClickListener() {
+        holder.setLevelClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 row_index=position;
@@ -105,14 +106,14 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
         public TextView levelName;
         public ImageView levelImage;
 
-        LevelClickListener levelClickListener;
+        ItemClickListener itemClickListener;
 
         public void setLevelImage(ImageView levelImage) {
             this.levelImage = levelImage;
         }
 
-        public void setLevelClickListener(LevelClickListener levelClickListener) {
-            this.levelClickListener = levelClickListener;
+        public void setLevelClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
         }
 
         public CustomViewHolder(@NonNull View itemView) {
@@ -124,7 +125,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.CustomViewHo
 
         @Override
         public void onClick(View view) {
-            levelClickListener.onClick(view, getAdapterPosition());
+            itemClickListener.onClick(view, getAdapterPosition());
         }
     }
 }
