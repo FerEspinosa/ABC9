@@ -71,4 +71,19 @@
     <string name="initial_capslock_mode">Modo: mayúsculas + minúsculas</string>
     <string name="close">cerrar</string>
     <string name="play_again">jugar de nuevo</string>
+    <string name="level_name">Level name</string>
+    <string name="expand">expand</string>
+    <string name="add_card">add card</string>
+    <string name="elefante">Elefante</string>
+    <string name="correct_syllables">Sílabas Correctas:</string>
+    <string name="_1">1</string>
+    <string name="syl_1">silaba 1</string>
+    <string name="empty_string" />
+    <string name="syl_2">sílaba 2</string>
+    <string name="syl_3">sílaba 3</string>
+    <string name="syl_4">sílaba 4</string>
+    <string name="level_txt">Level:</string>
+    <string name="word_image">word image</string>
+    <string name="edit">Editar</string>
+    <string name="_00">00</string>
 </resources>

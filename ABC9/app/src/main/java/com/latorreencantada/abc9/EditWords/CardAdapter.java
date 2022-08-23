@@ -1,5 +1,7 @@
 package com.latorreencantada.abc9.EditWords;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.latorreencantada.abc9.AdminSQLiteOpenHelper;
 import com.latorreencantada.abc9.root.ItemClickListener;
 import com.latorreencantada.abc9.Models.Card;
 import com.latorreencantada.abc9.Models.Level;
@@ -49,9 +52,42 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CustomViewHold
 
         // definir de donde se sacará la info de cada card
         holder.iv_image.setImageBitmap(card.getImage());
-        holder.tv_word.setText(card.getWord());
-        holder.tv_level.setText(Integer.toString(card.getLevel()));
+        holder.tv_word.setText(card.getWord().replaceAll("ny","ñ"));
+        holder.et_level.setText(String.valueOf(card.getLevel()));
 
+        holder.et_syl1.setText(card.getSyl(1));
+        holder.et_syl2.setText(card.getSyl(2));
+        holder.et_syl3.setText(card.getSyl(3));
+        holder.et_syl4.setText(card.getSyl(4));
+
+        holder.iv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo: agregar función "abrir galería o cámara"
+            }
+        });
+
+        holder.bt_editCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Todo: agregar función editar tarjeta
+
+                    Bitmap image = Card.resizeBitmap(((BitmapDrawable)holder.iv_image.getDrawable()).getBitmap());
+                    new AdminSQLiteOpenHelper(v.getContext()).addMemory(new Card(
+                            holder.et_syl1.getText().toString()+
+                                    holder.et_syl2.getText().toString()+
+                                    holder.et_syl3.getText().toString()+
+                                    holder.et_syl4.getText().toString(),
+                            holder.et_syl1.getText().toString(),
+                            holder.et_syl2.getText().toString(),
+                            holder.et_syl3.getText().toString(),
+                            holder.et_syl4.getText().toString(),
+                            Integer.parseInt(holder.et_level.getText().toString()),
+                            Card.bitmapToString(image)
+                    ));
+               // todo: revisar si lo anterior funciona !!! probablemente no porque esto no edita una card sino que la crea
+            }
+        });
 
         // definir cómo se ve la card en caso de estar seleccionada y en caso contrario
         if (row_index==position){
@@ -93,9 +129,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CustomViewHold
 
         public ImageView iv_image;
         public TextView tv_word;
-        public TextView tv_level;
+        public EditText et_level;
         public Button bt_editCard;
         public ImageView iv_arrow;
+        public EditText et_syl1;
+        public EditText et_syl2;
+        public EditText et_syl3;
+        public EditText et_syl4;
 
 
         public LinearLayout expandableLayout;
@@ -115,12 +155,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CustomViewHold
             super(itemView);
             tv_word = itemView.findViewById(R.id.tv_editable_word);
             iv_image = itemView.findViewById(R.id.iv_word_image);
-            tv_level = itemView.findViewById(R.id.tv_card_level);
+            et_level = itemView.findViewById(R.id.tv_card_level);
 
             bt_editCard = itemView.findViewById(R.id.bt_edit_card);
             iv_arrow = itemView.findViewById(R.id.dropdown_arrow);
             expandableLayout = itemView.findViewById(R.id.expandableCardLayout);
             nestedRecyclerView = itemView.findViewById(R.id.edit_levels_recyclerview);
+            et_syl1 = itemView.findViewById(R.id.et_syl1);
+            et_syl2 = itemView.findViewById(R.id.et_syl2);
+            et_syl3 = itemView.findViewById(R.id.et_syl3);
+            et_syl4 = itemView.findViewById(R.id.et_syl4);
+
             itemView.setOnClickListener(this);
         }
 

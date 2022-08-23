@@ -38,6 +38,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:id="@+id/expandableCardLayout"
         android:orientation="horizontal"
         android:gravity="center">
@@ -47,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +66,7 @@
 
                 <EditText
                     android:id="@+id/et_syl1"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:importantForAutofill="no"
@@ -74,7 +76,7 @@
 
                 <EditText
                     android:id="@+id/et_syl2"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:importantForAutofill="no"
@@ -84,7 +86,7 @@
 
                 <EditText
                     android:id="@+id/et_syl3"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:importantForAutofill="no"
@@ -94,7 +96,7 @@
 
                 <EditText
                     android:id="@+id/et_syl4"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:importantForAutofill="no"
@@ -117,10 +119,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/level_txt"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_card_level"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:hint="@string/_00"
                     android:layout_marginStart="20dp"/>
 
             </LinearLayout>
@@ -129,17 +134,17 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/right_column_layout"
             android:layout_marginEnd="30dp"
-            android:layout_marginStart="30dp">
+            android:layout_marginStart="30dp"
+            android:gravity="end">
 
             <ImageView
                 android:id="@+id/iv_word_image"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="20dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -148,9 +153,10 @@
 
             <Button
                 android:id="@+id/bt_edit_card"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_gravity=""
+                android:layout_marginTop="30dp"
                 android:text="@string/edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/iv_word_image" />
