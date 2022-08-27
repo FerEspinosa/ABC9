@@ -139,15 +139,12 @@
             android:id="@+id/right_column_layout"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
-            android:gravity="end">
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/iv_word_image"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars"
                 android:contentDescription="@string/word_image" />
 
@@ -157,9 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity=""
                 android:layout_marginTop="30dp"
-                android:text="@string/edit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/iv_word_image" />
+                android:text="@string/edit" />
 
         </LinearLayout>
 

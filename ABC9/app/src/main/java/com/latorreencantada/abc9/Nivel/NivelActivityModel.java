@@ -34,13 +34,14 @@ public class NivelActivityModel implements NivelActivityMVP.Model{
 
             while(!c.isAfterLast()) {
                 Card card = new Card(
-                    c.getString(0), // word
-                    c.getString(1), // syl1
-                    c.getString(2), // syl2
-                    c.getString(3), // syl3
-                    c.getString(4), // syl4
-                    c.getInt   (5),  // level
-                    c.getString   (6)  // image
+                        c.getString(0),     // word
+                        c.getString(1),     // syl1
+                        c.getString(2),     // syl2
+                        c.getString(3),     // syl3
+                        c.getString   (4),  // Syl4
+                        c.getInt   (5),  // level
+                        c.getString(6) ,       // image
+                        c.getString(7)      // id
                 );
 
                 levelCardList.add(card);

@@ -35,11 +35,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     @Override
     public boolean MusicOn() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(MUSIC, true)){
-            return true;
-        } else {
-            return false;
-        }
+        return sharedPreferences.getBoolean(MUSIC, true);
     }
 
     @Override
@@ -54,11 +50,7 @@ public class HomePresenter implements HomeMVP.Presenter{
     @Override
     public boolean SoundOn() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(SOUND, true)){
-            return true;
-        } else {
-            return false;
-        }
+        return sharedPreferences.getBoolean(SOUND, true);
     }
 
     @Override
@@ -104,6 +96,7 @@ public class HomePresenter implements HomeMVP.Presenter{
             view.SetMayuscOn();
 
         } else {
+            assert view != null;
             view.MinuscOn();
         }
     }
@@ -119,6 +112,7 @@ public class HomePresenter implements HomeMVP.Presenter{
         editor.putBoolean(CAPSLOCK, false);
         editor.apply();
 
+        assert view != null;
         view.MinuscOn();
 
     }
@@ -131,6 +125,7 @@ public class HomePresenter implements HomeMVP.Presenter{
         editor.putBoolean(CAPSLOCK, true);
         editor.apply();
 
+        assert view != null;
         view.SetMayuscOn();
     }
 
@@ -186,6 +181,8 @@ public class HomePresenter implements HomeMVP.Presenter{
                 // Crear un objeto que almacenará los datos que deseamos pasar a la base de datos
                 ContentValues registro = new ContentValues();
 
+
+                registro.put("id", Integer.parseInt(level+ word_i));
                 registro.put("word", word);
                 registro.put("syl1", syl1);
                 registro.put("syl2", syl2);

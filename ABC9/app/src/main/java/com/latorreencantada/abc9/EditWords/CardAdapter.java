@@ -1,5 +1,6 @@
 package com.latorreencantada.abc9.EditWords;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CustomViewHold
     List<Level> levels;
     List<Card> cards;
     int row_index = -1;
+    SQLiteDatabase db;
 
     public CardAdapter(List<Card> cards) {
         this.cards = cards;
@@ -73,18 +75,28 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CustomViewHold
                 // Todo: agregar función editar tarjeta
 
                     Bitmap image = Card.resizeBitmap(((BitmapDrawable)holder.iv_image.getDrawable()).getBitmap());
-                    new AdminSQLiteOpenHelper(v.getContext()).addMemory(new Card(
-                            holder.et_syl1.getText().toString()+
+
+
+                    Card card = new Card(
+
+                            holder.et_syl1.getText().toString()+                  // word
                                     holder.et_syl2.getText().toString()+
                                     holder.et_syl3.getText().toString()+
                                     holder.et_syl4.getText().toString(),
-                            holder.et_syl1.getText().toString(),
-                            holder.et_syl2.getText().toString(),
-                            holder.et_syl3.getText().toString(),
-                            holder.et_syl4.getText().toString(),
-                            Integer.parseInt(holder.et_level.getText().toString()),
-                            Card.bitmapToString(image)
-                    ));
+                            holder.et_syl1.getText().toString(),                        // syl 1
+                            holder.et_syl2.getText().toString(),                        // syl 2
+                            holder.et_syl3.getText().toString(),                        // syl 3
+                            holder.et_syl4.getText().toString(),                        // syl 4
+                            Integer.parseInt(holder.et_level.getText().toString()),     // level
+                            Card.bitmapToString(image),                                 // image
+                            cards.get(holder.getAdapterPosition()).getId()              // id
+
+                    );
+
+                    // update the card here
+                    int update = new AdminSQLiteOpenHelper(holder.et_level.getContext()).updateCard(card);
+
+
                // todo: revisar si lo anterior funciona !!! probablemente no porque esto no edita una card sino que la crea
             }
         });

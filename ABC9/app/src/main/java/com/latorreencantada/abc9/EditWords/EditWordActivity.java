@@ -70,13 +70,15 @@ public class EditWordActivity extends AppCompatActivity {
     public void save(View view) {
         Bitmap image = Card.resizeBitmap(((BitmapDrawable)bt_uploadImage.getDrawable()).getBitmap());
         new AdminSQLiteOpenHelper(this).addMemory(new Card(
+
                 et_word.getText().toString(),
                 et_syl1.getText().toString(),
                 et_syl2.getText().toString(),
                 et_syl3.getText().toString(),
                 et_syl4.getText().toString(),
                 Integer.parseInt(et_level.getText().toString()),
-                Card.bitmapToString(image)
+                Card.bitmapToString(image),
+                "provisory id"
         ));
         finish();
     }

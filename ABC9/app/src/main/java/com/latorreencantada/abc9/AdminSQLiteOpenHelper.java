@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
@@ -16,7 +17,7 @@ public class AdminSQLiteOpenHelper  extends SQLiteOpenHelper {
         private static final String INTEGER_TYPE = " INTEGER";
         private static final String COMMA_SEP = ",";
         private static final String DATABASE_NAME = "administracion";
-        private static final int DATABASE_VERSION = 3;
+        private static final int DATABASE_VERSION = 4;
 
 
 
@@ -26,7 +27,7 @@ public class AdminSQLiteOpenHelper  extends SQLiteOpenHelper {
 
         @Override
         public void onCreate(SQLiteDatabase BD) {
-            onUpgrade(BD, 0, 3);
+            onUpgrade(BD, 0, 4);
         }
 
         @Override
@@ -40,6 +41,7 @@ public class AdminSQLiteOpenHelper  extends SQLiteOpenHelper {
                 // perform updates
                 BD.execSQL("ALTER TABLE players ADD COLUMN profileImage text");
                 BD.execSQL("ALTER TABLE cards ADD COLUMN image text");
+                BD.execSQL("ALTER TABLE cards ADD COLUMN id text");
             }
         }
 
@@ -59,8 +61,40 @@ public class AdminSQLiteOpenHelper  extends SQLiteOpenHelper {
         values.put(MemoryContract.MemoryEntry.COLUMN_SYL4, card.getSyl(4));
         values.put(MemoryContract.MemoryEntry.COLUMN_LEVEL, card.getLevel());
         values.put(MemoryContract.MemoryEntry.COLUMN_IMAGE, card.getImageAsString());
+        values.put(MemoryContract.MemoryEntry.COLUMN_ID, card.getId());
 
         return db.insert("cards", null, values) != -1;
+    }
+
+    public int updateCard (Card card){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(MemoryContract.MemoryEntry.COLUMN_WORD, card.getWord());
+        values.put(MemoryContract.MemoryEntry.COLUMN_SYL1, card.getSyl(1).toLowerCase());
+        values.put(MemoryContract.MemoryEntry.COLUMN_SYL2, card.getSyl(2).toLowerCase());
+        values.put(MemoryContract.MemoryEntry.COLUMN_SYL3, card.getSyl(3).toLowerCase());
+        values.put(MemoryContract.MemoryEntry.COLUMN_SYL4, card.getSyl(4).toLowerCase());
+        values.put(MemoryContract.MemoryEntry.COLUMN_LEVEL, card.getLevel());
+        values.put(MemoryContract.MemoryEntry.COLUMN_IMAGE, card.getImageAsString());
+        //values.put(MemoryContract.MemoryEntry.COLUMN_ID, card.getId());
+
+        //String query = "UPDATE cards SET ";
+
+        int answer = db.update("cards", values, "id = ?",new String[]{card.getId()});
+        db.close();
+        return answer;
+
+        //return db.update("cards", values, "id= "+card.getId() + " AND level= " + card.getLevel(),new String[]{card.getId()});
+    }
+
+    public int getNumberOfCardsWithinALevel (int level){
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        SQLiteStatement s = db.compileStatement("select count(*) from cards where level ="+ level+";");
+        long count = s.simpleQueryForLong();
+        return (int)count;
     }
 
     }

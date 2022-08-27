@@ -82,13 +82,15 @@ public class WordListActivity extends AppCompatActivity {
 
                     // crear la card a la que apunta el cursor
                     Card card = new Card(
-                            c.getString(0), // word
-                            c.getString(1), // syl1
-                            c.getString(2), // syl2
-                            c.getString(3), // syl3
-                            c.getString(4), // syl4
-                            c.getInt(5),  // level
-                            c.getString(6)  // image
+
+                            c.getString(0),     // word
+                            c.getString(1),     // syl1
+                            c.getString(2),     // syl2
+                            c.getString(3),     // syl3
+                            c.getString   (4),  // Syl4
+                            c.getInt   (5),     // level
+                            c.getString(6) ,    // image
+                            c.getString(7)      // id
                     );
 
                     // agregar esa card al array de cards del nivel i

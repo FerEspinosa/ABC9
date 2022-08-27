@@ -20,6 +20,7 @@ public class Card {
     public static final int COL_LEVEL = 6;
     public static final int COL_IMAGE = 7;
 
+    String id;
     String word;
     String syl1;
     String syl2;
@@ -39,7 +40,8 @@ public class Card {
         this.image = cursor.getString(COL_IMAGE);
     }
 
-    public Card(String word, String syl1, String syl2, String syl3, String syl4, int level, String image) {
+    public Card(String word, String syl1, String syl2, String syl3, String syl4, int level, String image, String id) {
+        this.id = id;
         this.word = word;
         this.syl1 = syl1;
         this.syl2 = syl2;
@@ -49,6 +51,15 @@ public class Card {
         this.image = image;
         this.expanded = false;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public boolean isExpanded() {
         return expanded;
@@ -118,7 +129,7 @@ public class Card {
         matrix.postScale(scaleWidth, scaleHeight);
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bitmap, 0, 0, width, height, matrix, false);
-        bitmap.recycle();
+        // bitmap.recycle();
         return resizedBitmap;
     }
 }
